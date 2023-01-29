@@ -22,7 +22,7 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocRendererSinglePdf implements MultiDocRendererInterface
+class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
 {
     /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface
@@ -74,33 +74,81 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
      */
     public function render(): MultiDocRendererInterface
     {
-        $pdf = new MultiDocPdfFile();
+        foreach ($this->files as $file) {
+            foreach ($file->getClasses() as $class) {
+                $this->renderClass($class);
+            }
+            foreach ($file->getInterfaces() as $interface) {
+                $this->renderInterface($interface);
+            }
+            foreach ($file->getTraits() as $trait) {
+                $this->renderTrait($trait);
+            }
+        }
 
+        return $this;
+    }
+
+    public function renderSinglePdf(string $destinationFilename): MultiDocRendererInterface
+    {
+        $pdf = new MultiDocPdfFile();
         $pdf->WriteHTML(
             file_get_contents(MultiDocAssetManager::getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
-
-        $this->htmlService->initializeService();
-
-        foreach ($this->files as $file) {
-            foreach ($file->getClasses() as $class) {
-                $this->htmlService->createFromClass($class);
-            }
-
-            foreach ($file->getInterfaces() as $interface) {
-                $this->htmlService->createFromInterface($interface);
-            }
-
-            foreach ($file->getTraits() as $trait) {
-                $this->htmlService->createFromTrait($trait);
-            }
-        }
-
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
-
         $pdf->WriteHTML((string)$this->htmlService);
         $pdf->Output($destinationFilename, 'F');
+
+        return $this;
+    }
+
+    /**
+     * Render a class pdf file
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function renderClass($class): MultiDocRendererInterface
+    {
+        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
+
+        $this->htmlService->initializeService();
+        $this->htmlService->createFromClass($class);
+
+        $this->renderSinglePdf($destinationFilename);
+
+        return $this;
+    }
+
+    /**
+     * Render a interface pdf file
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function renderInterface($interface): MultiDocRendererInterface
+    {
+        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
+
+        $this->htmlService->initializeService();
+        $this->htmlService->createFromInterface($interface);
+
+        $this->renderSinglePdf($destinationFilename);
+
+        return $this;
+    }
+
+    /**
+     * Render a interface pdf file
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function renderTrait($interface): MultiDocRendererInterface
+    {
+        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
+
+        $this->htmlService->initializeService();
+        $this->htmlService->createFromTrait($interface);
+
+        $this->renderSinglePdf($destinationFilename);
 
         return $this;
     }

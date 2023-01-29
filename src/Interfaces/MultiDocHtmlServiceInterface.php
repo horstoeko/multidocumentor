@@ -21,13 +21,6 @@ namespace horstoeko\multidocumentor\Interfaces;
 interface MultiDocHtmlServiceInterface
 {
     /**
-     * Returns the directory where all the html assets are stored
-     *
-     * @return string
-     */
-    public function getAssetsDirectory(): string;
-
-    /**
      * Initialize (e.g. the internal HTML Content Container)
      *
      * @return MultiDocHtmlServiceInterface

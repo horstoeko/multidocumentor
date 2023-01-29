@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
+use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
 use League\Plates\Engine as PlatesEngine;
 use horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface;
 
@@ -42,16 +43,8 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
      */
     public function __construct()
     {
-        $this->templatesEngine = new PlatesEngine($this->getAssetsDirectory());
+        $this->templatesEngine = new PlatesEngine(MultiDocAssetManager::getHtmlDirectory());
         $this->html = "";
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getAssetsDirectory(): string
-    {
-        return dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets" . DIRECTORY_SEPARATOR . "Html";
     }
 
     /**
