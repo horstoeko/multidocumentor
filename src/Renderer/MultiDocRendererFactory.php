@@ -10,6 +10,7 @@
 namespace horstoeko\multidocumentor\Renderer;
 
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
 
@@ -34,6 +35,7 @@ class MultiDocRendererFactory
         return [
             MultiDocRendererSinglePdf::class,
             MultiDocRendererMultiplePdf::class,
+            MultiDocRendererSingleMarkDown::class,
         ];
     }
 

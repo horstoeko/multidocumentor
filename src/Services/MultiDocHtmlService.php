@@ -10,8 +10,8 @@
 namespace horstoeko\multidocumentor\Services;
 
 use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
-use League\Plates\Engine as PlatesEngine;
 use horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface;
+use League\Plates\Engine as PlatesEngine;
 
 /**
  * Service class which renders the html
