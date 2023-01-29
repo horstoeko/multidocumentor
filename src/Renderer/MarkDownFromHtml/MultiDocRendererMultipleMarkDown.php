@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\multidocumentor\Renderer\MarkDown;
+namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
+use League\HTMLToMarkdown\HtmlConverter;
 use horstoeko\multidocumentor\Services\MultiDocHtmlService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use League\HTMLToMarkdown\HtmlConverter;
 
 /**
  * service class which renders the output documents as an single markdown document
@@ -22,7 +22,7 @@ use League\HTMLToMarkdown\HtmlConverter;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
+class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
 {
     /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface
@@ -80,27 +80,83 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
      */
     public function render(): MultiDocRendererInterface
     {
-        $this->htmlService->initializeService();
-
         foreach ($this->files as $file) {
             foreach ($file->getClasses() as $class) {
-                $this->htmlService->createFromClass($class);
+                $this->renderClass($class);
             }
-
             foreach ($file->getInterfaces() as $interface) {
-                $this->htmlService->createFromInterface($interface);
+                $this->renderInterface($interface);
             }
-
             foreach ($file->getTraits() as $trait) {
-                $this->htmlService->createFromTrait($trait);
+                $this->renderTrait($trait);
             }
         }
 
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.md";
+        return $this;
+    }
 
+    /**
+     * Render a single markdown file
+     *
+     * @param string $destinationFilename
+     * @return MultiDocRendererInterface
+     */
+    public function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
+    {
         $markDown = $this->htmlConverter->convert((string)$this->htmlService);
 
         file_put_contents($destinationFilename, $markDown);
+
+        return $this;
+    }
+
+    /**
+     * Render a class markdown file
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function renderClass($class): MultiDocRendererInterface
+    {
+        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
+
+        $this->htmlService->initializeService();
+        $this->htmlService->createFromClass($class);
+
+        $this->renderSingleMarkDown($destinationFilename);
+
+        return $this;
+    }
+
+    /**
+     * Render a interface markdown file
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function renderInterface($interface): MultiDocRendererInterface
+    {
+        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
+
+        $this->htmlService->initializeService();
+        $this->htmlService->createFromInterface($interface);
+
+        $this->renderSingleMarkDown($destinationFilename);
+
+        return $this;
+    }
+
+    /**
+     * Render a interface markdown file
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function renderTrait($interface): MultiDocRendererInterface
+    {
+        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".md";
+
+        $this->htmlService->initializeService();
+        $this->htmlService->createFromTrait($interface);
+
+        $this->renderSingleMarkDown($destinationFilename);
 
         return $this;
     }

@@ -89,7 +89,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
         return $this;
     }
 
-    public function renderSinglePdf(string $destinationFilename): MultiDocRendererInterface
+    public function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
         $pdf = new MultiDocPdfFile();
         $pdf->WriteHTML(
@@ -114,7 +114,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
         $this->htmlService->initializeService();
         $this->htmlService->createFromClass($class);
 
-        $this->renderSinglePdf($destinationFilename);
+        $this->renderSingleMarkDown($destinationFilename);
 
         return $this;
     }
@@ -131,7 +131,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
         $this->htmlService->initializeService();
         $this->htmlService->createFromInterface($interface);
 
-        $this->renderSinglePdf($destinationFilename);
+        $this->renderSingleMarkDown($destinationFilename);
 
         return $this;
     }
@@ -148,7 +148,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
         $this->htmlService->initializeService();
         $this->htmlService->createFromTrait($interface);
 
-        $this->renderSinglePdf($destinationFilename);
+        $this->renderSingleMarkDown($destinationFilename);
 
         return $this;
     }
