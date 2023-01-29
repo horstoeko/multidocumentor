@@ -42,8 +42,16 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
      */
     public function __construct()
     {
-        $this->templatesEngine = new PlatesEngine(dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets");
+        $this->templatesEngine = new PlatesEngine($this->getAssetsDirectory());
         $this->html = "";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAssetsDirectory(): string
+    {
+        return dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets" . DIRECTORY_SEPARATOR . "Html";
     }
 
     /**
@@ -186,7 +194,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     }
 
     /**
-     * @param \phpDocumentor\Reflection\Php\Trait_ $trait
+     * @inheritDoc
      */
     public function createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait): MultiDocHtmlServiceInterface
     {

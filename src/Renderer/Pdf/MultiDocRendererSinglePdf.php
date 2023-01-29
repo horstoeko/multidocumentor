@@ -24,7 +24,7 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 class MultiDocRendererSinglePdf implements MultiDocRendererInterface
 {
     /**
-     * @var \horstoeko\multidocumentor\Interfaces\MultiDocHtmlService
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface
      */
     protected $htmlService;
 
@@ -74,6 +74,11 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
     public function render(): MultiDocRendererInterface
     {
         $pdf = new MultiDocPdfFile();
+
+        $pdf->WriteHTML(
+            file_get_contents($this->htmlService->getAssetsDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
+            \Mpdf\HTMLParserMode::HEADER_CSS
+        );
 
         foreach ($this->files as $file) {
             $this->htmlService->initializeService();

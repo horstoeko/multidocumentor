@@ -22,3 +22,7 @@ th, tr {
 em {
     font-size: 0.8em;
 }
+
+h1.header {
+    page-break-before: always;
+}

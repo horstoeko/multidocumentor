@@ -24,6 +24,29 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 class MultiDocRendererFactory
 {
     /**
+     * Returns a list of all available renderers
+     *
+     * @return array
+     */
+    public static function getAllRenderers(): array
+    {
+        return [
+            MultiDocRendererSinglePdf::class,
+        ];
+    }
+
+    /**
+     * Returns true when a renderer for the given $format is available
+     *
+     * @param integer $format
+     * @return boolean
+     */
+    public static function hasRenderer(int $format): bool
+    {
+        return isset(self::getAllRenderers()[$format]);
+    }
+
+    /**
      * Create a renderer by format identifiert
      *
      * @param integer $format
@@ -31,14 +54,12 @@ class MultiDocRendererFactory
      */
     public static function createRenderer(int $format): MultiDocRendererInterface
     {
-        $rendererClasses = [
-            MultiDocRendererSinglePdf::class,
-        ];
-
-        if (!isset($rendererClasses[$format])) {
+        if (!self::hasRenderer($format)) {
             throw new \Exception('Cannot determine the renderer');
         }
 
-        return new $rendererClasses[$format]();
+        $classname = self::getAllRenderers()[$format];
+
+        return new $classname;
     }
 }
