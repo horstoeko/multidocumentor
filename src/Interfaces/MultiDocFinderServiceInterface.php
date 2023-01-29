@@ -10,8 +10,7 @@
 namespace horstoeko\multidocumentor\Interfaces;
 
 /**
- * Interface for the service which will give us all files
- * to handle
+ * Interface for a service class which will give us all files to handle
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor

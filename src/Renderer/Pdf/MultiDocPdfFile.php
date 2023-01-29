@@ -12,7 +12,7 @@ namespace horstoeko\multidocumentor\Renderer\Pdf;
 use Mpdf\Mpdf;
 
 /**
- * Class which implements a pdf file
+ * Class which creates a pdf file
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
@@ -29,14 +29,5 @@ class MultiDocPdfFile extends Mpdf
      */
     public function __construct() {
         parent::__construct(['tempDir' => sys_get_temp_dir() . '/mpdf']);
-    }
-
-    /**
-     * Generates PDF file.
-     * @throws \Mpdf\MpdfException
-     */
-    private function save(): void {
-        //$this->WriteHTML($this->html);
-        //$this->output($this->path . '.pdf', 'F');
     }
 }

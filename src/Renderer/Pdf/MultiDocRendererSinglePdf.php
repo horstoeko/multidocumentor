@@ -13,7 +13,7 @@ use horstoeko\multidocumentor\Services\MultiDocHtmlService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
 /**
- * class which renders the documentation to a single PDF
+ * service class which renders the output documents as an single PDF document
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor

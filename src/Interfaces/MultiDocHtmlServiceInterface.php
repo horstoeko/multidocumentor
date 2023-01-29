@@ -10,7 +10,7 @@
 namespace horstoeko\multidocumentor\Interfaces;
 
 /**
- * Interface for a class which renders the html
+ * Interface for a service class which renders the html
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
