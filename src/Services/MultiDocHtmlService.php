@@ -49,7 +49,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function init(): MultiDocHtmlServiceInterface
+    public function initializeService(): MultiDocHtmlServiceInterface
     {
         $this->html = "";
         return $this;
@@ -58,7 +58,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function html(): string
+    public function getHtmlOutput(): string
     {
         return $this->html;
     }

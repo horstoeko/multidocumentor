@@ -48,7 +48,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function outputTo(string $outputTo): MultiDocRenderServiceInterface
+    public function setOutputTo(string $outputTo): MultiDocRenderServiceInterface
     {
         $this->outputTo = $outputTo;
         return $this;
@@ -57,7 +57,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function format(int $format): MultiDocRenderServiceInterface
+    public function setOutputFormat(int $format): MultiDocRenderServiceInterface
     {
         $this->format = $format;
         return $this;
@@ -66,7 +66,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function files(array $files): MultiDocRenderServiceInterface
+    public function setFiles(array $files): MultiDocRenderServiceInterface
     {
         $this->files = $files;
         return $this;
@@ -75,14 +75,14 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function render(): MultiDocRenderServiceInterface
+    public function renderDocumentation(): MultiDocRenderServiceInterface
     {
         $projectFactory = ProjectFactory::createInstance();
         $project = $projectFactory->create('Project to document', $this->files);
 
         $renderer = MultiDocRendererFactory::createRenderer($this->format);
-        $renderer->files($project->getFiles());
-        $renderer->outputTo($this->outputTo);
+        $renderer->setFiles($project->getFiles());
+        $renderer->setOutputTo($this->outputTo);
         $renderer->render();
 
         return $this;

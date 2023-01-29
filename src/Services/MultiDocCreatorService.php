@@ -26,14 +26,14 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
     /**
      * Finder Service
      *
-     * @var \horstoeko\multidocumentor\Services\MultiDocFinderService
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocFinderServiceInterface
      */
     protected $finderService;
 
     /**
      * Render Service
      *
-     * @var \horstoeko\multidocumentor\Services\MultiDocRenderService
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocRenderServiceInterface
      */
     protected $renderService;
 
@@ -49,36 +49,36 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
     /**
      * @inheritDoc
      */
-    public function include($directory): MultiDocCreatorServiceInterface
+    public function addDirectoryToInclude($directory): MultiDocCreatorServiceInterface
     {
-        $this->finderService->include($directory);
+        $this->finderService->addDirectoryToInclude($directory);
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function exclude($directory): MultiDocCreatorServiceInterface
+    public function addDirectoryToExclude($directory): MultiDocCreatorServiceInterface
     {
-        $this->finderService->exclude($directory);
+        $this->finderService->addDirectoryToExclude($directory);
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function outputTo(string $outputTo): MultiDocCreatorServiceInterface
+    public function setOutputTo(string $outputTo): MultiDocCreatorServiceInterface
     {
-        $this->renderService->outputTo($outputTo);
+        $this->renderService->setOutputTo($outputTo);
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function format(int $format): MultiDocCreatorServiceInterface
+    public function setOutputFormat(int $format): MultiDocCreatorServiceInterface
     {
-        $this->renderService->format($format);
+        $this->renderService->setOutputFormat($format);
         return $this;
     }
 
@@ -87,8 +87,8 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
      */
     public function process(): MultiDocCreatorServiceInterface
     {
-        $this->renderService->files($this->finderService->filesAsPhpDocLocalFiles());
-        $this->renderService->render();
+        $this->renderService->setFiles($this->finderService->getAllFilesAsPhpDocLocalFiles());
+        $this->renderService->renderDocumentation();
 
         return $this;
     }

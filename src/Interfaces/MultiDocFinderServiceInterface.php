@@ -27,7 +27,7 @@ interface MultiDocFinderServiceInterface
      * @param string|array $directory
      * @return MultiDocFinderServiceInterface
      */
-    public function include($directory): MultiDocFinderServiceInterface;
+    public function addDirectoryToInclude($directory): MultiDocFinderServiceInterface;
 
     /**
      * Set the directories which should excluded from the search
@@ -35,19 +35,19 @@ interface MultiDocFinderServiceInterface
      * @param string|array $directory
      * @return MultiDocFinderServiceInterface
      */
-    public function exclude($directory): MultiDocFinderServiceInterface;
+    public function addDirectoryToExclude($directory): MultiDocFinderServiceInterface;
 
     /**
      * Get all found files
      *
      * @return array
      */
-    public function files(): array;
+    public function getAllFiles(): array;
 
     /**
      * Get all files as a PHPdoc LocalFile
      *
      * @return \phpDocumentor\Reflection\File\LocalFile[]
      */
-    public function filesAsPhpDocLocalFiles(): array;
+    public function getAllFilesAsPhpDocLocalFiles(): array;
 }

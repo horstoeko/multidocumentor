@@ -26,7 +26,7 @@ interface MultiDocRendererInterface
      * @param string $outputTo
      * @return MultiDocRendererInterface
      */
-    public function outputTo(string $outputTo): MultiDocRendererInterface;
+    public function setOutputTo(string $outputTo): MultiDocRendererInterface;
 
     /**
      * Set the file to render
@@ -34,7 +34,7 @@ interface MultiDocRendererInterface
      * @param \phpDocumentor\Reflection\Php\File[] $file
      * @return MultiDocRendererInterface
      */
-    public function files(array $files): MultiDocRendererInterface;
+    public function setFiles(array $files): MultiDocRendererInterface;
 
     /**
      * Render the file

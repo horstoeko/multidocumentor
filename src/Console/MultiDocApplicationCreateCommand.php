@@ -55,6 +55,7 @@ class MultiDocApplicationCreateCommand extends Command
         $this->addOption('include', 'i', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to include');
         $this->addOption('exclude', 'x', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to exclude');
         $this->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Directory where the docs should be generated');
+        $this->addOption('format', 'f', InputOption::VALUE_REQUIRED, 'The output format of documentation');
     }
 
     /**
@@ -62,9 +63,10 @@ class MultiDocApplicationCreateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->creatorService->include($input->getOption('include'));
-        $this->creatorService->exclude($input->getOption('exclude'));
-        $this->creatorService->outputTo($input->getOption('output'));
+        $this->creatorService->addDirectoryToInclude($input->getOption('include'));
+        $this->creatorService->addDirectoryToExclude($input->getOption('exclude'));
+        $this->creatorService->setOutputTo($input->getOption('output'));
+        $this->creatorService->setOutputFormat($input->getOption('format') ?? 0);
         $this->creatorService->process();
 
         return Command::SUCCESS;

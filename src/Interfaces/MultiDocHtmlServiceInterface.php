@@ -25,14 +25,14 @@ interface MultiDocHtmlServiceInterface
      *
      * @return MultiDocHtmlServiceInterface
      */
-    public function init(): MultiDocHtmlServiceInterface;
+    public function initializeService(): MultiDocHtmlServiceInterface;
 
     /**
      * Return the created HTML
      *
      * @return string
      */
-    public function html(): string;
+    public function getHtmlOutput(): string;
 
     /**
      * Write Header

@@ -26,7 +26,7 @@ interface MultiDocRenderServiceInterface
      * @param string $outputTo
      * @return MultiDocRenderServiceInterface
      */
-    public function outputTo(string $outputTo): MultiDocRenderServiceInterface;
+    public function setOutputTo(string $outputTo): MultiDocRenderServiceInterface;
 
     /**
      * Set the output format
@@ -34,7 +34,7 @@ interface MultiDocRenderServiceInterface
      * @param integer $format
      * @return MultiDocRenderServiceInterface
      */
-    public function format(int $format): MultiDocRenderServiceInterface;
+    public function setOutputFormat(int $format): MultiDocRenderServiceInterface;
 
     /**
      * Set the files which are to handle
@@ -42,12 +42,12 @@ interface MultiDocRenderServiceInterface
      * @param \phpDocumentor\Reflection\File\LocalFile[] $files
      * @return MultiDocRenderServiceInterface
      */
-    public function files(array $files): MultiDocRenderServiceInterface;
+    public function setFiles(array $files): MultiDocRenderServiceInterface;
 
     /**
      * Render the documentation from files
      *
      * @return MultiDocRenderServiceInterface
      */
-    public function render(): MultiDocRenderServiceInterface;
+    public function renderDocumentation(): MultiDocRenderServiceInterface;
 }

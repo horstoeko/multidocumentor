@@ -46,7 +46,7 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
     /**
      * @inheritDoc
      */
-    public function include($directory): MultiDocFinderServiceInterface
+    public function addDirectoryToInclude($directory): MultiDocFinderServiceInterface
     {
         $this->finder->in($directory);
         return $this;
@@ -55,7 +55,7 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
     /**
      * @inheritDoc
      */
-    public function exclude($directory): MultiDocFinderServiceInterface
+    public function addDirectoryToExclude($directory): MultiDocFinderServiceInterface
     {
         $this->finder->exclude($directory);
         return $this;
@@ -64,7 +64,7 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
     /**
      * @inheritDoc
      */
-    public function files(): array
+    public function getAllFiles(): array
     {
         $files = array_values(array_map(function ($file) {
             return $file->getRealPath();
@@ -76,7 +76,7 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
     /**
      * @inheritDoc
      */
-    public function filesAsPhpDocLocalFiles(): array
+    public function getAllFilesAsPhpDocLocalFiles(): array
     {
         $files = array_map(function ($file) {
             return new LocalFile($file);

@@ -53,7 +53,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
     /**
      * @inheritDoc
      */
-    public function outputTo(string $outputTo): MultiDocRendererInterface
+    public function setOutputTo(string $outputTo): MultiDocRendererInterface
     {
         $this->outputTo = $outputTo;
         return $this;
@@ -62,7 +62,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
     /**
      * @inheritDoc
      */
-    public function files(array $files): MultiDocRendererInterface
+    public function setFiles(array $files): MultiDocRendererInterface
     {
         $this->files = $files;
         return $this;
@@ -76,7 +76,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
         $pdf = new MultiDocPdfFile();
 
         foreach ($this->files as $file) {
-            $this->htmlService->init();
+            $this->htmlService->initializeService();
 
             foreach ($file->getClasses() as $class) {
                 $this->htmlService->createFromClass($class);

@@ -26,7 +26,7 @@ interface MultiDocCreatorServiceInterface
      * @param string|array $directory
      * @return MultiDocCreatorServiceInterface
      */
-    public function include($directory): MultiDocCreatorServiceInterface;
+    public function addDirectoryToInclude($directory): MultiDocCreatorServiceInterface;
 
     /**
      * Set the directories which should excluded from the search
@@ -34,7 +34,7 @@ interface MultiDocCreatorServiceInterface
      * @param string|array $directory
      * @return MultiDocCreatorServiceInterface
      */
-    public function exclude($directory): MultiDocCreatorServiceInterface;
+    public function addDirectoryToExclude($directory): MultiDocCreatorServiceInterface;
 
     /**
      * Set the directory to which the docs should be published
@@ -42,7 +42,7 @@ interface MultiDocCreatorServiceInterface
      * @param string $outputTo
      * @return MultiDocCreatorServiceInterface
      */
-    public function outputTo(string $outputTo): MultiDocCreatorServiceInterface;
+    public function setOutputTo(string $outputTo): MultiDocCreatorServiceInterface;
 
     /**
      * Set the output format
@@ -50,7 +50,7 @@ interface MultiDocCreatorServiceInterface
      * @param integer $format
      * @return MultiDocCreatorServiceInterface
      */
-    public function format(int $format): MultiDocCreatorServiceInterface;
+    public function setOutputFormat(int $format): MultiDocCreatorServiceInterface;
 
     /**
      * Starts the creation of the documentation
