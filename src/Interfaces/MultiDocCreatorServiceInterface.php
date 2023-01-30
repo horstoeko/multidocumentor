@@ -21,38 +21,6 @@ namespace horstoeko\multidocumentor\Interfaces;
 interface MultiDocCreatorServiceInterface
 {
     /**
-     * Set the entry point(s) where to start to look for files
-     *
-     * @param string|array $directory
-     * @return MultiDocCreatorServiceInterface
-     */
-    public function addDirectoryToInclude($directory): MultiDocCreatorServiceInterface;
-
-    /**
-     * Set the directories which should excluded from the search
-     *
-     * @param string|array $directory
-     * @return MultiDocCreatorServiceInterface
-     */
-    public function addDirectoryToExclude($directory): MultiDocCreatorServiceInterface;
-
-    /**
-     * Set the directory to which the docs should be published
-     *
-     * @param string $outputTo
-     * @return MultiDocCreatorServiceInterface
-     */
-    public function setOutputTo(string $outputTo): MultiDocCreatorServiceInterface;
-
-    /**
-     * Set the output format
-     *
-     * @param integer $format
-     * @return MultiDocCreatorServiceInterface
-     */
-    public function setOutputFormat(int $format): MultiDocCreatorServiceInterface;
-
-    /**
      * Starts the creation of the documentation
      *
      * @return MultiDocCreatorServiceInterface

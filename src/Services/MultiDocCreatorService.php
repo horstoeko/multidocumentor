@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Services\MultiDocFinderService;
 use horstoeko\multidocumentor\Interfaces\MultiDocCreatorServiceInterface;
 
@@ -23,6 +24,13 @@ use horstoeko\multidocumentor\Interfaces\MultiDocCreatorServiceInterface;
  */
 class MultiDocCreatorService implements MultiDocCreatorServiceInterface
 {
+    /**
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     */
+    protected $config;
+
     /**
      * Finder Service
      *
@@ -40,46 +48,12 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(MultiDocConfig $config)
     {
-        $this->finderService = new MultiDocFinderService();
-        $this->renderService = new MultiDocRenderService();
-    }
+        $this->config = $config;
 
-    /**
-     * @inheritDoc
-     */
-    public function addDirectoryToInclude($directory): MultiDocCreatorServiceInterface
-    {
-        $this->finderService->addDirectoryToInclude($directory);
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function addDirectoryToExclude($directory): MultiDocCreatorServiceInterface
-    {
-        $this->finderService->addDirectoryToExclude($directory);
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setOutputTo(string $outputTo): MultiDocCreatorServiceInterface
-    {
-        $this->renderService->setOutputTo($outputTo);
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setOutputFormat(int $format): MultiDocCreatorServiceInterface
-    {
-        $this->renderService->setOutputFormat($format);
-        return $this;
+        $this->finderService = new MultiDocFinderService($config);
+        $this->renderService = new MultiDocRenderService($config);
     }
 
     /**

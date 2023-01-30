@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use League\HTMLToMarkdown\HtmlConverter;
@@ -25,9 +26,16 @@ use League\HTMLToMarkdown\HtmlConverter;
 class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
 {
     /**
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     */
+    protected $config;
+
+    /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
-    protected $htmlService;
+    protected $markupService;
 
     /**
      * @var \League\HTMLToMarkdown\HtmlConverter
@@ -42,28 +50,14 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
     protected $files = "";
 
     /**
-     * Directory to which the docs should be published
-     *
-     * @var string
-     */
-    protected $outputTo = "";
-
-    /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(MultiDocConfig $config)
     {
-        $this->htmlService = new MultiDocMarkupService();
-        $this->htmlConverter = new HtmlConverter();
-    }
+        $this->config = $config;
 
-    /**
-     * @inheritDoc
-     */
-    public function setOutputTo(string $outputTo): MultiDocRendererInterface
-    {
-        $this->outputTo = $outputTo;
-        return $this;
+        $this->markupService = new MultiDocMarkupService($this->config);
+        $this->htmlConverter = new HtmlConverter();
     }
 
     /**
@@ -80,25 +74,25 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
      */
     public function render(): MultiDocRendererInterface
     {
-        $this->htmlService->initializeService();
+        $this->markupService->initializeService();
 
         foreach ($this->files as $file) {
             foreach ($file->getClasses() as $class) {
-                $this->htmlService->createFromClass($class);
+                $this->markupService->createFromClass($class);
             }
 
             foreach ($file->getInterfaces() as $interface) {
-                $this->htmlService->createFromInterface($interface);
+                $this->markupService->createFromInterface($interface);
             }
 
             foreach ($file->getTraits() as $trait) {
-                $this->htmlService->createFromTrait($trait);
+                $this->markupService->createFromTrait($trait);
             }
         }
 
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.md";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.md";
 
-        $markDown = $this->htmlConverter->convert((string)$this->htmlService);
+        $markDown = $this->htmlConverter->convert((string)$this->markupService);
 
         file_put_contents($destinationFilename, $markDown);
 

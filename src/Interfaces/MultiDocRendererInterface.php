@@ -21,22 +21,6 @@ namespace horstoeko\multidocumentor\Interfaces;
 interface MultiDocRendererInterface
 {
     /**
-     * Set the directory to which the docs should be published
-     *
-     * @param string $outputTo
-     * @return MultiDocRendererInterface
-     */
-    public function setOutputTo(string $outputTo): MultiDocRendererInterface;
-
-    /**
-     * Set the file to render
-     *
-     * @param \phpDocumentor\Reflection\Php\File[] $file
-     * @return MultiDocRendererInterface
-     */
-    public function setFiles(array $files): MultiDocRendererInterface;
-
-    /**
      * Render the file
      *
      * @return MultiDocRendererInterface

@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Console;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Services\MultiDocCreatorService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,23 +29,6 @@ use Symfony\Component\Console\Input\InputOption;
 class MultiDocApplicationCreateCommand extends Command
 {
     /**
-     * The creator service
-     *
-     * @var \horstoeko\multidocumentor\Services\MultiDocCreatorService
-     */
-    protected $creatorService;
-
-    /**
-     * @inheritDoc
-     */
-    public function __construct(string $name = null)
-    {
-        parent::__construct($name);
-
-        $this->creatorService = new MultiDocCreatorService();
-    }
-
-    /**
      * @inheritDoc
      */
     protected function configure()
@@ -63,11 +47,14 @@ class MultiDocApplicationCreateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->creatorService->addDirectoryToInclude($input->getOption('include'));
-        $this->creatorService->addDirectoryToExclude($input->getOption('exclude'));
-        $this->creatorService->setOutputTo($input->getOption('output'));
-        $this->creatorService->setOutputFormat($input->getOption('format') ?? 0);
-        $this->creatorService->process();
+        $config = new MultiDocConfig();
+        $config->setIncludeDirectories($input->getOption('include'));
+        $config->setExcludeDirectories($input->getOption('exclude'));
+        $config->setOutputTo($input->getOption('output'));
+        $config->setOutputFormat($input->getOption('format') ?? 0);
+
+        $creatorService = new MultiDocCreatorService($config);
+        $creatorService->process();
 
         return Command::SUCCESS;
     }

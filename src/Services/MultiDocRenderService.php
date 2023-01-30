@@ -10,6 +10,7 @@
 namespace horstoeko\multidocumentor\Services;
 
 use phpDocumentor\Reflection\Php\ProjectFactory;
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Renderer\MultiDocRendererFactory;
 use horstoeko\multidocumentor\Interfaces\MultiDocRenderServiceInterface;
 
@@ -25,6 +26,13 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRenderServiceInterface;
 class MultiDocRenderService implements MultiDocRenderServiceInterface
 {
     /**
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     */
+    protected $config;
+
+    /**
      * Files to handle
      *
      * @param \phpDocumentor\Reflection\File\LocalFile[] $files
@@ -32,35 +40,11 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     protected $files = [];
 
     /**
-     * Directory to which the docs should be published
-     *
-     * @var string
+     * Constructor
      */
-    protected $outputTo = "";
-
-    /**
-     * The output format
-     *
-     * @var integer
-     */
-    protected $format = 0;
-
-    /**
-     * @inheritDoc
-     */
-    public function setOutputTo(string $outputTo): MultiDocRenderServiceInterface
+    public function __construct(MultiDocConfig $config)
     {
-        $this->outputTo = $outputTo;
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setOutputFormat(int $format): MultiDocRenderServiceInterface
-    {
-        $this->format = $format;
-        return $this;
+        $this->config = $config;
     }
 
     /**
@@ -80,9 +64,8 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
         $projectFactory = ProjectFactory::createInstance();
         $project = $projectFactory->create('Project to document', $this->files);
 
-        $renderer = MultiDocRendererFactory::createRenderer($this->format);
+        $renderer = MultiDocRendererFactory::createRenderer($this->config);
         $renderer->setFiles($project->getFiles());
-        $renderer->setOutputTo($this->outputTo);
         $renderer->render();
 
         return $this;

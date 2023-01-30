@@ -21,22 +21,6 @@ namespace horstoeko\multidocumentor\Interfaces;
 interface MultiDocFinderServiceInterface
 {
     /**
-     * Set the entry point(s) where to start to look for files
-     *
-     * @param string|array $directory
-     * @return MultiDocFinderServiceInterface
-     */
-    public function addDirectoryToInclude($directory): MultiDocFinderServiceInterface;
-
-    /**
-     * Set the directories which should excluded from the search
-     *
-     * @param string|array $directory
-     * @return MultiDocFinderServiceInterface
-     */
-    public function addDirectoryToExclude($directory): MultiDocFinderServiceInterface;
-
-    /**
      * Get all found files
      *
      * @return array

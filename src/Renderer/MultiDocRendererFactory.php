@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
@@ -55,17 +56,17 @@ class MultiDocRendererFactory
     /**
      * Create a renderer by format identifiert
      *
-     * @param integer $format
+     * @param \horstoeko\multidocumentor\Config\MultiDocConfig $config
      * @return MultiDocRendererInterface
      */
-    public static function createRenderer(int $format): MultiDocRendererInterface
+    public static function createRenderer(MultiDocConfig $config): MultiDocRendererInterface
     {
-        if (!self::hasRenderer($format)) {
+        if (!self::hasRenderer($config->getOutputFormat())) {
             throw new \Exception('Cannot determine the renderer');
         }
 
-        $classname = self::getAllRenderers()[$format];
+        $classname = self::getAllRenderers()[$config->getOutputFormat()];
 
-        return new $classname;
+        return new $classname($config);
     }
 }

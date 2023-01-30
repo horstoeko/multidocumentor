@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use League\HTMLToMarkdown\HtmlConverter;
 use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
@@ -25,9 +26,16 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
 {
     /**
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     */
+    protected $config;
+
+    /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
-    protected $htmlService;
+    protected $markupService;
 
     /**
      * @var \League\HTMLToMarkdown\HtmlConverter
@@ -42,28 +50,14 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
     protected $files = "";
 
     /**
-     * Directory to which the docs should be published
-     *
-     * @var string
-     */
-    protected $outputTo = "";
-
-    /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(MultiDocConfig $config)
     {
-        $this->htmlService = new MultiDocMarkupService();
-        $this->htmlConverter = new HtmlConverter();
-    }
+        $this->config = $config;
 
-    /**
-     * @inheritDoc
-     */
-    public function setOutputTo(string $outputTo): MultiDocRendererInterface
-    {
-        $this->outputTo = $outputTo;
-        return $this;
+        $this->markupService = new MultiDocMarkupService($this->config);
+        $this->htmlConverter = new HtmlConverter();
     }
 
     /**
@@ -103,7 +97,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      */
     public function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
-        $markDown = $this->htmlConverter->convert((string)$this->htmlService);
+        $markDown = $this->htmlConverter->convert((string)$this->markupService);
 
         file_put_contents($destinationFilename, $markDown);
 
@@ -117,10 +111,10 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      */
     public function renderClass($class): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
 
-        $this->htmlService->initializeService();
-        $this->htmlService->createFromClass($class);
+        $this->markupService->initializeService();
+        $this->markupService->createFromClass($class);
 
         $this->renderSingleMarkDown($destinationFilename);
 
@@ -134,10 +128,10 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      */
     public function renderInterface($interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
 
-        $this->htmlService->initializeService();
-        $this->htmlService->createFromInterface($interface);
+        $this->markupService->initializeService();
+        $this->markupService->createFromInterface($interface);
 
         $this->renderSingleMarkDown($destinationFilename);
 
@@ -151,10 +145,10 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      */
     public function renderTrait($interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".md";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".md";
 
-        $this->htmlService->initializeService();
-        $this->htmlService->createFromTrait($interface);
+        $this->markupService->initializeService();
+        $this->markupService->createFromTrait($interface);
 
         $this->renderSingleMarkDown($destinationFilename);
 
