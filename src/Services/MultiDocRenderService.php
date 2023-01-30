@@ -37,7 +37,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
      *
      * @param \phpDocumentor\Reflection\File\LocalFile[] $files
      */
-    protected $files = [];
+    protected $localFiles = [];
 
     /**
      * Constructor
@@ -50,9 +50,9 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function setFiles(array $files): MultiDocRenderServiceInterface
+    public function setLocalFiles(array $files): MultiDocRenderServiceInterface
     {
-        $this->files = $files;
+        $this->localFiles = $files;
         return $this;
     }
 
@@ -62,10 +62,10 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     public function renderDocumentation(): MultiDocRenderServiceInterface
     {
         $projectFactory = ProjectFactory::createInstance();
-        $project = $projectFactory->create('Project to document', $this->files);
+        $project = $projectFactory->create('Project to document', $this->localFiles);
 
         $renderer = MultiDocRendererFactory::createRenderer($this->config);
-        $renderer->setFiles($project->getFiles());
+        $renderer->setReflectedFiles($project->getFiles());
         $renderer->render();
 
         return $this;

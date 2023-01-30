@@ -25,5 +25,5 @@ interface MultiDocCreatorServiceInterface
      *
      * @return MultiDocCreatorServiceInterface
      */
-    public function process(): MultiDocCreatorServiceInterface;
+    public function renderDocumentation(): MultiDocCreatorServiceInterface;
 }

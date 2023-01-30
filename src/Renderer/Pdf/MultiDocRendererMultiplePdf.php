@@ -63,7 +63,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     /**
      * @inheritDoc
      */
-    public function setFiles(array $files): MultiDocRendererInterface
+    public function setReflectedFiles(array $files): MultiDocRendererInterface
     {
         $this->files = $files;
         return $this;

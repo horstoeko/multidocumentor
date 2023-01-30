@@ -21,6 +21,14 @@ namespace horstoeko\multidocumentor\Interfaces;
 interface MultiDocRendererInterface
 {
     /**
+     * Set the file to render
+     *
+     * @param \phpDocumentor\Reflection\Php\File[] $file
+     * @return MultiDocRendererInterface
+     */
+    public function setReflectedFiles(array $files): MultiDocRendererInterface;
+
+    /**
      * Render the file
      *
      * @return MultiDocRendererInterface

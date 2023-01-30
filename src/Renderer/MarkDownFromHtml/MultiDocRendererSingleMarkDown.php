@@ -47,7 +47,7 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
      *
      * @param \phpDocumentor\Reflection\Php\File $file
      */
-    protected $files = "";
+    protected $reflectedFiles;
 
     /**
      * Constructor
@@ -63,9 +63,9 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
     /**
      * @inheritDoc
      */
-    public function setFiles(array $files): MultiDocRendererInterface
+    public function setReflectedFiles(array $files): MultiDocRendererInterface
     {
-        $this->files = $files;
+        $this->reflectedFiles = $files;
         return $this;
     }
 
@@ -76,7 +76,7 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
     {
         $this->markupService->initializeService();
 
-        foreach ($this->files as $file) {
+        foreach ($this->reflectedFiles as $file) {
             foreach ($file->getClasses() as $class) {
                 $this->markupService->createFromClass($class);
             }
