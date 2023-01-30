@@ -9,7 +9,6 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 use League\Plates\Engine as PlatesEngine;
@@ -53,7 +52,7 @@ class MultiDocMarkupService implements MultiDocMarkupServiceInterface
     {
         $this->config = $config;
 
-        $this->templatesEngine = new PlatesEngine(MultiDocAssetManager::getHtmlDirectory());
+        $this->templatesEngine = new PlatesEngine($this->config->getHtmlDirectory());
         $this->markup = "";
     }
 

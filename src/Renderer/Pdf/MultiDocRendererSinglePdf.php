@@ -10,7 +10,6 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
 use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
@@ -67,10 +66,10 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
      */
     public function render(): MultiDocRendererInterface
     {
-        $pdf = new MultiDocPdfFile();
+        $pdf = new MultiDocPdfFile($this->config);
 
         $pdf->WriteHTML(
-            file_get_contents(MultiDocAssetManager::getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
+            file_get_contents($this->config->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
 

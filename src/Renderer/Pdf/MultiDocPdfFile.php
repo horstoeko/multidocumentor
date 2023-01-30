@@ -10,6 +10,9 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use Mpdf\Mpdf;
+use Mpdf\Config\FontVariables;
+use Mpdf\Config\ConfigVariables;
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 
 /**
  * Class which creates a pdf file
@@ -23,9 +26,33 @@ use Mpdf\Mpdf;
 class MultiDocPdfFile extends Mpdf
 {
     /**
-     * Constructor
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
      */
-    public function __construct() {
-        parent::__construct(['tempDir' => sys_get_temp_dir() . '/mpdf']);
+    protected $config;
+
+    /**
+     * Constructor
+     *
+     * @param MultiDocConfig $config
+     */
+    public function __construct(MultiDocConfig $config)
+    {
+        $this->config = $config;
+
+        $defaultConfig = (new ConfigVariables())->getDefaults();
+        $defaultFontDirs = $defaultConfig['fontDir'];
+
+        $defaultFontConfig = (new FontVariables())->getDefaults();
+        $defaultFontData = $defaultFontConfig['fontdata'];
+
+        parent::__construct(
+            [
+                'tempDir' => sys_get_temp_dir() . '/mpdf',
+                'fontDir' => array_merge($defaultFontDirs, [$this->config->getFontsDirectory()]),
+                'fontdata' => $defaultFontData + []
+            ]
+        );
     }
 }
