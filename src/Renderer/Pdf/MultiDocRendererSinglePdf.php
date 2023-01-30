@@ -9,6 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
 use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
@@ -25,6 +26,13 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 class MultiDocRendererSinglePdf implements MultiDocRendererInterface
 {
     /**
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     */
+    protected $config;
+
+    /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
     protected $htmlService;
@@ -32,32 +40,17 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
     /**
      * Files to handle
      *
-     * @param \phpDocumentor\Reflection\Php\File $file
+     * @param \phpDocumentor\Reflection\Php\File[] $file
      */
-    protected $files = "";
-
-    /**
-     * Directory to which the docs should be published
-     *
-     * @var string
-     */
-    protected $outputTo = "";
+    protected $reflectedFiles = [];
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(MultiDocConfig $config)
     {
-        $this->htmlService = new MultiDocMarkupService();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setOutputTo(string $outputTo): MultiDocRendererInterface
-    {
-        $this->outputTo = $outputTo;
-        return $this;
+        $this->config = $config;
+        $this->htmlService = new MultiDocMarkupService($this->config);
     }
 
     /**
@@ -65,7 +58,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
      */
     public function setReflectedFiles(array $files): MultiDocRendererInterface
     {
-        $this->files = $files;
+        $this->reflectedFiles = $files;
         return $this;
     }
 
@@ -83,7 +76,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
 
         $this->htmlService->initializeService();
 
-        foreach ($this->files as $file) {
+        foreach ($this->reflectedFiles as $file) {
             foreach ($file->getClasses() as $class) {
                 $this->htmlService->createFromClass($class);
             }
@@ -97,7 +90,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
             }
         }
 
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
 
         $pdf->WriteHTML((string)$this->htmlService);
         $pdf->Output($destinationFilename, 'F');

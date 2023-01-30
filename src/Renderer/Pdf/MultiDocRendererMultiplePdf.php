@@ -10,6 +10,7 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
@@ -25,6 +26,13 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
 {
     /**
+     * Configuration
+     *
+     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     */
+    protected $config;
+
+    /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
     protected $htmlService;
@@ -32,32 +40,17 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     /**
      * Files to handle
      *
-     * @param \phpDocumentor\Reflection\Php\File $file
+     * @param \phpDocumentor\Reflection\Php\File[] $file
      */
-    protected $files = "";
-
-    /**
-     * Directory to which the docs should be published
-     *
-     * @var string
-     */
-    protected $outputTo = "";
+    protected $reflectedFiles = [];
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(MultiDocConfig $config)
     {
-        $this->htmlService = new MultiDocMarkupService();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setOutputTo(string $outputTo): MultiDocRendererInterface
-    {
-        $this->outputTo = $outputTo;
-        return $this;
+        $this->config = $config;
+        $this->htmlService = new MultiDocMarkupService($this->config);
     }
 
     /**
@@ -65,7 +58,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      */
     public function setReflectedFiles(array $files): MultiDocRendererInterface
     {
-        $this->files = $files;
+        $this->reflectedFiles = $files;
         return $this;
     }
 
@@ -74,7 +67,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      */
     public function render(): MultiDocRendererInterface
     {
-        foreach ($this->files as $file) {
+        foreach ($this->reflectedFiles as $file) {
             foreach ($file->getClasses() as $class) {
                 $this->renderClass($class);
             }
@@ -109,7 +102,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      */
     public function renderClass($class): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
 
         $this->htmlService->initializeService();
         $this->htmlService->createFromClass($class);
@@ -126,7 +119,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      */
     public function renderInterface($interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
 
         $this->htmlService->initializeService();
         $this->htmlService->createFromInterface($interface);
@@ -143,7 +136,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      */
     public function renderTrait($interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->outputTo, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
 
         $this->htmlService->initializeService();
         $this->htmlService->createFromTrait($interface);

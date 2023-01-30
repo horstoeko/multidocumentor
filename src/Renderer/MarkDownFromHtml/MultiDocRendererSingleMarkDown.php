@@ -45,9 +45,9 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
     /**
      * Files to handle
      *
-     * @param \phpDocumentor\Reflection\Php\File $file
+     * @param \phpDocumentor\Reflection\Php\File[] $file
      */
-    protected $reflectedFiles;
+    protected $reflectedFiles = [];
 
     /**
      * Constructor
