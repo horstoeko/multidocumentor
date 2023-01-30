@@ -9,10 +9,10 @@
 
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
-use Mpdf\Mpdf;
-use Mpdf\Config\FontVariables;
-use Mpdf\Config\ConfigVariables;
 use horstoeko\multidocumentor\Config\MultiDocConfig;
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
+use Mpdf\Mpdf;
 
 /**
  * Class which creates a pdf file

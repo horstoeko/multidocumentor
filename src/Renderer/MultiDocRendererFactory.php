@@ -11,10 +11,10 @@ namespace horstoeko\multidocumentor\Renderer;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown;
 use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 
 /**
  * class which is a factory for a renderer

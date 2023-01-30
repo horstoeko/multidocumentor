@@ -10,8 +10,8 @@
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use League\HTMLToMarkdown\HtmlConverter;
 
 /**

@@ -10,8 +10,8 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 
 /**
  * service class which renders the output documents as an single PDF document

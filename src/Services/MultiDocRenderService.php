@@ -9,10 +9,10 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use phpDocumentor\Reflection\Php\ProjectFactory;
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Renderer\MultiDocRendererFactory;
 use horstoeko\multidocumentor\Interfaces\MultiDocRenderServiceInterface;
+use horstoeko\multidocumentor\Renderer\MultiDocRendererFactory;
+use phpDocumentor\Reflection\Php\ProjectFactory;
 
 /**
  * Service class which will render the documentation

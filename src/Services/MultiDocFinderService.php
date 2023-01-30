@@ -9,10 +9,10 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use Symfony\Component\Finder\Finder;
-use phpDocumentor\Reflection\File\LocalFile;
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocFinderServiceInterface;
+use phpDocumentor\Reflection\File\LocalFile;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Service class which will give us all files to handle

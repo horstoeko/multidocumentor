@@ -10,9 +10,9 @@
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use League\HTMLToMarkdown\HtmlConverter;
-use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Services\MultiDocMarkupService;
+use League\HTMLToMarkdown\HtmlConverter;
 
 /**
  * service class which renders the output documents as an single markdown document

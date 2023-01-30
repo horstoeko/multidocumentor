@@ -10,8 +10,8 @@
 namespace horstoeko\multidocumentor\Services;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Services\MultiDocFinderService;
 use horstoeko\multidocumentor\Interfaces\MultiDocCreatorServiceInterface;
+use horstoeko\multidocumentor\Services\MultiDocFinderService;
 
 /**
  * Service class which will create the documentation
