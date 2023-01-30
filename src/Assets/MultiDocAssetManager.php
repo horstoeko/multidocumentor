@@ -27,7 +27,7 @@ class MultiDocAssetManager
      */
     public static function getAssetsDirectory(): string
     {
-        return dirname(__FILE__);
+        return rtrim(dirname(__FILE__), DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -38,6 +38,16 @@ class MultiDocAssetManager
     public static function getHtmlDirectory(): string
     {
         return self::getAssetsDirectory() . DIRECTORY_SEPARATOR . "Html";
+    }
+
+    /**
+     * Return the MarkDown directory
+     *
+     * @return string
+     */
+    public static function getMarkDownDirectory(): string
+    {
+        return self::getAssetsDirectory() . DIRECTORY_SEPARATOR . "MarkDown";
     }
 
     /**

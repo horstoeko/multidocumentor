@@ -10,7 +10,7 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
-use horstoeko\multidocumentor\Services\MultiDocHtmlService;
+use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
 /**
@@ -25,7 +25,7 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 class MultiDocRendererSinglePdf implements MultiDocRendererInterface
 {
     /**
-     * @var \horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
     protected $htmlService;
 
@@ -48,7 +48,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
      */
     public function __construct()
     {
-        $this->htmlService = new MultiDocHtmlService();
+        $this->htmlService = new MultiDocMarkupService();
     }
 
     /**

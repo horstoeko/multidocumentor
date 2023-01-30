@@ -10,11 +10,11 @@
 namespace horstoeko\multidocumentor\Services;
 
 use horstoeko\multidocumentor\Assets\MultiDocAssetManager;
-use horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface;
+use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 use League\Plates\Engine as PlatesEngine;
 
 /**
- * Service class which renders the html
+ * Service class which renders the markup
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
@@ -22,7 +22,7 @@ use League\Plates\Engine as PlatesEngine;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocHtmlService implements MultiDocHtmlServiceInterface
+class MultiDocMarkupService implements MultiDocMarkupServiceInterface
 {
     /**
      * Undocumented variable
@@ -32,11 +32,11 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     protected $templatesEngine;
 
     /**
-     * The internal HTML container
+     * The internal markup container
      *
      * @var string
      */
-    protected $html;
+    protected $markup;
 
     /**
      * Constructur
@@ -44,32 +44,32 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     public function __construct()
     {
         $this->templatesEngine = new PlatesEngine(MultiDocAssetManager::getHtmlDirectory());
-        $this->html = "";
+        $this->markup = "";
     }
 
     /**
      * @inheritDoc
      */
-    public function initializeService(): MultiDocHtmlServiceInterface
+    public function initializeService(): MultiDocMarkupServiceInterface
     {
-        $this->html = "";
+        $this->markup = "";
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function getHtmlOutput(): string
+    public function getMarkupOutput(): string
     {
-        return $this->html;
+        return $this->markup;
     }
 
     /**
      * @inheritDoc
      */
-    public function writeHeader(string $name, string $summary, string $description): MultiDocHtmlServiceInterface
+    public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface
     {
-        $this->html .= $this->templatesEngine->render(
+        $this->markup .= $this->templatesEngine->render(
             'header',
             [
                 'name' => $name,
@@ -84,7 +84,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function writeSummary(array $constants, array $properties, array $methods): MultiDocHtmlServiceInterface
+    public function writeSummary(array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface
     {
         $allConstants = $allProperties = $allMethods = array(
             'public' => '',
@@ -104,7 +104,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
             $allMethods[strval($method->getVisibility())] .= '<a href="#method:' . $method->getName() . '">' . $method->getName() . '</a><br>';
         }
 
-        $this->html .= $this->templatesEngine->render(
+        $this->markup .= $this->templatesEngine->render(
             'summary',
             [
                 'methods' => $allMethods,
@@ -119,10 +119,10 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function writeConstants(array $constants): MultiDocHtmlServiceInterface
+    public function writeConstants(array $constants): MultiDocMarkupServiceInterface
     {
         if (!empty($constants)) {
-            $this->html .= $this->templatesEngine->render('constants', array('constants' => $constants));
+            $this->markup .= $this->templatesEngine->render('constants', array('constants' => $constants));
         }
 
         return $this;
@@ -131,10 +131,10 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function writeProperties(array $properties): MultiDocHtmlServiceInterface
+    public function writeProperties(array $properties): MultiDocMarkupServiceInterface
     {
         if (!empty($properties)) {
-            $this->html .= $this->templatesEngine->render('properties', array('properties' => $properties));
+            $this->markup .= $this->templatesEngine->render('properties', array('properties' => $properties));
         }
 
         return $this;
@@ -143,10 +143,10 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function writeMethods(array $methods): MultiDocHtmlServiceInterface
+    public function writeMethods(array $methods): MultiDocMarkupServiceInterface
     {
         if (!empty($methods)) {
-            $this->html .= $this->templatesEngine->render('methods', array('methods' => $methods));
+            $this->markup .= $this->templatesEngine->render('methods', array('methods' => $methods));
         }
 
         return $this;
@@ -155,7 +155,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function createFromClass(\phpDocumentor\Reflection\Php\Class_ $class): MultiDocHtmlServiceInterface
+    public function createFromClass(\phpDocumentor\Reflection\Php\Class_ $class): MultiDocMarkupServiceInterface
     {
         $parsedown = new \Parsedown();
         $summary = $class->getDocBlock() !== null ? $class->getDocBlock()->getSummary() : '';
@@ -173,7 +173,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface): MultiDocHtmlServiceInterface
+    public function createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface): MultiDocMarkupServiceInterface
     {
         $summary = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getSummary() : '';
         $description = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getDescription() : '';
@@ -189,7 +189,7 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
     /**
      * @inheritDoc
      */
-    public function createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait): MultiDocHtmlServiceInterface
+    public function createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait): MultiDocMarkupServiceInterface
     {
         $summary = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getSummary() : '';
         $description = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getDescription() : '';
@@ -209,6 +209,6 @@ class MultiDocHtmlService implements MultiDocHtmlServiceInterface
      */
     public function __toString()
     {
-        return $this->html;
+        return $this->markup;
     }
 }

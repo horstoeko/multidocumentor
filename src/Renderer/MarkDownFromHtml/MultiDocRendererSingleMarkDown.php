@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
-use horstoeko\multidocumentor\Services\MultiDocHtmlService;
+use horstoeko\multidocumentor\Services\MultiDocMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use League\HTMLToMarkdown\HtmlConverter;
 
@@ -25,7 +25,7 @@ use League\HTMLToMarkdown\HtmlConverter;
 class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
 {
     /**
-     * @var \horstoeko\multidocumentor\Interfaces\MultiDocHtmlServiceInterface
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
     protected $htmlService;
 
@@ -53,7 +53,7 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
      */
     public function __construct()
     {
-        $this->htmlService = new MultiDocHtmlService();
+        $this->htmlService = new MultiDocMarkupService();
         $this->htmlConverter = new HtmlConverter();
     }
 
