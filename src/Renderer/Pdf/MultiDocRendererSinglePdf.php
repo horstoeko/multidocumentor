@@ -35,7 +35,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
     /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
-    protected $htmlService;
+    protected $markupService;
 
     /**
      * Files to handle
@@ -50,7 +50,7 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
     public function __construct(MultiDocConfig $config)
     {
         $this->config = $config;
-        $this->htmlService = new MultiDocMarkupService($this->config);
+        $this->markupService = new MultiDocMarkupService($this->config);
     }
 
     /**
@@ -74,25 +74,25 @@ class MultiDocRendererSinglePdf implements MultiDocRendererInterface
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
 
-        $this->htmlService->initializeService();
+        $this->markupService->initializeService();
 
         foreach ($this->reflectedFiles as $file) {
             foreach ($file->getClasses() as $class) {
-                $this->htmlService->createFromClass($class);
+                $this->markupService->createFromClass($class);
             }
 
             foreach ($file->getInterfaces() as $interface) {
-                $this->htmlService->createFromInterface($interface);
+                $this->markupService->createFromInterface($interface);
             }
 
             foreach ($file->getTraits() as $trait) {
-                $this->htmlService->createFromTrait($trait);
+                $this->markupService->createFromTrait($trait);
             }
         }
 
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
 
-        $pdf->WriteHTML((string)$this->htmlService);
+        $pdf->WriteHTML($this->markupService->getMarkupOutput());
         $pdf->Output($destinationFilename, 'F');
 
         return $this;

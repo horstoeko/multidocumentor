@@ -35,7 +35,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
-    protected $htmlService;
+    protected $markupService;
 
     /**
      * Files to handle
@@ -50,7 +50,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     public function __construct(MultiDocConfig $config)
     {
         $this->config = $config;
-        $this->htmlService = new MultiDocMarkupService($this->config);
+        $this->markupService = new MultiDocMarkupService($this->config);
     }
 
     /**
@@ -89,7 +89,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
             file_get_contents(MultiDocAssetManager::getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
-        $pdf->WriteHTML((string)$this->htmlService);
+        $pdf->WriteHTML($this->markupService->getMarkupOutput());
         $pdf->Output($destinationFilename, 'F');
 
         return $this;
@@ -104,8 +104,8 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
 
-        $this->htmlService->initializeService();
-        $this->htmlService->createFromClass($class);
+        $this->markupService->initializeService();
+        $this->markupService->createFromClass($class);
 
         $this->renderSingleMarkDown($destinationFilename);
 
@@ -121,8 +121,8 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
 
-        $this->htmlService->initializeService();
-        $this->htmlService->createFromInterface($interface);
+        $this->markupService->initializeService();
+        $this->markupService->createFromInterface($interface);
 
         $this->renderSingleMarkDown($destinationFilename);
 
@@ -138,8 +138,8 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
 
-        $this->htmlService->initializeService();
-        $this->htmlService->createFromTrait($interface);
+        $this->markupService->initializeService();
+        $this->markupService->createFromTrait($interface);
 
         $this->renderSingleMarkDown($destinationFilename);
 

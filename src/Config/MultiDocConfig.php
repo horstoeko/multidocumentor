@@ -68,7 +68,7 @@ class MultiDocConfig extends ConsoleApplication
      * Set a bunch of directories to search in
      *
      * @param array $directories
-     * @return MultiDocConfig
+     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function setIncludeDirectories(array $directories): MultiDocConfig
     {
@@ -80,7 +80,7 @@ class MultiDocConfig extends ConsoleApplication
      * Add a directory to search in
      *
      * @param string $directory
-     * @return MultiDocConfig
+     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function addIncludeDirectory(string $directory): MultiDocConfig
     {
@@ -102,7 +102,7 @@ class MultiDocConfig extends ConsoleApplication
      * Set a bunch of directories to exclude from search
      *
      * @param array $directories
-     * @return MultiDocConfig
+     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function setExcludeDirectories(array $directories): MultiDocConfig
     {
@@ -114,7 +114,7 @@ class MultiDocConfig extends ConsoleApplication
      * Add a directory to exclude from search
      *
      * @param string $directory
-     * @return MultiDocConfig
+     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function addExcludeDirectory(string $directory): MultiDocConfig
     {
@@ -135,7 +135,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory to which the documentation is saved
      *
-     * @return string
+     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function setOutputTo(string $outputTo): MultiDocConfig
     {
@@ -156,7 +156,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory to which the documentation is saved
      *
-     * @return string
+     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function setOutputFormat(int $outputFormat): MultiDocConfig
     {

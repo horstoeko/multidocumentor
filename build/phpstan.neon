@@ -6,4 +6,4 @@ parameters:
     treatPhpDocTypesAsCertain: false
     checkMissingIterableValueType: false
     excludePaths:
-        - ../src/entities/*
+        - ../src/Assets/*

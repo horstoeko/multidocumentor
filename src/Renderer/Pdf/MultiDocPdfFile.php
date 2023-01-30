@@ -24,8 +24,6 @@ class MultiDocPdfFile extends Mpdf
 {
     /**
      * Constructor
-     *
-     * @param string $path
      */
     public function __construct() {
         parent::__construct(['tempDir' => sys_get_temp_dir() . '/mpdf']);

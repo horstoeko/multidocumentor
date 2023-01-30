@@ -97,7 +97,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      */
     public function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
-        $markDown = $this->htmlConverter->convert((string)$this->markupService);
+        $markDown = $this->htmlConverter->convert($this->markupService->getMarkupOutput());
 
         file_put_contents($destinationFilename, $markDown);
 

@@ -33,9 +33,9 @@ class MultiDocMarkupService implements MultiDocMarkupServiceInterface
     protected $config;
 
     /**
-     * Undocumented variable
+     * The HTML Engine
      *
-     * @var Engine
+     * @var \League\Plates\Engine
      */
     protected $templatesEngine;
 
@@ -210,15 +210,5 @@ class MultiDocMarkupService implements MultiDocMarkupServiceInterface
         $this->writeMethods($trait->getMethods());
 
         return $this;
-    }
-
-    /**
-     * Magic mathod - returns the result as string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->markup;
     }
 }

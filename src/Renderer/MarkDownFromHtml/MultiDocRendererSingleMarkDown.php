@@ -92,7 +92,7 @@ class MultiDocRendererSingleMarkDown implements MultiDocRendererInterface
 
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.md";
 
-        $markDown = $this->htmlConverter->convert((string)$this->markupService);
+        $markDown = $this->htmlConverter->convert($this->markupService->getMarkupOutput());
 
         file_put_contents($destinationFilename, $markDown);
 
