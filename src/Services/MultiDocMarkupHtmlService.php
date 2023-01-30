@@ -9,8 +9,6 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use League\Plates\Engine as PlatesEngine;
-use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Services\MultiDocAbstractMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 
