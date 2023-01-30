@@ -28,6 +28,13 @@ interface MultiDocMarkupServiceInterface
     public function initializeService(): MultiDocMarkupServiceInterface;
 
     /**
+     * Get the directory where all the markup files are located
+     *
+     * @return string
+     */
+    public function getMarkupDirectory(): string;
+
+    /**
      * Return the created markup
      *
      * @return string

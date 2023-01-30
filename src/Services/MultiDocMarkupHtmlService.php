@@ -9,9 +9,10 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 use League\Plates\Engine as PlatesEngine;
+use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Services\MultiDocAbstractMarkupService;
+use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 
 /**
  * Service class which renders the markup
@@ -22,55 +23,14 @@ use League\Plates\Engine as PlatesEngine;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocMarkupService implements MultiDocMarkupServiceInterface
+class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
 {
     /**
-     * Configuration
-     *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
-     */
-    protected $config;
-
-    /**
-     * The HTML Engine
-     *
-     * @var \League\Plates\Engine
-     */
-    protected $templatesEngine;
-
-    /**
-     * The internal markup container
-     *
-     * @var string
-     */
-    protected $markup;
-
-    /**
-     * Constructur
-     */
-    public function __construct(MultiDocConfig $config)
-    {
-        $this->config = $config;
-
-        $this->templatesEngine = new PlatesEngine($this->config->getHtmlDirectory());
-        $this->markup = "";
-    }
-
-    /**
      * @inheritDoc
      */
-    public function initializeService(): MultiDocMarkupServiceInterface
+    public function getMarkupDirectory(): string
     {
-        $this->markup = "";
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getMarkupOutput(): string
-    {
-        return $this->markup;
+        return $this->config->getHtmlDirectory();
     }
 
     /**

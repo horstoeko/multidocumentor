@@ -11,7 +11,7 @@ namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Services\MultiDocMarkupService;
+use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
 
 /**
  * service class which renders the output documents as an single PDF document
@@ -49,7 +49,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
     public function __construct(MultiDocConfig $config)
     {
         $this->config = $config;
-        $this->markupService = new MultiDocMarkupService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlService($this->config);
     }
 
     /**

@@ -11,7 +11,7 @@ namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Services\MultiDocMarkupService;
+use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
 use League\HTMLToMarkdown\HtmlConverter;
 
 /**
@@ -56,7 +56,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
     {
         $this->config = $config;
 
-        $this->markupService = new MultiDocMarkupService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlService($this->config);
         $this->htmlConverter = new HtmlConverter();
     }
 
