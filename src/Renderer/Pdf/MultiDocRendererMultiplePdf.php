@@ -81,7 +81,13 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
         return $this;
     }
 
-    public function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
+    /**
+     * Render a single PDF file
+     *
+     * @param string $destinationFilename
+     * @return MultiDocRendererInterface
+     */
+    private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
         $pdf = new MultiDocPdfFile($this->config);
         $pdf->WriteHTML(
@@ -99,7 +105,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      *
      * @return MultiDocRendererInterface
      */
-    public function renderClass($class): MultiDocRendererInterface
+    private function renderClass($class): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
 
@@ -116,7 +122,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      *
      * @return MultiDocRendererInterface
      */
-    public function renderInterface($interface): MultiDocRendererInterface
+    private function renderInterface($interface): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
 
@@ -133,7 +139,7 @@ class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
      *
      * @return MultiDocRendererInterface
      */
-    public function renderTrait($interface): MultiDocRendererInterface
+    private function renderTrait($interface): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
 

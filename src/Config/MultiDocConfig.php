@@ -83,10 +83,10 @@ class MultiDocConfig extends ConsoleApplication
      */
     public function __construct()
     {
-        $this->assetDirectory = dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets";
-        $this->htmlDirectory = $this->assetDirectory . DIRECTORY_SEPARATOR . "Html";
-        $this->markdownDirectory = $this->assetDirectory . DIRECTORY_SEPARATOR . "MarkDown";
-        $this->fontsDirectory = $this->assetDirectory . DIRECTORY_SEPARATOR . "Fonts";
+        $this->assetDirectory = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets");
+        $this->htmlDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "Html");
+        $this->markdownDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "MarkDown");
+        $this->fontsDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "Fonts");
     }
 
     /**

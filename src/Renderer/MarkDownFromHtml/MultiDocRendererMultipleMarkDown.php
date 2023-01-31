@@ -95,7 +95,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      * @param string $destinationFilename
      * @return MultiDocRendererInterface
      */
-    public function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
+    private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
         $markDown = $this->htmlConverter->convert($this->markupService->getMarkupOutput());
 
@@ -109,7 +109,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      *
      * @return MultiDocRendererInterface
      */
-    public function renderClass($class): MultiDocRendererInterface
+    private function renderClass($class): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
 
@@ -126,7 +126,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      *
      * @return MultiDocRendererInterface
      */
-    public function renderInterface($interface): MultiDocRendererInterface
+    private function renderInterface($interface): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
 
@@ -143,7 +143,7 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
      *
      * @return MultiDocRendererInterface
      */
-    public function renderTrait($interface): MultiDocRendererInterface
+    private function renderTrait($interface): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".md";
 

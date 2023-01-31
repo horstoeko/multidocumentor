@@ -13,7 +13,7 @@ use horstoeko\multidocumentor\Services\MultiDocAbstractMarkupService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 
 /**
- * Service class which renders the markup in HTML format
+ * Service class which renders the markup in markdown format
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
@@ -21,14 +21,14 @@ use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
+class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
 {
     /**
      * @inheritDoc
      */
     public function getMarkupTemplateDirectory(): string
     {
-        return $this->config->getHtmlDirectory();
+        return $this->config->getMarkdownDirectory();
     }
 
     /**

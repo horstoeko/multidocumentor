@@ -11,8 +11,10 @@ namespace horstoeko\multidocumentor\Renderer;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererMultipleMarkDown;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown as MultiDocRendererMultipleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 
@@ -35,10 +37,12 @@ class MultiDocRendererFactory
     public static function getAllRenderers(): array
     {
         return [
-            MultiDocRendererSinglePdf::class,
-            MultiDocRendererMultiplePdf::class,
-            MultiDocRendererSingleMarkDown::class,
-            MultiDocRendererMultipleMarkDown::class,
+            0 => MultiDocRendererSinglePdf::class,
+            1 => MultiDocRendererMultiplePdf::class,
+            2 => MultiDocRendererSingleMarkDownFromHtml::class,
+            3 => MultiDocRendererMultipleMarkDownFromHtml::class,
+            4 => MultiDocRendererSingleMarkDown::class,
+            5 => MultiDocRendererMultipleMarkDown::class,
         ];
     }
 
