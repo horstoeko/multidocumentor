@@ -1,7 +1,5 @@
 # <?php echo $name ?>
 
-__<?php echo $summary ?>
+_<?php echo $summary ?>_
 
-<?php
-$parsedown = new \Parsedown();
-echo $parsedown->text($description) ?>
+<?php echo $description ?>

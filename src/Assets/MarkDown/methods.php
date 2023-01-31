@@ -6,34 +6,35 @@ foreach ($methods as $method) {
     foreach ($method->getArguments() as $argument) {
         $argumentNames[] = $argument->getType() . ' $' . $argument->getName();
     }
-    $summary = ($method->getDocBlock() !== null && $method->getDocBlock()->getSummary() !== '') ? $method->getDocBlock()->getSummary() . '<br>' : '';
+    $summary = ($method->getDocBlock() !== null && $method->getDocBlock()->getSummary() !== '') ? $method->getDocBlock()->getSummary() . PHP_EOL : '';
     $description = ($method->getDocBlock() !== null && $method->getDocBlock()->getDescription() !== '') ? $parsedown->text($method->getDocBlock()->getDescription()) : '';
     ?>
-    
-    ### <a name="method:<?php echo $method->getName() ?>"><?php echo $method->getName() ?> (<?php echo $method->getVisibility() ?>)</a
-    ```<?php echo $method->getName() ?>(<?php echo implode(', ', $argumentNames) ?>)<?php echo ($method->getReturnType() != 'mixed' ? ': ' . $method->getReturnType() : '') ?>```
-    __<?php echo $summary ?>__
-    <?php echo $description;
-    if (!empty($method->getArguments())) {
-        ?>
-        #### Parameters
-        <?php
-    }
-    foreach ($method->getArguments() as $argument) {
-        echo $argument->getType() ?> _<?php echo $argument->getName() ?>_
-        <?php
-    }
-    if ($method->getDocBlock() !== null) {
-        if (!empty($method->getDocBlock()->getTagsByName('throws'))) {
-            ?>
-            #### Throws
-            <?php
-        }
-        foreach ($method->getDocBlock()->getTagsByName('throws') as $throwsTag) {
-            echo str_replace('@throws', '', $throwsTag->render());
-        }
-    }
+
+### <?php echo trim($method->getName()) ?> (<?php echo $method->getVisibility() ?>)
+```<?php echo trim($method->getName()) ?>(<?php echo implode(', ', $argumentNames) ?>)<?php echo ($method->getReturnType() != 'mixed' ? ': ' . $method->getReturnType() : '') ?>```
+  <?php echo PHP_EOL ?> 
+__<?php echo trim($summary) ?>__
+<?php echo $description;
+if (!empty($method->getArguments())) {
     ?>
-    <br>
+#### Parameters
+<?php
+}
+foreach ($method->getArguments() as $argument) {
+    echo $argument->getType() ?> _<?php echo $argument->getName() ?>_
     <?php
+}
+if ($method->getDocBlock() !== null) {
+    if (!empty($method->getDocBlock()->getTagsByName('throws'))) {
+        ?>
+#### Throws
+<?php
+    }
+    foreach ($method->getDocBlock()->getTagsByName('throws') as $throwsTag) {
+        echo str_replace('@throws', '', $throwsTag->render()) . PHP_EOL;
+    }
+    echo PHP_EOL;
+}
+?>
+<?php
 }

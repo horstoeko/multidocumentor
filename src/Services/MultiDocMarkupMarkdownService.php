@@ -54,21 +54,21 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     public function writeSummary(array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface
     {
         $allConstants = $allProperties = $allMethods = array(
-            'public' => '',
-            'protected' => '',
-            'private' => ''
+            'public' => [],
+            'protected' => [],
+            'private' => []
         );
 
         foreach ($constants as $constant) {
-            $allConstants['public'] .= '<a href="#constant:' . $constant->getName() . '">' . $constant->getName() . '</a><br>';
+            $allConstants['public'][] = $constant->getName();
         }
 
         foreach ($properties as $property) {
-            $allProperties[strval($property->getVisibility())] .= '<a href="#property:' . $property->getName() . '">$' . $property->getName() . '</a><br>';
+            $allProperties[strval($property->getVisibility())][] = $property->getName();
         }
 
         foreach ($methods as $method) {
-            $allMethods[strval($method->getVisibility())] .= '<a href="#method:' . $method->getName() . '">' . $method->getName() . '</a><br>';
+            $allMethods[strval($method->getVisibility())][] = $method->getName();
         }
 
         $this->renderAndAddToOutput(
