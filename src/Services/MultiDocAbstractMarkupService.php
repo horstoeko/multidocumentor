@@ -36,14 +36,14 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      *
      * @var \League\Plates\Engine
      */
-    protected $templatesEngine;
+    private $templatesEngine;
 
     /**
      * The internal markup container
      *
      * @var string
      */
-    protected $markup;
+    private $markup;
 
     /**
      * Constructur
@@ -53,7 +53,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
         $this->config = $config;
         $this->markup = "";
 
-        $this->templatesEngine = new PlatesEngine($this->config->getHtmlDirectory());
+        $this->templatesEngine = new PlatesEngine($this->getMarkupTemplateDirectory());
     }
 
     /**
@@ -68,6 +68,11 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
+    abstract public function getMarkupTemplateDirectory(): string;
+
+    /**
+     * @inheritDoc
+     */
     public function getMarkupOutput(): string
     {
         return $this->markup;
@@ -76,7 +81,28 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    abstract public function getMarkupDirectory(): string;
+    public function addToMarkupOutput(string $add): MultiDocMarkupServiceInterface
+    {
+        $this->markup .= $add;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function render(string $name, array $data = array()) : string
+    {
+        return $this->templatesEngine->render($name, $data);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function renderAndAddToOutput(string $name, array $data = array()) : MultiDocMarkupServiceInterface
+    {
+        $this->addToMarkupOutput($this->render($name, $data));
+        return $this;
+    }
 
     /**
      * @inheritDoc

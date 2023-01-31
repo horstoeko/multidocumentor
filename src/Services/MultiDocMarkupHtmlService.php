@@ -26,7 +26,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function getMarkupDirectory(): string
+    public function getMarkupTemplateDirectory(): string
     {
         return $this->config->getHtmlDirectory();
     }
@@ -36,7 +36,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface
     {
-        $this->markup .= $this->templatesEngine->render(
+        $this->renderAndAddToOutput(
             'header',
             [
                 'name' => $name,
@@ -71,7 +71,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
             $allMethods[strval($method->getVisibility())] .= '<a href="#method:' . $method->getName() . '">' . $method->getName() . '</a><br>';
         }
 
-        $this->markup .= $this->templatesEngine->render(
+        $this->renderAndAddToOutput(
             'summary',
             [
                 'methods' => $allMethods,
@@ -89,7 +89,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeConstants(array $constants): MultiDocMarkupServiceInterface
     {
         if (!empty($constants)) {
-            $this->markup .= $this->templatesEngine->render('constants', array('constants' => $constants));
+            $this->renderAndAddToOutput('constants', array('constants' => $constants));
         }
 
         return $this;
@@ -101,7 +101,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeProperties(array $properties): MultiDocMarkupServiceInterface
     {
         if (!empty($properties)) {
-            $this->markup .= $this->templatesEngine->render('properties', array('properties' => $properties));
+            $this->renderAndAddToOutput('properties', array('properties' => $properties));
         }
 
         return $this;
@@ -113,7 +113,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeMethods(array $methods): MultiDocMarkupServiceInterface
     {
         if (!empty($methods)) {
-            $this->markup .= $this->templatesEngine->render('methods', array('methods' => $methods));
+            $this->renderAndAddToOutput('methods', array('methods' => $methods));
         }
 
         return $this;

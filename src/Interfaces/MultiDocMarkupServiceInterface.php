@@ -28,11 +28,11 @@ interface MultiDocMarkupServiceInterface
     public function initializeService(): MultiDocMarkupServiceInterface;
 
     /**
-     * Get the directory where all the markup files are located
+     * Get the directory where all the markup template files are located
      *
      * @return string
      */
-    public function getMarkupDirectory(): string;
+    public function getMarkupTemplateDirectory(): string;
 
     /**
      * Return the created markup
@@ -40,6 +40,32 @@ interface MultiDocMarkupServiceInterface
      * @return string
      */
     public function getMarkupOutput(): string;
+
+    /**
+     * Add data to markup output
+     *
+     * @param string $add
+     * @return MultiDocMarkupServiceInterface
+     */
+    public function addToMarkupOutput(string $add): MultiDocMarkupServiceInterface;
+
+    /**
+     * Render a markup
+     *
+     * @param string $name
+     * @param array $data
+     * @return string
+     */
+    public function render(string $name, array $data = array()) : string;
+
+    /**
+     * Render a markup and add the rendered output to internal markup storage
+     *
+     * @param string $name
+     * @param array $data
+     * @return MultiDocMarkupServiceInterface
+     */
+    public function renderAndAddToOutput(string $name, array $data = array()) : MultiDocMarkupServiceInterface;
 
     /**
      * Write Header
