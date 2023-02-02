@@ -10,8 +10,8 @@
 namespace horstoeko\multidocumentor\Services;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Services\MultiDocTwigService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
-use League\Plates\Engine as PlatesEngine;
 
 /**
  * Service class which renders the markup
@@ -34,9 +34,9 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * The HTML Engine
      *
-     * @var \League\Plates\Engine
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocTwigServiceInterface
      */
-    private $templatesEngine;
+    private $twigService;
 
     /**
      * The internal markup container
@@ -53,7 +53,8 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
         $this->config = $config;
         $this->markup = "";
 
-        $this->templatesEngine = new PlatesEngine($this->getMarkupTemplateDirectory());
+        $this->twigService = new MultiDocTwigService($this->config);
+        $this->twigService->addTemplateDirectory($this->getMarkupTemplateDirectory());
     }
 
     /**
@@ -92,7 +93,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      */
     public function render(string $name, array $data = array()) : string
     {
-        return $this->templatesEngine->render($name, $data);
+        return $this->twigService->render($name, $data);
     }
 
     /**

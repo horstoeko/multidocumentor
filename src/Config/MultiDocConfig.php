@@ -128,7 +128,7 @@ class MultiDocConfig extends ConsoleApplication
      *
      * @return array
      */
-    public function getExclideDirectories(): array
+    public function getExcludeDirectories(): array
     {
         return $this->excludeDirectories;
     }

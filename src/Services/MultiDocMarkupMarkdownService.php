@@ -37,7 +37,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface
     {
         $this->renderAndAddToOutput(
-            'header',
+            'header.twig',
             [
                 'name' => $name,
                 'summary' => $summary,
@@ -72,7 +72,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
         }
 
         $this->renderAndAddToOutput(
-            'summary',
+            'summary.twig',
             [
                 'methods' => $allMethods,
                 'properties' => $allProperties,
@@ -89,7 +89,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     public function writeConstants(array $constants): MultiDocMarkupServiceInterface
     {
         if (!empty($constants)) {
-            $this->renderAndAddToOutput('constants', array('constants' => $constants));
+            $this->renderAndAddToOutput('constants.twig', array('constants' => $constants));
         }
 
         return $this;
@@ -101,7 +101,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     public function writeProperties(array $properties): MultiDocMarkupServiceInterface
     {
         if (!empty($properties)) {
-            $this->renderAndAddToOutput('properties', array('properties' => $properties));
+            $this->renderAndAddToOutput('properties.twig', array('properties' => $properties));
         }
 
         return $this;
@@ -113,7 +113,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     public function writeMethods(array $methods): MultiDocMarkupServiceInterface
     {
         if (!empty($methods)) {
-            $this->renderAndAddToOutput('methods', array('methods' => $methods));
+            $this->renderAndAddToOutput('methods.twig', array('methods' => $methods));
         }
 
         return $this;

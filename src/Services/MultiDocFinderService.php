@@ -52,7 +52,7 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
         $this->finder->ignoreVCSIgnored(true);
         $this->finder->sortByName();
 
-        $this->finder->in($this->config->getIncludeDirectories())->exclude($this->config->getExclideDirectories());
+        $this->finder->in($this->config->getIncludeDirectories())->exclude($this->config->getExcludeDirectories());
     }
 
     /**
