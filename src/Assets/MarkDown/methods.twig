@@ -1,5 +1,4 @@
 ## Methods
-
 {% for method in methods %}
 {% set argumentNames = [] %}
 {% for argument in method.getArguments() %}
@@ -27,17 +26,15 @@
 {% set formattedMethodName = method.getName()|removeinvisible %}
 {% set formattedMethodVisibilty = method.getVisibility()|removeinvisible %}
 {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
+{{ "" }}
 ### {{ formattedMethodName }} ({{ formattedMethodVisibilty }})
-
+{{ "" }}
 ```php
 {{ formattedCode }}
 ```
-
-{%- if summary != "" %}
-{{ "\n\n" ~ summary }}
-{% endif -%}
-{%- if description != "" %}
-{{ "\n\n" ~ description }}
-{% endif -%}
-{{ "\n" }}
+{{ "" }}
+{% if summary != "" %}{{ summary }}{% endif %}
+{% if description != "" %}{{ description }}{% endif %}
+{{ "" }}
 {% endfor %}
+{{ "\n" }}
