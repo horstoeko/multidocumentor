@@ -84,7 +84,8 @@ class MultiDocRendererFactoryDefinitionList
     public function findByName(string $name, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererFactoryDefinition
     {
         $rendererDefinitions = array_filter(
-            $this->rendererDefinitions, function (MultiDocRendererFactoryDefinition $definition) use ($name) {
+            $this->rendererDefinitions,
+            function (MultiDocRendererFactoryDefinition $definition) use ($name) {
                 return strcasecmp($definition->getName(), $name) === 0;
             }
         );

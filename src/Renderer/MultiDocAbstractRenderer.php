@@ -57,5 +57,5 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
     /**
      * @inheritDoc
      */
-    public abstract function render(): MultiDocRendererInterface;
+    abstract public function render(): MultiDocRendererInterface;
 }

@@ -53,7 +53,8 @@ class MultiDocApplicationListRenderers extends Command
         $tableItems = array_map(
             function ($renderer) {
                 return ['', $renderer->getName(), $renderer->getDescription()];
-            }, $renderers
+            },
+            $renderers
         );
 
         $table->setRows($tableItems);
