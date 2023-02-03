@@ -5,7 +5,7 @@ a {
 pre {
     background-color: transparent;
     font-size: 0.9em;
-    border: .25px solid #979797;
+    border: .25px solid #e4e4e4;
     border-radius: 4px;
     padding: 4px;
     color: black;
@@ -25,7 +25,8 @@ em {
 }
 
 h1.objectheader {
-    background-color: #fafafa;
+    background-color: #fefefe;
+    border: 1px solid #e4e4e4;
     color: goldenrod;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -36,6 +37,6 @@ h1.objectheader {
 
 .underline {
     padding-bottom: 5px;
-    border-bottom: 1px solid #979797;
+    border-bottom: 1px solid #e4e4e4;
     border-bottom-width: .25px;
 }
