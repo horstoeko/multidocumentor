@@ -332,14 +332,14 @@ _Interface for a service class which will create the documentation_
 
 ### Public methods
 
-renderDocumentation()
+render()
 
 ## Methods
 
-### renderDocumentation (public)
+### render (public)
 
 ```php
-renderDocumentation()
+render()
 ```
 
 Starts the creation of the documentation
@@ -519,7 +519,7 @@ _Interface for a service class which will render the documentation_
 ### Public methods
 
 setLocalFiles()
-renderDocumentation()
+render()
 
 ## Methods
 
@@ -531,10 +531,10 @@ setLocalFiles(array $files)
 
 Set the files which are to handle
 
-### renderDocumentation (public)
+### render (public)
 
 ```php
-renderDocumentation()
+render()
 ```
 
 Render the documentation from files
@@ -1540,7 +1540,7 @@ _Service class which will create the documentation_
 ### Public methods
 
 __construct()
-renderDocumentation()
+render()
 
 ## Properties
 
@@ -1578,10 +1578,10 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
-### renderDocumentation (public)
+### render (public)
 
 ```php
-renderDocumentation()
+render()
 ```
 
 
@@ -1836,7 +1836,7 @@ _Service class which will render the documentation_
 
 __construct()
 setLocalFiles()
-renderDocumentation()
+render()
 
 ## Properties
 
@@ -1874,10 +1874,10 @@ setLocalFiles(array $files)
 
 
 
-### renderDocumentation (public)
+### render (public)
 
 ```php
-renderDocumentation()
+render()
 ```
 
 

@@ -59,7 +59,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function renderDocumentation(): MultiDocRenderServiceInterface
+    public function render(): MultiDocRenderServiceInterface
     {
         $projectFactory = ProjectFactory::createInstance();
 

@@ -33,5 +33,5 @@ interface MultiDocRenderServiceInterface
      *
      * @return MultiDocRenderServiceInterface
      */
-    public function renderDocumentation(): MultiDocRenderServiceInterface;
+    public function render(): MultiDocRenderServiceInterface;
 }

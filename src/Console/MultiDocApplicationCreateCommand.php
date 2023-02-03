@@ -53,7 +53,7 @@ class MultiDocApplicationCreateCommand extends Command
         $config->setOutputFormat((string)$input->getOption('format'));
 
         $creatorService = new MultiDocCreatorService($config);
-        $creatorService->renderDocumentation();
+        $creatorService->render();
 
         return Command::SUCCESS;
     }
