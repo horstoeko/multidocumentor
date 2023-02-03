@@ -91,15 +91,15 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    public function render(string $name, array $data = array()) : string
+    public function render(string $name, array $data = array()): string
     {
-        return $this->twigService->render($name, $data);
+        return $this->twigService->render($name, array_merge($data, ["_config" => $this->config]));
     }
 
     /**
      * @inheritDoc
      */
-    public function renderAndAddToOutput(string $name, array $data = array()) : MultiDocMarkupServiceInterface
+    public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface
     {
         $this->addToMarkupOutput($this->render($name, $data));
         return $this;
