@@ -4,7 +4,7 @@
 ### Public methods
 
 {% for method in methods.public %}
-{{ method|removeinvisible }}
+{{ method|removeinvisible }}()
 {% endfor %}
 {% endif %}
 {% if methods.protected | length > 0 %}
@@ -12,7 +12,7 @@
 ### Protected methods
 
 {% for method in methods.protected %}
-{{ method|removeinvisible }}
+{{ method|removeinvisible }}()
 {% endfor %}
 {% endif %}
 {% if methods.private | length > 0 %}
@@ -20,7 +20,7 @@
 ### Private methods
 
 {% for method in methods.private %}
-{{ method|removeinvisible }}
+{{ method|removeinvisible }}()
 {% endfor %}
 {% endif %}
 

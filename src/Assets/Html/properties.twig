@@ -1,0 +1,33 @@
+<h2>Properties</h2>
+{% for property in properties %}
+    {% if property.getDocBlock() != null and property.getDocBlock().getSummary() != '' %}
+        {% set summary = property.getDocBlock().getSummary() %}
+    {% else %}
+        {% set summary = '' %}
+    {% endif %}
+    {% if property.getDocBlock() != null and property.getDocBlock().getDescription() != '' %}
+        {% set description = property.getDocBlock().getDescription() %}
+    {% else %}
+        {% set description = '' %}
+    {% endif %}
+    {% if property.getDocBlock() != null and property.getDocBlock().hasTag('var') %}
+        {% set temp1 = property.getDocBlock().getTagsByName('var') %}
+        {% set temp2 = temp1[0] %}
+        {% set temp3 = temp2.render()|split(" ", 2) %}
+        {% set temp4 = temp3[1] %}
+        {% set type = temp4 %}
+    {% else %}
+        {% set type = '' %}
+    {% endif %}
+    {% set separator = type != '' ? ': ' : '' %}
+    {% set propertyname = property.getName() %}
+    {% set propertyvisibility = property.getVisibility() %}
+
+<h3>{{ propertyname }} ({{ propertyvisibility }})</h3>
+
+<pre>{{ propertyname }}{{ separator }}{{ type }}</pre>
+
+{% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
+{% if description != "" %}{{ description|parsedown }}{% endif %}
+{% endfor %}
+

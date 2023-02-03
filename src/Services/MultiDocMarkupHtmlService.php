@@ -37,7 +37,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface
     {
         $this->renderAndAddToOutput(
-            'header',
+            'header.twig',
             [
                 'name' => $name,
                 'summary' => $summary,
@@ -54,25 +54,25 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeSummary(array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface
     {
         $allConstants = $allProperties = $allMethods = array(
-            'public' => '',
-            'protected' => '',
-            'private' => ''
+            'public' => [],
+            'protected' => [],
+            'private' => []
         );
 
         foreach ($constants as $constant) {
-            $allConstants['public'] .= '<a href="#constant:' . $constant->getName() . '">' . $constant->getName() . '</a><br>';
+            $allConstants['public'][] = $constant->getName();
         }
 
         foreach ($properties as $property) {
-            $allProperties[strval($property->getVisibility())] .= '<a href="#property:' . $property->getName() . '">$' . $property->getName() . '</a><br>';
+            $allProperties[strval($property->getVisibility())][] = $property->getName();
         }
 
         foreach ($methods as $method) {
-            $allMethods[strval($method->getVisibility())] .= '<a href="#method:' . $method->getName() . '">' . $method->getName() . '</a><br>';
+            $allMethods[strval($method->getVisibility())][] = $method->getName();
         }
 
         $this->renderAndAddToOutput(
-            'summary',
+            'summary.twig',
             [
                 'methods' => $allMethods,
                 'properties' => $allProperties,
@@ -89,7 +89,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeConstants(array $constants): MultiDocMarkupServiceInterface
     {
         if (!empty($constants)) {
-            $this->renderAndAddToOutput('constants', array('constants' => $constants));
+            $this->renderAndAddToOutput('constants.twig', array('constants' => $constants));
         }
 
         return $this;
@@ -101,7 +101,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeProperties(array $properties): MultiDocMarkupServiceInterface
     {
         if (!empty($properties)) {
-            $this->renderAndAddToOutput('properties', array('properties' => $properties));
+            $this->renderAndAddToOutput('properties.twig', array('properties' => $properties));
         }
 
         return $this;
@@ -113,7 +113,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     public function writeMethods(array $methods): MultiDocMarkupServiceInterface
     {
         if (!empty($methods)) {
-            $this->renderAndAddToOutput('methods', array('methods' => $methods));
+            $this->renderAndAddToOutput('methods.twig', array('methods' => $methods));
         }
 
         return $this;
@@ -124,9 +124,8 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function createFromClass(\phpDocumentor\Reflection\Php\Class_ $class): MultiDocMarkupServiceInterface
     {
-        $parsedown = new \Parsedown();
         $summary = $class->getDocBlock() !== null ? $class->getDocBlock()->getSummary() : '';
-        $description = $class->getDocBlock() !== null ? $parsedown->text($class->getDocBlock()->getDescription()) : '';
+        $description = $class->getDocBlock() !== null ? $class->getDocBlock()->getDescription() : '';
 
         $this->writeHeader($class->getName(), $summary, $description);
         $this->writeSummary($class->getConstants(), $class->getProperties(), $class->getMethods());

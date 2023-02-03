@@ -1,37 +1,43 @@
 ## Methods
-{% for method in methods %}
-    {% set argumentNames = [] %}
-    {% for argument in method.getArguments() %}
-        {% set argumentvar = argument.getType()|removeinvisible ~ " $" ~ argument.getName()|removeinvisible %}
-        {% set argumentNames = argumentNames|merge([argumentvar]) %}
-    {% endfor %}
-    {% if method.getDocBlock() != null and method.getDocBlock().getSummary() != '' %}
-        {% set summary = method.getDocBlock().getSummary()|removeinvisible %}
-    {% else %}
-        {% set summary = '' %}
-    {% endif %}
-    {% if method.getDocBlock() != null and method.getDocBlock().getDescription() != '' %}
-        {% set description = method.getDocBlock().getDescription()|removeinvisible %}
-    {% else %}
-        {% set description = '' %}
-    {% endif %}
-    {% if method.getReturnType() != "mixed" %}
-        {% set methodreturntype = method.getReturnType()|removeinvisible %}
-    {% else %}
-        {% set methodreturntype = '' %}
-    {% endif %}
-    {% set formattedMethodName = method.getName()|removeinvisible %}
-    {% set formattedMethodVisibilty = method.getVisibility()|removeinvisible %}
-    {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
 
+{% for method in methods %}
+{% set argumentNames = [] %}
+{% for argument in method.getArguments() %}
+{% set argumentvar = argument.getType()|removeinvisible ~ " $" ~ argument.getName()|removeinvisible %}
+{% if argument.getDefault() %}
+{% set argumentvar = argumentvar ~ " = " ~ argument.getDefault()|removeinvisible %}
+{% endif %}
+{% set argumentNames = argumentNames|merge([argumentvar]) %}
+{% endfor %}
+{% if method.getDocBlock() != null and method.getDocBlock().getSummary() != '' %}
+{% set summary = method.getDocBlock().getSummary()|removeinvisible %}
+{% else %}
+{% set summary = '' %}
+{% endif %}
+{% if method.getDocBlock() != null and method.getDocBlock().getDescription() != '' %}
+{% set description = method.getDocBlock().getDescription()|removeinvisible %}
+{% else %}
+{% set description = '' %}
+{% endif %}
+{% if method.getReturnType() != "mixed" %}
+{% set methodreturntype = method.getReturnType()|removeinvisible %}
+{% else %}
+{% set methodreturntype = '' %}
+{% endif %}
+{% set formattedMethodName = method.getName()|removeinvisible %}
+{% set formattedMethodVisibilty = method.getVisibility()|removeinvisible %}
+{% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
 ### {{ formattedMethodName }} ({{ formattedMethodVisibilty }})
 
 ```php
 {{ formattedCode }}
 ```
 
-{% if summary != "" %}{{ summary  }}{% endif %}
-
-{% if description != "" %}{{ description }}{% endif %}
+{%- if summary != "" %}
+{{ "\n\n" ~ summary }}
+{% endif -%}
+{%- if description != "" %}
+{{ "\n\n" ~ description }}
+{% endif -%}
+{{ "\n" }}
 {% endfor %}
-

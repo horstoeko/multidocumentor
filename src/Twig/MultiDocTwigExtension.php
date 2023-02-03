@@ -25,13 +25,15 @@ use Twig\TwigFilter;
 class MultiDocTwigExtension extends AbstractExtension
 {
     /**
-     * @inheritDoc
+     * Returns a list of filters to add to the existing list.
+     *
+     * @return TwigFilter[]
      */
     public function getFilters()
     {
         return [
-            new TwigFilter("removeinvisible", [$this, 'removeInvisibleCharacters']),
-            new TwigFilter("parsedown", [$this, 'parsedown']),
+            new TwigFilter("removeinvisible", [$this, 'removeInvisibleCharacters'], ['is_safe' => ['html']]),
+            new TwigFilter("parsedown", [$this, 'parsedown'], ['is_safe' => ['html']]),
         ];
     }
 

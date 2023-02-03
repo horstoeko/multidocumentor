@@ -124,9 +124,8 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
      */
     public function createFromClass(\phpDocumentor\Reflection\Php\Class_ $class): MultiDocMarkupServiceInterface
     {
-        $parsedown = new \Parsedown();
         $summary = $class->getDocBlock() !== null ? $class->getDocBlock()->getSummary() : '';
-        $description = $class->getDocBlock() !== null ? $parsedown->text($class->getDocBlock()->getDescription()) : '';
+        $description = $class->getDocBlock() !== null ? $class->getDocBlock()->getDescription() : '';
 
         $this->writeHeader($class->getName(), $summary, $description);
         $this->writeSummary($class->getConstants(), $class->getProperties(), $class->getMethods());

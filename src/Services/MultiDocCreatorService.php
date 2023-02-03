@@ -50,6 +50,8 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
      */
     public function __construct(MultiDocConfig $config)
     {
+        ini_set("pcre.backtrack_limit", "5000000");
+
         $this->config = $config;
 
         $this->finderService = new MultiDocFinderService($config);
