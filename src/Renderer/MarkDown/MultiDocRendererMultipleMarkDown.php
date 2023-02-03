@@ -32,6 +32,8 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
     protected $config;
 
     /**
+     * The internal markup service
+     *
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
     protected $markupService;

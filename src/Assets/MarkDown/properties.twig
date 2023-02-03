@@ -1,5 +1,4 @@
 ## Properties
-
 {% for property in properties %}
 {% if property.getDocBlock() != null and property.getDocBlock().getSummary() != '' %}
 {% set summary = property.getDocBlock().getSummary()|removeinvisible %}
@@ -23,14 +22,15 @@
 {% set separator = type != '' ? ': ' : '' %}
 {% set propertyname = property.getName()|removeinvisible %}
 {% set propertyvisibility = property.getVisibility()|removeinvisible %}
+{{ "" }}
 ### {{ propertyname }} ({{ propertyvisibility }})
-
+{{ "" }}
 ```php
 {{ propertyname }}{{ separator }}{{ type }}
 ```
-
+{{ "" }}
 {% if summary != "" %}{{ summary }}{% endif %}
-
 {% if description != "" %}{{ description }}{% endif %}
+{{ "" }}
 {% endfor %}
-
+{{ "\n" }}

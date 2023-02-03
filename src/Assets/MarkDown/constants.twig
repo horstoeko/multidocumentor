@@ -1,25 +1,25 @@
 ## Constants
 {% for constant in constants %}
-    {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
-        {% set summary = constant.getDocBlock().getSummary()|removeinvisible %}
-    {% else %}
-        {% set summary = '' %}
-    {% endif %}
-    {% if constant.getDocBlock() != null and constant.getDocBlock().getDescription() != '' %}
-        {% set description = constant.getDocBlock().getDescription()|removeinvisible %}
-    {% else %}
-        {% set description = '' %}
-    {% endif %}
-    {% set formattedConstantName = constant.getName()|removeinvisible %}
-
+{% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
+{% set summary = constant.getDocBlock().getSummary()|removeinvisible %}
+{% else %}
+{% set summary = '' %}
+{% endif %}
+{% if constant.getDocBlock() != null and constant.getDocBlock().getDescription() != '' %}
+{% set description = constant.getDocBlock().getDescription()|removeinvisible %}
+{% else %}
+{% set description = '' %}
+{% endif %}
+{% set formattedConstantName = constant.getName()|removeinvisible %}
+{{ "" }}
 ### {{ formattedConstantName }}
-
+{{ "" }}
 ```php
 {{ formattedConstantName }}
 ```
-
+{{ "" }}
 {% if summary != "" %}{{ summary  }}{% endif %}
-
 {% if description != "" %}{{ description }}{% endif %}
+{{ "" }}
 {% endfor %}
-
+{{ "\n" }}
