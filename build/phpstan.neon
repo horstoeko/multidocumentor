@@ -2,7 +2,7 @@ parameters:
     paths:
         - ../src
         - ../tests
-    level: 5
+    level: 7
     treatPhpDocTypesAsCertain: false
     checkMissingIterableValueType: false
     excludePaths:

@@ -10,9 +10,12 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
-use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use phpDocumentor\Reflection\Php\Class_ as PhpDocumentorClass;
+use phpDocumentor\Reflection\Php\Interface_ as PhpDocumentorInterface;
+use phpDocumentor\Reflection\Php\Trait_ as PhpDocumentorTrait;
 
 /**
  * service class which renders the output documents as an single PDF document
@@ -82,9 +85,10 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * Render a class pdf file
      *
+     * @param  PhpDocumentorClass $class
      * @return MultiDocRendererInterface
      */
-    private function renderClass($class): MultiDocRendererInterface
+    private function renderClass(PhpDocumentorClass $class): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
 
@@ -99,9 +103,10 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * Render a interface pdf file
      *
+     * @param  PhpDocumentorInterface $interface
      * @return MultiDocRendererInterface
      */
-    private function renderInterface($interface): MultiDocRendererInterface
+    private function renderInterface(PhpDocumentorInterface $interface): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
 
@@ -116,9 +121,10 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * Render a interface pdf file
      *
+     * @param  PhpDocumentorTrait $interface
      * @return MultiDocRendererInterface
      */
-    private function renderTrait($interface): MultiDocRendererInterface
+    private function renderTrait(PhpDocumentorTrait $interface): MultiDocRendererInterface
     {
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
 

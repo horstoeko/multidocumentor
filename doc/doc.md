@@ -654,7 +654,7 @@ Render a single markdown file
 ### renderClass (private)
 
 ```php
-renderClass(mixed $class)
+renderClass(\phpDocumentor\Reflection\Php\Class_ $class)
 ```
 
 Render a class markdown file
@@ -662,7 +662,7 @@ Render a class markdown file
 ### renderInterface (private)
 
 ```php
-renderInterface(mixed $interface)
+renderInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 ```
 
 Render a interface markdown file
@@ -670,7 +670,7 @@ Render a interface markdown file
 ### renderTrait (private)
 
 ```php
-renderTrait(mixed $interface)
+renderTrait(\phpDocumentor\Reflection\Php\Trait_ $interface)
 ```
 
 Render a interface markdown file
@@ -779,7 +779,7 @@ Render a single markdown file
 ### renderClass (private)
 
 ```php
-renderClass(mixed $class)
+renderClass(\phpDocumentor\Reflection\Php\Class_ $class)
 ```
 
 Render a class markdown file
@@ -787,7 +787,7 @@ Render a class markdown file
 ### renderInterface (private)
 
 ```php
-renderInterface(mixed $interface)
+renderInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 ```
 
 Render a interface markdown file
@@ -795,7 +795,7 @@ Render a interface markdown file
 ### renderTrait (private)
 
 ```php
-renderTrait(mixed $interface)
+renderTrait(\phpDocumentor\Reflection\Php\Trait_ $interface)
 ```
 
 Render a interface markdown file
@@ -1205,7 +1205,7 @@ Render a single PDF file
 ### renderClass (private)
 
 ```php
-renderClass(mixed $class)
+renderClass(\phpDocumentor\Reflection\Php\Class_ $class)
 ```
 
 Render a class pdf file
@@ -1213,7 +1213,7 @@ Render a class pdf file
 ### renderInterface (private)
 
 ```php
-renderInterface(mixed $interface)
+renderInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 ```
 
 Render a interface pdf file
@@ -1221,7 +1221,7 @@ Render a interface pdf file
 ### renderTrait (private)
 
 ```php
-renderTrait(mixed $interface)
+renderTrait(\phpDocumentor\Reflection\Php\Trait_ $interface)
 ```
 
 Render a interface pdf file
