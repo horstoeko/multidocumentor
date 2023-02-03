@@ -47,10 +47,10 @@ class MultiDocApplicationCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $config = new MultiDocConfig();
-        $config->setIncludeDirectories($input->getOption('include'));
-        $config->setExcludeDirectories($input->getOption('exclude'));
-        $config->setOutputTo($input->getOption('output'));
-        $config->setOutputFormat($input->getOption('format') ?? 0);
+        $config->setIncludeDirectories((array)$input->getOption('include'));
+        $config->setExcludeDirectories((array)$input->getOption('exclude'));
+        $config->setOutputTo((string)$input->getOption('output'));
+        $config->setOutputFormat((string)$input->getOption('format') ?? 0);
 
         $creatorService = new MultiDocCreatorService($config);
         $creatorService->renderDocumentation();
