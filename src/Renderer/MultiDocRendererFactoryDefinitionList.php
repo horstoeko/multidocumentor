@@ -58,8 +58,8 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Find a renderer by it's registerd $index
      *
-     * @param integer $index
-     * @param boolean $raiseExceptionIfNotFound
+     * @param  integer $index
+     * @param  boolean $raiseExceptionIfNotFound
      * @return MultiDocRendererFactoryDefinition|null
      */
     public function findByIndex(int $index, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererFactoryDefinition
@@ -77,15 +77,17 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Find renderer by it's $name
      *
-     * @param string $name
-     * @param boolean $raiseExceptionIfNotFound
+     * @param  string  $name
+     * @param  boolean $raiseExceptionIfNotFound
      * @return MultiDocRendererFactoryDefinition|null
      */
     public function findByName(string $name, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererFactoryDefinition
     {
-        $rendererDefinitions = array_filter($this->rendererDefinitions, function (MultiDocRendererFactoryDefinition $definition) use ($name) {
-            return strcasecmp($definition->getName(), $name) === 0;
-        });
+        $rendererDefinitions = array_filter(
+            $this->rendererDefinitions, function (MultiDocRendererFactoryDefinition $definition) use ($name) {
+                return strcasecmp($definition->getName(), $name) === 0;
+            }
+        );
 
         $rendererDefinitionsFirst = reset($rendererDefinitions);
 
@@ -102,7 +104,7 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Check if a renderer has been registered on $index
      *
-     * @param int $index
+     * @param  int $index
      * @return boolean
      */
     public function existsByIndex(int $index): bool
@@ -113,7 +115,7 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Check if a renderer has been registered with $name
      *
-     * @param string $name
+     * @param  string $name
      * @return boolean
      */
     public function existsByName(string $name): bool
@@ -192,7 +194,7 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Add a renderer definition to list
      *
-     * @param MultiDocRendererFactoryDefinition $rendererDefinition
+     * @param  MultiDocRendererFactoryDefinition $rendererDefinition
      * @return MultiDocRendererFactoryDefinitionList
      */
     private function addRendererDefinition(MultiDocRendererFactoryDefinition $rendererDefinition): MultiDocRendererFactoryDefinitionList

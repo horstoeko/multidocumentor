@@ -40,7 +40,7 @@ class MultiDocTwigExtension extends AbstractExtension
     /**
      * Removes invisble Characters
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function removeInvisibleCharacters($string): string
@@ -51,7 +51,7 @@ class MultiDocTwigExtension extends AbstractExtension
     /**
      * Parse markdown to HTML
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function parsedown($string): string

@@ -23,7 +23,7 @@ interface MultiDocRendererInterface
     /**
      * Set the file to render
      *
-     * @param \phpDocumentor\Reflection\Php\File[] $files
+     * @param  \phpDocumentor\Reflection\Php\File[] $files
      * @return MultiDocRendererInterface
      */
     public function setReflectedFiles(array $files): MultiDocRendererInterface;

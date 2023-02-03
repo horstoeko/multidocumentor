@@ -51,7 +51,7 @@ class MultiDocTwigEngine
     /**
      * Add a folder where templates are stored
      *
-     * @param string $directory
+     * @param  string $directory
      * @return MultiDocTwigEngine
      */
     public function addTemplateDirectory(string $directory): MultiDocTwigEngine
@@ -63,8 +63,8 @@ class MultiDocTwigEngine
     /**
      * Render a template
      *
-     * @param string $name
-     * @param array $data
+     * @param  string $name
+     * @param  array  $data
      * @return string
      */
     public function render(string $name, array $data): string

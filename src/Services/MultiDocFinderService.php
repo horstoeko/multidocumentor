@@ -60,9 +60,13 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
      */
     public function getAllFiles(): array
     {
-        $files = array_values(array_map(function ($file) {
-            return $file->getRealPath();
-        }, iterator_to_array($this->finder->files()->name('*.php'))));
+        $files = array_values(
+            array_map(
+                function ($file) {
+                    return $file->getRealPath();
+                }, iterator_to_array($this->finder->files()->name('*.php'))
+            )
+        );
 
         return $files;
     }
@@ -72,11 +76,17 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
      */
     public function getAllFilesAsPhpDocLocalFiles(): array
     {
-        $files = array_map(function ($file) {
-            return new LocalFile($file);
-        }, array_values(array_map(function ($file) {
-            return $file->getRealPath();
-        }, iterator_to_array($this->finder->files()->name('*.php')))));
+        $files = array_map(
+            function ($file) {
+                return new LocalFile($file);
+            }, array_values(
+                array_map(
+                    function ($file) {
+                        return $file->getRealPath();
+                    }, iterator_to_array($this->finder->files()->name('*.php'))
+                )
+            )
+        );
 
         return $files;
     }

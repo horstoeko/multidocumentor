@@ -50,9 +50,11 @@ class MultiDocApplicationListRenderers extends Command
         $table = new Table($output);
         $table->setHeaders(['Index', 'Name', 'Description']);
 
-        $tableItems = array_map(function ($renderer) {
-            return ['', $renderer->getName(), $renderer->getDescription()];
-        }, $renderers);
+        $tableItems = array_map(
+            function ($renderer) {
+                return ['', $renderer->getName(), $renderer->getDescription()];
+            }, $renderers
+        );
 
         $table->setRows($tableItems);
         $table->setStyle('box');

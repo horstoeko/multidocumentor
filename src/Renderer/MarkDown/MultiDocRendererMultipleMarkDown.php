@@ -65,7 +65,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     /**
      * Render a single markdown file
      *
-     * @param string $destinationFilename
+     * @param  string $destinationFilename
      * @return MultiDocRendererInterface
      */
     private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface

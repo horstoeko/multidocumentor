@@ -23,7 +23,7 @@ interface MultiDocTwigServiceInterface
     /**
      * Add a directory where to find the needed templates
      *
-     * @param string $directory
+     * @param  string $directory
      * @return MultiDocTwigServiceInterface
      */
     public function addTemplateDirectory(string $directory): MultiDocTwigServiceInterface;
@@ -31,8 +31,8 @@ interface MultiDocTwigServiceInterface
     /**
      * Render a twig remplate
      *
-     * @param string $name
-     * @param array $data
+     * @param  string $name
+     * @param  array  $data
      * @return string
      */
     public function render(string $name, array $data): string;

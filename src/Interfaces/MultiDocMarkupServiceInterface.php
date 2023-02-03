@@ -44,7 +44,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Add data to markup output
      *
-     * @param string $add
+     * @param  string $add
      * @return MultiDocMarkupServiceInterface
      */
     public function addToMarkupOutput(string $add): MultiDocMarkupServiceInterface;
@@ -52,8 +52,8 @@ interface MultiDocMarkupServiceInterface
     /**
      * Render a markup
      *
-     * @param string $name
-     * @param array $data
+     * @param  string $name
+     * @param  array  $data
      * @return string
      */
     public function render(string $name, array $data = array()) : string;
@@ -61,8 +61,8 @@ interface MultiDocMarkupServiceInterface
     /**
      * Render a markup and add the rendered output to internal markup storage
      *
-     * @param string $name
-     * @param array $data
+     * @param  string $name
+     * @param  array  $data
      * @return MultiDocMarkupServiceInterface
      */
     public function renderAndAddToOutput(string $name, array $data = array()) : MultiDocMarkupServiceInterface;
@@ -70,9 +70,9 @@ interface MultiDocMarkupServiceInterface
     /**
      * Write Header
      *
-     * @param string $name
-     * @param string $summary
-     * @param string $description
+     * @param  string $name
+     * @param  string $summary
+     * @param  string $description
      * @return MultiDocMarkupServiceInterface
      */
     public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface;
@@ -80,9 +80,9 @@ interface MultiDocMarkupServiceInterface
     /**
      * Write a summary
      *
-     * @param \phpDocumentor\Reflection\Php\Constant[] $constants
-     * @param \phpDocumentor\Reflection\Php\Property[] $properties
-     * @param \phpDocumentor\Reflection\Php\Method[] $methods
+     * @param  \phpDocumentor\Reflection\Php\Constant[] $constants
+     * @param  \phpDocumentor\Reflection\Php\Property[] $properties
+     * @param  \phpDocumentor\Reflection\Php\Method[]   $methods
      * @return MultiDocMarkupServiceInterface
      */
     public function writeSummary(array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface;
@@ -90,7 +90,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Write constants
      *
-     * @param \phpDocumentor\Reflection\Php\Constant[] $constants
+     * @param  \phpDocumentor\Reflection\Php\Constant[] $constants
      * @return MultiDocMarkupServiceInterface
      */
     public function writeConstants(array $constants): MultiDocMarkupServiceInterface;
@@ -98,7 +98,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Write properties
      *
-     * @param \phpDocumentor\Reflection\Php\Property[] $properties
+     * @param  \phpDocumentor\Reflection\Php\Property[] $properties
      * @return MultiDocMarkupServiceInterface
      */
     public function writeProperties(array $properties): MultiDocMarkupServiceInterface;
@@ -106,7 +106,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Write methods
      *
-     * @param \phpDocumentor\Reflection\Php\Method[] $methods
+     * @param  \phpDocumentor\Reflection\Php\Method[] $methods
      * @return MultiDocMarkupServiceInterface
      */
     public function writeMethods(array $methods): MultiDocMarkupServiceInterface;
@@ -114,7 +114,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Generate class description
      *
-     * @param \phpDocumentor\Reflection\Php\Class_ $class
+     * @param  \phpDocumentor\Reflection\Php\Class_ $class
      * @return MultiDocMarkupServiceInterface
      */
     public function createFromClass(\phpDocumentor\Reflection\Php\Class_ $class): MultiDocMarkupServiceInterface;
@@ -122,7 +122,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Generate Interface description
      *
-     * @param \phpDocumentor\Reflection\Php\Interface_ $interface
+     * @param  \phpDocumentor\Reflection\Php\Interface_ $interface
      * @return MultiDocMarkupServiceInterface
      */
     public function createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface): MultiDocMarkupServiceInterface;
@@ -130,7 +130,7 @@ interface MultiDocMarkupServiceInterface
     /**
      * Generate Trait description
      *
-     * @param \phpDocumentor\Reflection\Php\Trait_ $trait
+     * @param  \phpDocumentor\Reflection\Php\Trait_ $trait
      * @return MultiDocMarkupServiceInterface
      */
     public function createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait): MultiDocMarkupServiceInterface;

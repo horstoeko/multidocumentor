@@ -23,7 +23,7 @@ interface MultiDocRenderServiceInterface
     /**
      * Set the files which are to handle
      *
-     * @param \phpDocumentor\Reflection\File\LocalFile[] $files
+     * @param  \phpDocumentor\Reflection\File\LocalFile[] $files
      * @return MultiDocRenderServiceInterface
      */
     public function setLocalFiles(array $files): MultiDocRenderServiceInterface;

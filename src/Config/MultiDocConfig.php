@@ -102,7 +102,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set a bunch of directories to search in
      *
-     * @param array $directories
+     * @param  array $directories
      * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function setIncludeDirectories(array $directories): MultiDocConfig
@@ -114,7 +114,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Add a directory to search in
      *
-     * @param string $directory
+     * @param  string $directory
      * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function addIncludeDirectory(string $directory): MultiDocConfig
@@ -136,7 +136,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set a bunch of directories to exclude from search
      *
-     * @param array $directories
+     * @param  array $directories
      * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function setExcludeDirectories(array $directories): MultiDocConfig
@@ -148,7 +148,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Add a directory to exclude from search
      *
-     * @param string $directory
+     * @param  string $directory
      * @return \horstoeko\multidocumentor\Config\MultiDocConfig
      */
     public function addExcludeDirectory(string $directory): MultiDocConfig
@@ -191,7 +191,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory to which the documentation is saved
      *
-     * @param string $outputFormat
+     * @param  string $outputFormat
      * @return MultiDocConfig
      */
     public function setOutputFormat(string $outputFormat): MultiDocConfig
@@ -213,7 +213,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory where the assets are stored
      *
-     * @param string $assetDirectory
+     * @param  string $assetDirectory
      * @return MultiDocConfig
      */
     public function setAssetDirectory(string $assetDirectory): MultiDocConfig
@@ -235,7 +235,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory where the html markup files are stored
      *
-     * @param string $htmlDirectory
+     * @param  string $htmlDirectory
      * @return MultiDocConfig
      */
     public function setHtmlDirectory(string $htmlDirectory): MultiDocConfig
@@ -257,7 +257,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory where the markdown markup files are stored
      *
-     * @param string $markdownDirectory
+     * @param  string $markdownDirectory
      * @return MultiDocConfig
      */
     public function setMarkdownDirectory(string $markdownDirectory): MultiDocConfig
@@ -279,7 +279,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory where the font files are stored
      *
-     * @param string $fontsDirectory
+     * @param  string $fontsDirectory
      * @return MultiDocConfig
      */
     public function setFontsDirectory(string $fontsDirectory): MultiDocConfig

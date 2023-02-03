@@ -58,9 +58,9 @@ class MultiDocRendererFactoryDefinition
     /**
      * Create a new renderer definition
      *
-     * @param string $name
-     * @param string $description
-     * @param string $classname
+     * @param  string $name
+     * @param  string $description
+     * @param  string $classname
      * @return MultiDocRendererFactoryDefinition
      */
     public static function make(string $name, string $description, string $classname): MultiDocRendererFactoryDefinition

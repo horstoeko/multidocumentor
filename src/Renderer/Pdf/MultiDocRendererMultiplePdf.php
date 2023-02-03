@@ -63,7 +63,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * Render a single PDF file
      *
-     * @param string $destinationFilename
+     * @param  string $destinationFilename
      * @return MultiDocRendererInterface
      */
     private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface

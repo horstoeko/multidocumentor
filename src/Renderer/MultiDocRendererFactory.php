@@ -33,7 +33,7 @@ class MultiDocRendererFactory
     /**
      * Create a renderer by format identifiert
      *
-     * @param \horstoeko\multidocumentor\Config\MultiDocConfig $config
+     * @param  \horstoeko\multidocumentor\Config\MultiDocConfig $config
      * @return MultiDocRendererInterface
      */
     public static function createRenderer(MultiDocConfig $config): MultiDocRendererInterface
