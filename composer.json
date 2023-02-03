@@ -57,6 +57,12 @@
         "phpcbf12": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr12.xml --ignore=/src/entities/* -q ./src ./tests",
         "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --xdebug",
         "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle --xdebug",
+        "docmd": "./src/Console/MultiDocConsole create --include=./src --output=./doc --format=singlemd",
+        "docpdf": "./src/Console/MultiDocConsole create --include=./src --output=./doc --format=singlepdf",
+        "doc": [
+            "@docmd",
+            "@docpdf"
+        ],
         "all": [
             "@testsreal",
             "@phpstan"
