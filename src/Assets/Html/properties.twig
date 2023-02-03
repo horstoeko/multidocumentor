@@ -1,4 +1,4 @@
-<h2>Properties</h2>
+<h2 class="underline">Properties</h2>
 {% for property in properties %}
     {% if property.getDocBlock() != null and property.getDocBlock().getSummary() != '' %}
         {% set summary = property.getDocBlock().getSummary() %}
