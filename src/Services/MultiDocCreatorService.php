@@ -63,7 +63,9 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
      */
     public function renderDocumentation(): MultiDocCreatorServiceInterface
     {
-        $this->renderService->setLocalFiles($this->finderService->getAllFilesAsPhpDocLocalFiles());
+        $files = $this->finderService->getAllFilesAsPhpDocLocalFiles();
+
+        $this->renderService->setLocalFiles($files);
         $this->renderService->renderDocumentation();
 
         return $this;
