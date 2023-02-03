@@ -3,11 +3,12 @@ a {
 }
 
 pre {
-    background-color: #fff3d4;
+    background-color: #202020;
     font-size: 0.9em;
-    border: 1px solid #f6b73c;
+    border: 1px solid #202020;
     border-radius: 4px;
     padding: 4px;
+    color: white;
 }
 
 table {
