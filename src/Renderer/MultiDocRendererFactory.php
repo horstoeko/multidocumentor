@@ -11,12 +11,13 @@ namespace horstoeko\multidocumentor\Renderer;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererMultipleMarkDown;
-use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown as MultiDocRendererMultipleMarkDownFromHtml;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
+use horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinitionList;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererMultipleMarkDown;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown as MultiDocRendererMultipleMarkDownFromHtml;
 
 /**
  * class which is a factory for a renderer
@@ -30,34 +31,6 @@ use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 class MultiDocRendererFactory
 {
     /**
-     * Returns a list of all available renderers
-     *
-     * @return array
-     */
-    public static function getAllRenderers(): array
-    {
-        return [
-            0 => MultiDocRendererSinglePdf::class,
-            1 => MultiDocRendererMultiplePdf::class,
-            2 => MultiDocRendererSingleMarkDownFromHtml::class,
-            3 => MultiDocRendererMultipleMarkDownFromHtml::class,
-            4 => MultiDocRendererSingleMarkDown::class,
-            5 => MultiDocRendererMultipleMarkDown::class,
-        ];
-    }
-
-    /**
-     * Returns true when a renderer for the given $format is available
-     *
-     * @param integer $format
-     * @return boolean
-     */
-    public static function hasRenderer(int $format): bool
-    {
-        return isset(self::getAllRenderers()[$format]);
-    }
-
-    /**
      * Create a renderer by format identifiert
      *
      * @param \horstoeko\multidocumentor\Config\MultiDocConfig $config
@@ -65,11 +38,10 @@ class MultiDocRendererFactory
      */
     public static function createRenderer(MultiDocConfig $config): MultiDocRendererInterface
     {
-        if (!self::hasRenderer($config->getOutputFormat())) {
-            throw new \Exception('Cannot determine the renderer');
-        }
+        $rendererDefinitions = new MultiDocRendererFactoryDefinitionList($config);
+        $rendererDefinition = $rendererDefinitions->findByIndex($config->getOutputFormat());
 
-        $classname = self::getAllRenderers()[$config->getOutputFormat()];
+        $classname = $rendererDefinition->getClassname();
 
         return new $classname($config);
     }
