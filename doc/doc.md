@@ -35,6 +35,7 @@ includeDirectories: string[]
 ```
 
 Directories to include
+
 ### excludeDirectories (protected)
 
 ```php
@@ -42,6 +43,7 @@ excludeDirectories: string[]
 ```
 
 Directories to exclude
+
 ### outputTo (protected)
 
 ```php
@@ -49,6 +51,7 @@ outputTo: string
 ```
 
 Directory to which the docs should be published
+
 ### outputFormat (protected)
 
 ```php
@@ -56,6 +59,7 @@ outputFormat: int
 ```
 
 The output format
+
 ### assetDirectory (protected)
 
 ```php
@@ -63,6 +67,7 @@ assetDirectory: string
 ```
 
 The directory where the assets are stored
+
 ### htmlDirectory (protected)
 
 ```php
@@ -70,6 +75,7 @@ htmlDirectory: string
 ```
 
 The directory where the HTML markup files are stored
+
 ### markdownDirectory (protected)
 
 ```php
@@ -77,6 +83,7 @@ markdownDirectory: string
 ```
 
 The directory where the markdown markup files are stored
+
 ### fontsDirectory (protected)
 
 ```php
@@ -95,6 +102,7 @@ __construct()
 
 Constructor
 
+
 ### getIncludeDirectories (public)
 
 ```php
@@ -102,6 +110,7 @@ getIncludeDirectories()
 ```
 
 Get the directories to search in
+
 
 ### setIncludeDirectories (public)
 
@@ -111,6 +120,7 @@ setIncludeDirectories(array $directories)
 
 Set a bunch of directories to search in
 
+
 ### addIncludeDirectory (public)
 
 ```php
@@ -118,6 +128,7 @@ addIncludeDirectory(string $directory)
 ```
 
 Add a directory to search in
+
 
 ### getExcludeDirectories (public)
 
@@ -127,6 +138,7 @@ getExcludeDirectories()
 
 Get the directories to exclude from search
 
+
 ### setExcludeDirectories (public)
 
 ```php
@@ -134,6 +146,7 @@ setExcludeDirectories(array $directories)
 ```
 
 Set a bunch of directories to exclude from search
+
 
 ### addExcludeDirectory (public)
 
@@ -143,6 +156,7 @@ addExcludeDirectory(string $directory)
 
 Add a directory to exclude from search
 
+
 ### getOutputTo (public)
 
 ```php
@@ -150,6 +164,7 @@ getOutputTo()
 ```
 
 Get the directory to which the documentation is saved
+
 
 ### setOutputTo (public)
 
@@ -159,6 +174,7 @@ setOutputTo(string $outputTo)
 
 Set the directory to which the documentation is saved
 
+
 ### getOutputFormat (public)
 
 ```php
@@ -166,6 +182,7 @@ getOutputFormat()
 ```
 
 Get the format in which the documentation is rendered
+
 
 ### setOutputFormat (public)
 
@@ -175,6 +192,7 @@ setOutputFormat(int $outputFormat)
 
 Set the directory to which the documentation is saved
 
+
 ### getAssetDirectory (public)
 
 ```php
@@ -182,6 +200,7 @@ getAssetDirectory()
 ```
 
 Get the directory where the assets are stored
+
 
 ### setAssetDirectory (public)
 
@@ -191,6 +210,7 @@ setAssetDirectory(string $assetDirectory)
 
 Set the directory where the assets are stored
 
+
 ### getHtmlDirectory (public)
 
 ```php
@@ -198,6 +218,7 @@ getHtmlDirectory()
 ```
 
 Get the directory where the html markup files are stored
+
 
 ### setHtmlDirectory (public)
 
@@ -207,6 +228,7 @@ setHtmlDirectory(string $htmlDirectory)
 
 Set the directory where the html markup files are stored
 
+
 ### getMarkdownDirectory (public)
 
 ```php
@@ -214,6 +236,7 @@ getMarkdownDirectory()
 ```
 
 Get the directory where the markdown markup files are stored
+
 
 ### setMarkdownDirectory (public)
 
@@ -223,6 +246,7 @@ setMarkdownDirectory(string $markdownDirectory)
 
 Set the directory where the markdown markup files are stored
 
+
 ### getFontsDirectory (public)
 
 ```php
@@ -231,6 +255,7 @@ getFontsDirectory()
 
 Get the directory where the font files are stored
 
+
 ### setFontsDirectory (public)
 
 ```php
@@ -238,6 +263,7 @@ setFontsDirectory(string $fontsDirectory)
 ```
 
 Set the directory where the font files are stored
+
 
 # MultiDocApplication
 
@@ -258,6 +284,7 @@ __construct(string $name = &#039;UNKNOWN&#039;, string $version = &#039;UNKNOWN&
 ```
 
 Constructor
+
 
 # MultiDocApplicationCreateCommand
 
@@ -280,11 +307,13 @@ configure()
 
 
 
+
 ### execute (protected)
 
 ```php
 execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output)
 ```
+
 
 
 
@@ -308,6 +337,7 @@ renderDocumentation()
 
 Starts the creation of the documentation
 
+
 # MultiDocFinderServiceInterface
 
 _Interface for a service class which will give us all files to handle_
@@ -329,6 +359,7 @@ getAllFiles()
 
 Get all found files
 
+
 ### getAllFilesAsPhpDocLocalFiles (public)
 
 ```php
@@ -336,6 +367,7 @@ getAllFilesAsPhpDocLocalFiles()
 ```
 
 Get all files as a PHPdoc LocalFile
+
 
 # MultiDocMarkupServiceInterface
 
@@ -370,6 +402,7 @@ initializeService()
 
 Initialize (e.g. the internal markup Content Container)
 
+
 ### getMarkupTemplateDirectory (public)
 
 ```php
@@ -377,6 +410,7 @@ getMarkupTemplateDirectory()
 ```
 
 Get the directory where all the markup template files are located
+
 
 ### getMarkupOutput (public)
 
@@ -386,6 +420,7 @@ getMarkupOutput()
 
 Return the created markup
 
+
 ### addToMarkupOutput (public)
 
 ```php
@@ -393,6 +428,7 @@ addToMarkupOutput(string $add)
 ```
 
 Add data to markup output
+
 
 ### render (public)
 
@@ -402,6 +438,7 @@ render(string $name, array $data = array())
 
 Render a markup
 
+
 ### renderAndAddToOutput (public)
 
 ```php
@@ -409,6 +446,7 @@ renderAndAddToOutput(string $name, array $data = array())
 ```
 
 Render a markup and add the rendered output to internal markup storage
+
 
 ### writeHeader (public)
 
@@ -418,6 +456,7 @@ writeHeader(string $name, string $summary, string $description)
 
 Write Header
 
+
 ### writeSummary (public)
 
 ```php
@@ -425,6 +464,7 @@ writeSummary(array $constants, array $properties, array $methods)
 ```
 
 Write a summary
+
 
 ### writeConstants (public)
 
@@ -434,6 +474,7 @@ writeConstants(array $constants)
 
 Write constants
 
+
 ### writeProperties (public)
 
 ```php
@@ -441,6 +482,7 @@ writeProperties(array $properties)
 ```
 
 Write properties
+
 
 ### writeMethods (public)
 
@@ -450,6 +492,7 @@ writeMethods(array $methods)
 
 Write methods
 
+
 ### createFromClass (public)
 
 ```php
@@ -457,6 +500,7 @@ createFromClass(\phpDocumentor\Reflection\Php\Class_ $class)
 ```
 
 Generate class description
+
 
 ### createFromInterface (public)
 
@@ -466,6 +510,7 @@ createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 
 Generate Interface description
 
+
 ### createFromTrait (public)
 
 ```php
@@ -473,6 +518,7 @@ createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait)
 ```
 
 Generate Trait description
+
 
 # MultiDocRenderServiceInterface
 
@@ -495,6 +541,7 @@ setLocalFiles(array $files)
 
 Set the files which are to handle
 
+
 ### renderDocumentation (public)
 
 ```php
@@ -502,6 +549,7 @@ renderDocumentation()
 ```
 
 Render the documentation from files
+
 
 # MultiDocRendererInterface
 
@@ -524,6 +572,7 @@ setReflectedFiles(array $files)
 
 Set the file to render
 
+
 ### render (public)
 
 ```php
@@ -531,6 +580,7 @@ render()
 ```
 
 Render the file
+
 
 # MultiDocTwigServiceInterface
 
@@ -553,6 +603,7 @@ addTemplateDirectory(string $directory)
 
 Add a directory where to find the needed templates
 
+
 ### render (public)
 
 ```php
@@ -561,168 +612,6 @@ render(string $name, array $data)
 
 Render a twig remplate
 
-# MultiDocRendererMultipleMarkDown
-
-_service class which renders the output documents as an single markdown document_
-
-## Summary
-
-### Public methods
-
-__construct()
-setReflectedFiles()
-render()
-
-### Private methods
-
-renderSingleMarkDown()
-renderClass()
-renderInterface()
-renderTrait()
-
-## Properties
-
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
-### markupService (protected)
-
-```php
-markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
-```
-
-
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
-
-## Methods
-
-### __construct (public)
-
-```php
-__construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
-```
-
-Constructor
-
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
-
-### render (public)
-
-```php
-render()
-```
-
-
-
-### renderSingleMarkDown (private)
-
-```php
-renderSingleMarkDown(string $destinationFilename)
-```
-
-Render a single markdown file
-
-### renderClass (private)
-
-```php
-renderClass(mixed $class)
-```
-
-Render a class markdown file
-
-### renderInterface (private)
-
-```php
-renderInterface(mixed $interface)
-```
-
-Render a interface markdown file
-
-### renderTrait (private)
-
-```php
-renderTrait(mixed $interface)
-```
-
-Render a interface markdown file
-
-# MultiDocRendererSingleMarkDown
-
-_service class which renders the output documents as an single markdown document_
-
-## Summary
-
-### Public methods
-
-__construct()
-setReflectedFiles()
-render()
-
-## Properties
-
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
-### markupService (protected)
-
-```php
-markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
-```
-
-
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
-
-## Methods
-
-### __construct (public)
-
-```php
-__construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
-```
-
-Constructor
-
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
-
-### render (public)
-
-```php
-render()
-```
-
-
 
 # MultiDocRendererMultipleMarkDown
 
@@ -752,6 +641,184 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
+### markupService (protected)
+
+```php
+markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
+```
+
+The internal markup service
+
+### reflectedFiles (protected)
+
+```php
+reflectedFiles
+```
+
+Files to handle
+
+## Methods
+
+### __construct (public)
+
+```php
+__construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
+```
+
+Constructor
+
+
+### setReflectedFiles (public)
+
+```php
+setReflectedFiles(array $files)
+```
+
+
+
+
+### render (public)
+
+```php
+render()
+```
+
+
+
+
+### renderSingleMarkDown (private)
+
+```php
+renderSingleMarkDown(string $destinationFilename)
+```
+
+Render a single markdown file
+
+
+### renderClass (private)
+
+```php
+renderClass(mixed $class)
+```
+
+Render a class markdown file
+
+
+### renderInterface (private)
+
+```php
+renderInterface(mixed $interface)
+```
+
+Render a interface markdown file
+
+
+### renderTrait (private)
+
+```php
+renderTrait(mixed $interface)
+```
+
+Render a interface markdown file
+
+
+# MultiDocRendererSingleMarkDown
+
+_service class which renders the output documents as an single markdown document_
+
+## Summary
+
+### Public methods
+
+__construct()
+setReflectedFiles()
+render()
+
+## Properties
+
+### config (protected)
+
+```php
+config: \horstoeko\multidocumentor\Config\MultiDocConfig
+```
+
+ConfigurationThis holds the application configuration
+
+### markupService (protected)
+
+```php
+markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
+```
+
+The internal markup service
+
+### reflectedFiles (protected)
+
+```php
+reflectedFiles
+```
+
+Files to handle
+
+## Methods
+
+### __construct (public)
+
+```php
+__construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
+```
+
+Constructor
+
+
+### setReflectedFiles (public)
+
+```php
+setReflectedFiles(array $files)
+```
+
+
+
+
+### render (public)
+
+```php
+render()
+```
+
+
+
+
+# MultiDocRendererMultipleMarkDown
+
+_service class which renders the output documents as an single markdown document_
+
+## Summary
+
+### Public methods
+
+__construct()
+setReflectedFiles()
+render()
+
+### Private methods
+
+renderSingleMarkDown()
+renderClass()
+renderInterface()
+renderTrait()
+
+## Properties
+
+### config (protected)
+
+```php
+config: \horstoeko\multidocumentor\Config\MultiDocConfig
+```
+
+Configuration
+
 ### markupService (protected)
 
 ```php
@@ -759,11 +826,13 @@ markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterf
 ```
 
 
+
 ### htmlConverter (protected)
 
 ```php
 htmlConverter: \League\HTMLToMarkdown\HtmlConverter
 ```
+
 
 
 ### reflectedFiles (protected)
@@ -784,11 +853,13 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### setReflectedFiles (public)
 
 ```php
 setReflectedFiles(array $files)
 ```
+
 
 
 
@@ -800,6 +871,7 @@ render()
 
 
 
+
 ### renderSingleMarkDown (private)
 
 ```php
@@ -807,6 +879,7 @@ renderSingleMarkDown(string $destinationFilename)
 ```
 
 Render a single markdown file
+
 
 ### renderClass (private)
 
@@ -816,6 +889,7 @@ renderClass(mixed $class)
 
 Render a class markdown file
 
+
 ### renderInterface (private)
 
 ```php
@@ -824,6 +898,7 @@ renderInterface(mixed $interface)
 
 Render a interface markdown file
 
+
 ### renderTrait (private)
 
 ```php
@@ -831,6 +906,7 @@ renderTrait(mixed $interface)
 ```
 
 Render a interface markdown file
+
 
 # MultiDocRendererSingleMarkDown
 
@@ -853,6 +929,7 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### markupService (protected)
 
 ```php
@@ -860,11 +937,13 @@ markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterf
 ```
 
 
+
 ### htmlConverter (protected)
 
 ```php
 htmlConverter: \League\HTMLToMarkdown\HtmlConverter
 ```
+
 
 
 ### reflectedFiles (protected)
@@ -885,6 +964,7 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### setReflectedFiles (public)
 
 ```php
@@ -893,11 +973,13 @@ setReflectedFiles(array $files)
 
 
 
+
 ### render (public)
 
 ```php
 render()
 ```
+
 
 
 
@@ -923,6 +1005,7 @@ getAllRenderers()
 
 Returns a list of all available renderers
 
+
 ### hasRenderer (public)
 
 ```php
@@ -931,6 +1014,7 @@ hasRenderer(int $format)
 
 Returns true when a renderer for the given $format is available
 
+
 ### createRenderer (public)
 
 ```php
@@ -938,6 +1022,7 @@ createRenderer(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 ```
 
 Create a renderer by format identifiert
+
 
 # MultiDocPdfFile
 
@@ -969,6 +1054,7 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 # MultiDocRendererMultiplePdf
 
 _service class which renders the output documents as an single PDF document_
@@ -997,11 +1083,13 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### markupService (protected)
 
 ```php
 markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
 ```
+
 
 
 ### reflectedFiles (protected)
@@ -1022,11 +1110,13 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### setReflectedFiles (public)
 
 ```php
 setReflectedFiles(array $files)
 ```
+
 
 
 
@@ -1038,6 +1128,7 @@ render()
 
 
 
+
 ### renderSingleMarkDown (private)
 
 ```php
@@ -1045,6 +1136,7 @@ renderSingleMarkDown(string $destinationFilename)
 ```
 
 Render a single PDF file
+
 
 ### renderClass (private)
 
@@ -1054,6 +1146,7 @@ renderClass(mixed $class)
 
 Render a class pdf file
 
+
 ### renderInterface (private)
 
 ```php
@@ -1062,6 +1155,7 @@ renderInterface(mixed $interface)
 
 Render a interface pdf file
 
+
 ### renderTrait (private)
 
 ```php
@@ -1069,6 +1163,7 @@ renderTrait(mixed $interface)
 ```
 
 Render a interface pdf file
+
 
 # MultiDocRendererSinglePdf
 
@@ -1091,11 +1186,13 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### markupService (protected)
 
 ```php
 markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
 ```
+
 
 
 ### reflectedFiles (protected)
@@ -1116,6 +1213,7 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### setReflectedFiles (public)
 
 ```php
@@ -1124,11 +1222,13 @@ setReflectedFiles(array $files)
 
 
 
+
 ### render (public)
 
 ```php
 render()
 ```
+
 
 
 
@@ -1165,6 +1265,7 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### twigService (private)
 
 ```php
@@ -1172,6 +1273,7 @@ twigService: \horstoeko\multidocumentor\Interfaces\MultiDocTwigServiceInterface
 ```
 
 The HTML Engine
+
 ### markup (private)
 
 ```php
@@ -1190,11 +1292,13 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructur
 
+
 ### initializeService (public)
 
 ```php
 initializeService()
 ```
+
 
 
 
@@ -1206,11 +1310,13 @@ getMarkupTemplateDirectory()
 
 
 
+
 ### getMarkupOutput (public)
 
 ```php
 getMarkupOutput()
 ```
+
 
 
 
@@ -1222,11 +1328,13 @@ addToMarkupOutput(string $add)
 
 
 
+
 ### render (public)
 
 ```php
 render(string $name, array $data = array())
 ```
+
 
 
 
@@ -1238,11 +1346,13 @@ renderAndAddToOutput(string $name, array $data = array())
 
 
 
+
 ### writeHeader (public)
 
 ```php
 writeHeader(string $name, string $summary, string $description)
 ```
+
 
 
 
@@ -1254,11 +1364,13 @@ writeSummary(array $constants, array $properties, array $methods)
 
 
 
+
 ### writeConstants (public)
 
 ```php
 writeConstants(array $constants)
 ```
+
 
 
 
@@ -1270,11 +1382,13 @@ writeProperties(array $properties)
 
 
 
+
 ### writeMethods (public)
 
 ```php
 writeMethods(array $methods)
 ```
+
 
 
 
@@ -1286,6 +1400,7 @@ createFromClass(\phpDocumentor\Reflection\Php\Class_ $class)
 
 
 
+
 ### createFromInterface (public)
 
 ```php
@@ -1294,11 +1409,13 @@ createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 
 
 
+
 ### createFromTrait (public)
 
 ```php
 createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait)
 ```
+
 
 
 
@@ -1322,6 +1439,7 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### finderService (protected)
 
 ```php
@@ -1329,6 +1447,7 @@ finderService: \horstoeko\multidocumentor\Interfaces\MultiDocFinderServiceInterf
 ```
 
 Finder Service
+
 ### renderService (protected)
 
 ```php
@@ -1347,11 +1466,13 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### renderDocumentation (public)
 
 ```php
 renderDocumentation()
 ```
+
 
 
 
@@ -1376,6 +1497,7 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### finder (protected)
 
 ```php
@@ -1394,6 +1516,7 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### getAllFiles (public)
 
 ```php
@@ -1402,11 +1525,13 @@ getAllFiles()
 
 
 
+
 ### getAllFilesAsPhpDocLocalFiles (public)
 
 ```php
 getAllFilesAsPhpDocLocalFiles()
 ```
+
 
 
 
@@ -1438,11 +1563,13 @@ getMarkupTemplateDirectory()
 
 
 
+
 ### writeHeader (public)
 
 ```php
 writeHeader(string $name, string $summary, string $description)
 ```
+
 
 
 
@@ -1454,11 +1581,13 @@ writeSummary(array $constants, array $properties, array $methods)
 
 
 
+
 ### writeConstants (public)
 
 ```php
 writeConstants(array $constants)
 ```
+
 
 
 
@@ -1470,11 +1599,13 @@ writeProperties(array $properties)
 
 
 
+
 ### writeMethods (public)
 
 ```php
 writeMethods(array $methods)
 ```
+
 
 
 
@@ -1486,6 +1617,7 @@ createFromClass(\phpDocumentor\Reflection\Php\Class_ $class)
 
 
 
+
 ### createFromInterface (public)
 
 ```php
@@ -1494,11 +1626,13 @@ createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 
 
 
+
 ### createFromTrait (public)
 
 ```php
 createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait)
 ```
+
 
 
 
@@ -1530,11 +1664,13 @@ getMarkupTemplateDirectory()
 
 
 
+
 ### writeHeader (public)
 
 ```php
 writeHeader(string $name, string $summary, string $description)
 ```
+
 
 
 
@@ -1546,11 +1682,13 @@ writeSummary(array $constants, array $properties, array $methods)
 
 
 
+
 ### writeConstants (public)
 
 ```php
 writeConstants(array $constants)
 ```
+
 
 
 
@@ -1562,11 +1700,13 @@ writeProperties(array $properties)
 
 
 
+
 ### writeMethods (public)
 
 ```php
 writeMethods(array $methods)
 ```
+
 
 
 
@@ -1578,6 +1718,7 @@ createFromClass(\phpDocumentor\Reflection\Php\Class_ $class)
 
 
 
+
 ### createFromInterface (public)
 
 ```php
@@ -1586,11 +1727,13 @@ createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface)
 
 
 
+
 ### createFromTrait (public)
 
 ```php
 createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait)
 ```
+
 
 
 
@@ -1615,6 +1758,7 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### localFiles (protected)
 
 ```php
@@ -1633,6 +1777,7 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### setLocalFiles (public)
 
 ```php
@@ -1641,11 +1786,13 @@ setLocalFiles(array $files)
 
 
 
+
 ### renderDocumentation (public)
 
 ```php
 renderDocumentation()
 ```
+
 
 
 
@@ -1670,6 +1817,7 @@ config: \horstoeko\multidocumentor\Config\MultiDocConfig
 ```
 
 Configuration
+
 ### twigEngine (protected)
 
 ```php
@@ -1688,6 +1836,7 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
+
 ### addTemplateDirectory (public)
 
 ```php
@@ -1696,11 +1845,13 @@ addTemplateDirectory(string $directory)
 
 
 
+
 ### render (public)
 
 ```php
 render(string $name, array $data)
 ```
+
 
 
 
@@ -1725,6 +1876,7 @@ twigLoader: \Twig\Loader\FilesystemLoader
 ```
 
 Twig template loader
+
 ### twigEnvironment (protected)
 
 ```php
@@ -1743,6 +1895,7 @@ __construct()
 
 Constructor
 
+
 ### addTemplateDirectory (public)
 
 ```php
@@ -1751,6 +1904,7 @@ addTemplateDirectory(string $directory)
 
 Add a folder where templates are stored
 
+
 ### render (public)
 
 ```php
@@ -1758,6 +1912,7 @@ render(string $name, array $data)
 ```
 
 Render a template
+
 
 # MultiDocTwigExtension
 
@@ -1781,6 +1936,7 @@ getFilters()
 
 Returns a list of filters to add to the existing list.
 
+
 ### removeInvisibleCharacters (public)
 
 ```php
@@ -1789,6 +1945,7 @@ removeInvisibleCharacters(mixed $string)
 
 Removes invisble Characters
 
+
 ### parsedown (public)
 
 ```php
@@ -1796,4 +1953,5 @@ parsedown(mixed $string)
 ```
 
 Parse markdown to HTML
+
 
