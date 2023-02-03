@@ -14,7 +14,7 @@ use horstoeko\multidocumentor\Services\MultiDocTwigService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 
 /**
- * Service class which renders the markup
+ * Basic Service class which renders the markup
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor

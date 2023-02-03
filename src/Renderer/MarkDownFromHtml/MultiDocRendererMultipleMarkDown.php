@@ -9,10 +9,11 @@
 
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
 use League\HTMLToMarkdown\HtmlConverter;
+use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
+use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
+use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
 /**
  * service class which renders the output documents as an single markdown document
@@ -23,15 +24,8 @@ use League\HTMLToMarkdown\HtmlConverter;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
+class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
 {
-    /**
-     * Configuration
-     *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
-     */
-    protected $config;
-
     /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
@@ -43,30 +37,14 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
     protected $htmlConverter;
 
     /**
-     * Files to handle
-     *
-     * @param \phpDocumentor\Reflection\Php\File[] $file
-     */
-    protected $reflectedFiles = [];
-
-    /**
      * Constructor
      */
     public function __construct(MultiDocConfig $config)
     {
-        $this->config = $config;
+        parent::__construct($config);
 
         $this->markupService = new MultiDocMarkupHtmlService($this->config);
         $this->htmlConverter = new HtmlConverter();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setReflectedFiles(array $files): MultiDocRendererInterface
-    {
-        $this->reflectedFiles = $files;
-        return $this;
     }
 
     /**

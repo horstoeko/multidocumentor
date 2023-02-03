@@ -10,6 +10,7 @@
 namespace horstoeko\multidocumentor\Renderer\MarkDown;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Services\MultiDocMarkupMarkdownService;
 
@@ -22,15 +23,8 @@ use horstoeko\multidocumentor\Services\MultiDocMarkupMarkdownService;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
+class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
 {
-    /**
-     * Configuration
-     *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
-     */
-    protected $config;
-
     /**
      * The internal markup service
      *
@@ -39,29 +33,13 @@ class MultiDocRendererMultipleMarkDown implements MultiDocRendererInterface
     protected $markupService;
 
     /**
-     * Files to handle
-     *
-     * @param \phpDocumentor\Reflection\Php\File[] $file
-     */
-    protected $reflectedFiles = [];
-
-    /**
      * Constructor
      */
     public function __construct(MultiDocConfig $config)
     {
-        $this->config = $config;
+        parent::__construct($config);
 
         $this->markupService = new MultiDocMarkupMarkdownService($this->config);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setReflectedFiles(array $files): MultiDocRendererInterface
-    {
-        $this->reflectedFiles = $files;
-        return $this;
     }
 
     /**

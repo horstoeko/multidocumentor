@@ -10,8 +10,9 @@
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
+use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
 /**
  * service class which renders the output documents as an single PDF document
@@ -22,43 +23,21 @@ use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocRendererMultiplePdf implements MultiDocRendererInterface
+class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
 {
-    /**
-     * Configuration
-     *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
-     */
-    protected $config;
-
     /**
      * @var \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface
      */
     protected $markupService;
 
     /**
-     * Files to handle
-     *
-     * @param \phpDocumentor\Reflection\Php\File[] $file
-     */
-    protected $reflectedFiles = [];
-
-    /**
      * Constructor
      */
     public function __construct(MultiDocConfig $config)
     {
-        $this->config = $config;
-        $this->markupService = new MultiDocMarkupHtmlService($this->config);
-    }
+        parent::__construct($config);
 
-    /**
-     * @inheritDoc
-     */
-    public function setReflectedFiles(array $files): MultiDocRendererInterface
-    {
-        $this->reflectedFiles = $files;
-        return $this;
+        $this->markupService = new MultiDocMarkupHtmlService($this->config);
     }
 
     /**
