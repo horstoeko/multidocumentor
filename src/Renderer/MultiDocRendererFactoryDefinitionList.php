@@ -120,6 +120,16 @@ class MultiDocRendererFactoryDefinitionList
     }
 
     /**
+     * Returns a list of all registered renderers
+     *
+     * @return \horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinition[]
+     */
+    public function getAllRegisteredRenderers(): array
+    {
+        return $this->rendererDefinitions;
+    }
+
+    /**
      * Initialize a list of default renderers
      *
      * @return MultiDocRendererFactoryDefinitionList
