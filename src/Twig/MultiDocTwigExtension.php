@@ -41,9 +41,9 @@ class MultiDocTwigExtension extends AbstractExtension
      * Removes invisble Characters
      *
      * @param string $string
-     * @return void
+     * @return string
      */
-    public function removeInvisibleCharacters($string)
+    public function removeInvisibleCharacters($string): string
     {
         return preg_replace('/[\x00-\x1F\x7F]/', '', $string);
     }
@@ -52,9 +52,9 @@ class MultiDocTwigExtension extends AbstractExtension
      * Parse markdown to HTML
      *
      * @param string $string
-     * @return void
+     * @return string
      */
-    public function parsedown($string)
+    public function parsedown($string): string
     {
         $parseDown = new Parsedown();
         return $parseDown->text($string);

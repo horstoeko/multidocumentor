@@ -62,6 +62,10 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     public function renderDocumentation(): MultiDocRenderServiceInterface
     {
         $projectFactory = ProjectFactory::createInstance();
+
+        /**
+         * @var \phpDocumentor\Reflection\Php\Project
+         */
         $project = $projectFactory->create('Project to document', $this->localFiles);
 
         $renderer = MultiDocRendererFactory::createRenderer($this->config);
