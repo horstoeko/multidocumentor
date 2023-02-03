@@ -84,17 +84,19 @@ class MultiDocRendererFactoryDefinitionList
     public function findByName(string $name, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererFactoryDefinition
     {
         $rendererDefinitions = array_filter($this->rendererDefinitions, function (MultiDocRendererFactoryDefinition $definition) use ($name) {
-            return strcasecmp($definition->getClassname(), $name) === 0;
+            return strcasecmp($definition->getName(), $name) === 0;
         });
 
-        if (empty($rendererDefinitions)) {
+        $rendererDefinitionsFirst = reset($rendererDefinitions);
+
+        if ($rendererDefinitionsFirst === false) {
             if ($raiseExceptionIfNotFound === true) {
                 throw new \Exception(sprintf('Cannot determine the renderer %s', $name));
             }
             return null;
         }
 
-        return $rendererDefinitions[0];
+        return $rendererDefinitionsFirst;
     }
 
     /**

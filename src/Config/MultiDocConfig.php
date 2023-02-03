@@ -46,9 +46,9 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * The output format
      *
-     * @var integer
+     * @var string
      */
-    protected $outputFormat = 0;
+    protected $outputFormat = "";
 
     /**
      * The directory where the assets are stored
@@ -181,9 +181,9 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Get the format in which the documentation is rendered
      *
-     * @return int
+     * @return string
      */
-    public function getOutputFormat(): int
+    public function getOutputFormat(): string
     {
         return $this->outputFormat;
     }
@@ -191,9 +191,10 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set the directory to which the documentation is saved
      *
-     * @return \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @param string $outputFormat
+     * @return MultiDocConfig
      */
-    public function setOutputFormat(int $outputFormat): MultiDocConfig
+    public function setOutputFormat(string $outputFormat): MultiDocConfig
     {
         $this->outputFormat = $outputFormat;
         return $this;
