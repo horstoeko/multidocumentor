@@ -50,7 +50,7 @@ class MultiDocApplicationCreateCommand extends Command
         $config->setIncludeDirectories((array)$input->getOption('include'));
         $config->setExcludeDirectories((array)$input->getOption('exclude'));
         $config->setOutputTo((string)$input->getOption('output'));
-        $config->setOutputFormat((string)$input->getOption('format') ?? 0);
+        $config->setOutputFormat((string)$input->getOption('format'));
 
         $creatorService = new MultiDocCreatorService($config);
         $creatorService->renderDocumentation();
