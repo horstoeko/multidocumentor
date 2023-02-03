@@ -9,7 +9,7 @@ With `horstoeko/multidocumentor` you can create an API documentation of any pack
 This package makes use of
 
   * [MPDF by Matěj Humpál and Ian Back](https://github.com/mpdf/mpdf)
-  * [Plates Template Engine by Jonathan Reinink and RJ Garcia](https://github.com/thephpleague/plates)
+  * [Twig Template Engine by Armin Ronacher and Fabien Potencier](https://twig.symfony.com/)
   * [ParseDown by Emanuil Rusev](https://github.com/erusev/parsedown)
   * [phpDocumentor ReflectionDocBlock by Mike van Riel and Jaap van Otterdijk](https://github.com/phpDocumentor/ReflectionDocBlock)
 
