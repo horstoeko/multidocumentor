@@ -606,7 +606,6 @@ _service class which renders the output documents as an single markdown document
 ### Public methods
 
 __construct()
-setReflectedFiles()
 render()
 
 ### Private methods
@@ -618,14 +617,6 @@ renderTrait()
 
 ## Properties
 
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
-
 ### markupService (protected)
 
 ```php
@@ -633,14 +624,6 @@ markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterf
 ```
 
 The internal markup service
-
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
 
 ## Methods
 
@@ -651,14 +634,6 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 ```
 
 Constructor
-
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
 
 ### render (public)
 
@@ -709,18 +684,9 @@ _service class which renders the output documents as an single markdown document
 ### Public methods
 
 __construct()
-setReflectedFiles()
 render()
 
 ## Properties
-
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
 
 ### markupService (protected)
 
@@ -729,14 +695,6 @@ markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterf
 ```
 
 The internal markup service
-
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
 
 ## Methods
 
@@ -747,14 +705,6 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 ```
 
 Constructor
-
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
 
 ### render (public)
 
@@ -773,7 +723,6 @@ _service class which renders the output documents as an single markdown document
 ### Public methods
 
 __construct()
-setReflectedFiles()
 render()
 
 ### Private methods
@@ -784,14 +733,6 @@ renderInterface()
 renderTrait()
 
 ## Properties
-
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
 
 ### markupService (protected)
 
@@ -809,14 +750,6 @@ htmlConverter: \League\HTMLToMarkdown\HtmlConverter
 
 
 
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
-
 ## Methods
 
 ### __construct (public)
@@ -826,14 +759,6 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 ```
 
 Constructor
-
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
 
 ### render (public)
 
@@ -884,18 +809,9 @@ _service class which renders the output documents as an single markdown document
 ### Public methods
 
 __construct()
-setReflectedFiles()
 render()
 
 ## Properties
-
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
 
 ### markupService (protected)
 
@@ -912,6 +828,46 @@ htmlConverter: \League\HTMLToMarkdown\HtmlConverter
 ```
 
 
+
+## Methods
+
+### __construct (public)
+
+```php
+__construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
+```
+
+Constructor
+
+### render (public)
+
+```php
+render()
+```
+
+
+
+# MultiDocAbstractRenderer
+
+_Basic class which renders the document(s)_
+
+## Summary
+
+### Public methods
+
+__construct()
+setReflectedFiles()
+render()
+
+## Properties
+
+### config (protected)
+
+```php
+config: \horstoeko\multidocumentor\Config\MultiDocConfig
+```
+
+Configuration
 
 ### reflectedFiles (protected)
 
@@ -1201,7 +1157,6 @@ _service class which renders the output documents as an single PDF document_
 ### Public methods
 
 __construct()
-setReflectedFiles()
 render()
 
 ### Private methods
@@ -1213,14 +1168,6 @@ renderTrait()
 
 ## Properties
 
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
-
 ### markupService (protected)
 
 ```php
@@ -1228,14 +1175,6 @@ markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterf
 ```
 
 
-
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
 
 ## Methods
 
@@ -1246,14 +1185,6 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 ```
 
 Constructor
-
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
 
 ### render (public)
 
@@ -1304,18 +1235,9 @@ _service class which renders the output documents as an single PDF document_
 ### Public methods
 
 __construct()
-setReflectedFiles()
 render()
 
 ## Properties
-
-### config (protected)
-
-```php
-config: \horstoeko\multidocumentor\Config\MultiDocConfig
-```
-
-Configuration
 
 ### markupService (protected)
 
@@ -1324,14 +1246,6 @@ markupService: \horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterf
 ```
 
 
-
-### reflectedFiles (protected)
-
-```php
-reflectedFiles
-```
-
-Files to handle
 
 ## Methods
 
@@ -1343,14 +1257,6 @@ __construct(\horstoeko\multidocumentor\Config\MultiDocConfig $config)
 
 Constructor
 
-### setReflectedFiles (public)
-
-```php
-setReflectedFiles(array $files)
-```
-
-
-
 ### render (public)
 
 ```php
@@ -1361,7 +1267,7 @@ render()
 
 # MultiDocAbstractMarkupService
 
-_Service class which renders the markup_
+_Basic Service class which renders the markup_
 
 ## Summary
 
