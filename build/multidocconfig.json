@@ -1,0 +1,7 @@
+{
+    "includedirectories": [
+        "./src"
+    ],
+    "outputTo": "./doc",
+    "outputFormat": "singlepdf"
+}
