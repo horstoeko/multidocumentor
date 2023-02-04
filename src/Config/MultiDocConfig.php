@@ -79,6 +79,21 @@ class MultiDocConfig extends ConsoleApplication
     protected $fontsDirectory = "";
 
     /**
+     * Settings for several fonts (see FontsDirectory)
+     *
+     * @var array
+     * @see https://mpdf.github.io/fonts-languages/fonts-in-mpdf-7-x.html
+     */
+    protected $fontsSettings = [];
+
+    /**
+     * The default font
+     *
+     * @var string
+     */
+    protected $fontDefault = "";
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -285,6 +300,50 @@ class MultiDocConfig extends ConsoleApplication
     public function setFontsDirectory(string $fontsDirectory): MultiDocConfig
     {
         $this->fontsDirectory = $fontsDirectory;
+        return $this;
+    }
+
+    /**
+     * Get the font settings
+     *
+     * @return array
+     */
+    public function getFontsSettings(): array
+    {
+        return $this->fontsSettings;
+    }
+
+    /**
+     * Set the font settings
+     *
+     * @param array $fontsSettings
+     * @return MultiDocConfig
+     */
+    public function setFontsSettings(array $fontsSettings): MultiDocConfig
+    {
+        $this->fontsSettings = $fontsSettings;
+        return $this;
+    }
+
+    /**
+     * Get the default font
+     *
+     * @return string
+     */
+    public function getFontDefault(): string
+    {
+        return $this->fontDefault;
+    }
+
+    /**
+     * Set the default font
+     *
+     * @param string $fontDefault
+     * @return MultiDocConfig
+     */
+    public function setFontDefault(string $fontDefault): MultiDocConfig
+    {
+        $this->fontDefault = $fontDefault;
         return $this;
     }
 }

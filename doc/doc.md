@@ -25,6 +25,10 @@ getMarkdownDirectory()
 setMarkdownDirectory()
 getFontsDirectory()
 setFontsDirectory()
+getFontsSettings()
+setFontsSettings()
+getFontDefault()
+setFontDefault()
 
 ## Properties
 
@@ -91,6 +95,22 @@ fontsDirectory: string
 ```
 
 The directory where the font files are stored
+
+### fontsSettings (protected)
+
+```php
+fontsSettings: array
+```
+
+Settings for several fonts (see FontsDirectory)
+
+### fontDefault (protected)
+
+```php
+fontDefault: string
+```
+
+The default font
 
 ## Methods
 
@@ -245,6 +265,38 @@ setFontsDirectory(string $fontsDirectory)
 ```
 
 Set the directory where the font files are stored
+
+### getFontsSettings (public)
+
+```php
+getFontsSettings()
+```
+
+Get the font settings
+
+### setFontsSettings (public)
+
+```php
+setFontsSettings(array $fontsSettings)
+```
+
+Set the font settings
+
+### getFontDefault (public)
+
+```php
+getFontDefault()
+```
+
+Get the default font
+
+### setFontDefault (public)
+
+```php
+setFontDefault(string $fontDefault)
+```
+
+Set the default font
 
 # MultiDocApplication
 
@@ -1843,6 +1895,71 @@ render(string $name, array $data)
 ```
 
 
+
+# MultiDocTools
+
+_Class representing a collection of tools_
+
+## Summary
+
+### Public methods
+
+isArray()
+arrayKeyExists()
+arrayCollapse()
+value()
+dataGet()
+objectToArray()
+
+## Methods
+
+### isArray (public)
+
+```php
+isArray(mixed $value)
+```
+
+Determine whether the given value is array accessible.
+
+### arrayKeyExists (public)
+
+```php
+arrayKeyExists(mixed $array, mixed $key)
+```
+
+Determine if the given key exists in the provided array.
+
+### arrayCollapse (public)
+
+```php
+arrayCollapse(mixed $array)
+```
+
+Collapse an array of arrays into a single array.
+
+### value (public)
+
+```php
+value(mixed $value, mixed $args)
+```
+
+Return the default value of the given value.
+
+### dataGet (public)
+
+```php
+dataGet(mixed $target, mixed $key, mixed $default = null)
+```
+
+Get an item from an array or object using &quot;dot&quot; notation.
+
+### objectToArray (public)
+
+```php
+objectToArray(mixed $obj)
+```
+
+Convert an object to an associate array
 
 # MultiDocTwigEngine
 

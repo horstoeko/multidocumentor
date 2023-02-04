@@ -10,7 +10,6 @@
 namespace horstoeko\multidocumentor\Console;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Config\MultiDocConfigJsonLoader;
 use horstoeko\multidocumentor\Services\MultiDocCreatorService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,7 +35,10 @@ class MultiDocApplicationCreateCommand extends Command
         $this->setName('create');
         $this->setDescription('Generate the documentation');
         $this->setHelp('Generate the documentation');
-        $this->addOption('jsonconfig', 'j', InputOption::VALUE_REQUIRED, 'A JSON configuration file');
+        $this->addOption('include', 'i', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to include');
+        $this->addOption('exclude', 'x', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to exclude');
+        $this->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Directory where the docs should be generated');
+        $this->addOption('format', 'f', InputOption::VALUE_REQUIRED, 'The output format of documentation');
     }
 
     /**
@@ -44,14 +46,11 @@ class MultiDocApplicationCreateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->getOption("jsonconfig")) {
-            $output->writeln("You must specify a JSON configuration file");
-            return Command::FAILURE;
-        }
-
-        $configLoader = new MultiDocConfigJsonLoader();
-
-        $config = $configLoader->loadFromJsonFile($input->getOption("jsonconfig"))->getConfig();
+        $config = new MultiDocConfig();
+        $config->setIncludeDirectories((array)$input->getOption('include'));
+        $config->setExcludeDirectories((array)$input->getOption('exclude'));
+        $config->setOutputTo((string)$input->getOption('output'));
+        $config->setOutputFormat((string)$input->getOption('format'));
 
         $creatorService = new MultiDocCreatorService($config);
         $creatorService->render();

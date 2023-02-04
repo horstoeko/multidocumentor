@@ -131,4 +131,23 @@ class MultiDocTools
 
         return $target;
     }
+
+    /**
+     * Convert an object to an associate array
+     *
+     * @param [type] $obj
+     * @return void
+     */
+    public static function objectToArray($obj)
+    {
+        if (is_object($obj) || is_array($obj)) {
+            $ret = (array) $obj;
+            foreach ($ret as &$item) {
+                $item = self::objectToArray($item);
+            }
+            return $ret;
+        } else {
+            return $obj;
+        }
+    }
 }

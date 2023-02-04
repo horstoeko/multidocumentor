@@ -53,7 +53,8 @@ class MultiDocPdfFile extends Mpdf
             [
                 'tempDir' => sys_get_temp_dir() . '/mpdf',
                 'fontDir' => array_merge($defaultFontDirs, [$this->config->getFontsDirectory()]),
-                'fontdata' => $defaultFontData + []
+                'fontdata' => $defaultFontData + $this->config->getFontsSettings(),
+                'default_font' => $this->config->getFontDefault(),
             ]
         );
     }
