@@ -12,6 +12,10 @@ This package makes use of
   * [Twig Template Engine by Armin Ronacher and Fabien Potencier](https://twig.symfony.com/)
   * [ParseDown by Emanuil Rusev](https://github.com/erusev/parsedown)
   * [phpDocumentor ReflectionDocBlock by Mike van Riel and Jaap van Otterdijk](https://github.com/phpDocumentor/ReflectionDocBlock)
+  * [Laravel like standalone validation library by Muhammad Syifa](https://github.com/rakit/validation)
+  * [Symfony Console by Fabien Potencier](https://github.com/symfony/console)
+  * [Symfony Finder by Fabien Potencier](https://github.com/symfony/finder)
+  * [HTML-to-markdown conversion helper by Colin O'Dell and Nick Cernis](https://github.com/thephpleague/html-to-markdown)
 
 ## Installation
 

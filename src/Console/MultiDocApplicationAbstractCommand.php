@@ -66,8 +66,8 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     /**
      * Perform option validation
      *
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @return boolean
      */
     protected function validateOptions(InputInterface $input, OutputInterface $output): bool
@@ -86,8 +86,8 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     /**
      * Perform option validation. If validation fails all errormessages will we be shown
      *
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @return boolean
      */
     protected function validateOptionsWithMessage(InputInterface $input, OutputInterface $output): bool
@@ -109,15 +109,14 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     /**
      * Return the validated value of an option with name $name
      *
-     * @param string $name
-     * @param mixed $default
+     * @param  string $name
      * @return mixed
      */
-    protected function validatedOption(string $name, $default = null)
+    protected function validatedOption(string $name)
     {
         $validData = $this->validation->getValidData();
 
-        return $validData[$name] ?? $default;
+        return $validData[$name];
     }
 
     /**
@@ -135,8 +134,8 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     /**
      * Contains the business logic of the command
      *
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @return integer
      */
     abstract protected function handle(InputInterface $input, OutputInterface $output): int;

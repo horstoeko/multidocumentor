@@ -40,7 +40,7 @@ class MultiDocValidationArrayOption extends Rule implements ModifyValue
     /**
      * Check the $value is an array
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     public function check($value): bool

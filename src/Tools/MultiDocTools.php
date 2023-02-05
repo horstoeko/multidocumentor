@@ -135,7 +135,7 @@ class MultiDocTools
     /**
      * Convert an object to an associate array
      *
-     * @param [type] $obj
+     * @param  [type] $obj
      * @return void
      */
     public static function objectToArray($obj)

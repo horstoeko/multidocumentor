@@ -65,11 +65,11 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
     {
         $config = new MultiDocConfig();
 
-        $config->setIncludeDirectories($this->validatedOption('include', []));
-        $config->setExcludeDirectories($this->validatedOption('exclude', []));
-        $config->setOutputTo($this->validatedOption('output', './'));
-        $config->setOutputFormat($this->validatedOption('format', 'singlepd'));
-        $config->setFontDefault($this->validatedOption('fontdefault', ''));
+        $config->setIncludeDirectories($this->validatedOption('include'));
+        $config->setExcludeDirectories($this->validatedOption('exclude'));
+        $config->setOutputTo($this->validatedOption('output'));
+        $config->setOutputFormat($this->validatedOption('format'));
+        $config->setFontDefault($this->validatedOption('fontdefault'));
 
         foreach ($this->validatedOption("fontsettings") ?? [] as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);

@@ -41,7 +41,7 @@ class MultiDocValidationStringOption extends Rule implements ModifyValue
     /**
      * Check the $value is an array
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     public function check($value): bool
@@ -62,7 +62,7 @@ class MultiDocValidationStringOption extends Rule implements ModifyValue
     /**
      * Check $value is empty value
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return boolean
      */
     protected function isEmptyValue($value): bool
