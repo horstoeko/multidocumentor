@@ -10,12 +10,14 @@
 namespace horstoeko\multidocumentor\Renderer;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
-use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
+use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererMultipleHtml;
+use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererSingleHtml;
 use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererMultipleMarkDown;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
 use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown as MultiDocRendererMultipleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 
 /**
  * class which is a list of factory definitions for a renderer
@@ -176,6 +178,18 @@ class MultiDocRendererFactoryDefinitionList
                 "multiplemd",
                 "Renders multiple mwrkDown files for each class",
                 MultiDocRendererMultipleMarkDown::class
+            )
+        )->addRendererDefinition(
+            MultiDocRendererFactoryDefinition::make(
+                "singlehtml",
+                "Renders a single HTML files for all classes",
+                MultiDocRendererSingleHtml::class
+            )
+        )->addRendererDefinition(
+            MultiDocRendererFactoryDefinition::make(
+                "multiplehtml",
+                "Renders multiple HTML files for each class",
+                MultiDocRendererMultipleHtml::class
             )
         );
 

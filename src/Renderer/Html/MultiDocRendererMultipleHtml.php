@@ -7,18 +7,18 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\multidocumentor\Renderer\MarkDown;
+namespace horstoeko\multidocumentor\Renderer\Html;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
-use horstoeko\multidocumentor\Services\MultiDocMarkupMarkdownService;
+use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
 use phpDocumentor\Reflection\Php\Class_ as PhpDocumentorClass;
 use phpDocumentor\Reflection\Php\Interface_ as PhpDocumentorInterface;
 use phpDocumentor\Reflection\Php\Trait_ as PhpDocumentorTrait;
 
 /**
- * service class which renders the output documents as multiple HTML documents
+ * service class which renders the output as multiple HTML documents
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
@@ -26,7 +26,7 @@ use phpDocumentor\Reflection\Php\Trait_ as PhpDocumentorTrait;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
+class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
 {
     /**
      * The internal markup service
@@ -42,7 +42,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     {
         parent::__construct($config);
 
-        $this->markupService = new MultiDocMarkupMarkdownService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlService($this->config);
     }
 
     /**
@@ -63,7 +63,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
         }
 
         return $this;
-    }
+   }
 
     /**
      * Render a single markdown file
@@ -71,7 +71,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
      * @param  string $destinationFilename
      * @return MultiDocRendererInterface
      */
-    private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
+    private function renderSingleHtml(string $destinationFilename): MultiDocRendererInterface
     {
         file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
 
@@ -86,12 +86,12 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
      */
     private function renderClass(PhpDocumentorClass $class): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
+        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".html";
 
         $this->markupService->initializeService();
         $this->markupService->createFromClass($class);
 
-        $this->renderSingleMarkDown($destinationFilename);
+        $this->renderSingleHtml($destinationFilename);
 
         return $this;
     }
@@ -109,7 +109,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
         $this->markupService->initializeService();
         $this->markupService->createFromInterface($interface);
 
-        $this->renderSingleMarkDown($destinationFilename);
+        $this->renderSingleHtml($destinationFilename);
 
         return $this;
     }
@@ -127,7 +127,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);
 
-        $this->renderSingleMarkDown($destinationFilename);
+        $this->renderSingleHtml($destinationFilename);
 
         return $this;
     }
