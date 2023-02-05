@@ -10,11 +10,11 @@
 namespace horstoeko\multidocumentor\Console;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
 use horstoeko\multidocumentor\Services\MultiDocCreatorService;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class representing the MultiDoc Console Application "Create"-Commands
@@ -25,7 +25,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocApplicationCreateCommand extends Command
+class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractCommand
 {
     /**
      * @inheritDoc
@@ -39,22 +39,46 @@ class MultiDocApplicationCreateCommand extends Command
         $this->addOption('exclude', 'x', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to exclude');
         $this->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Directory where the docs should be generated');
         $this->addOption('format', 'f', InputOption::VALUE_REQUIRED, 'The output format of documentation');
+        $this->addOption('fontsettings', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Font settings');
+        $this->addOption('fontdefault', null, InputOption::VALUE_REQUIRED, 'Set the default font');
     }
 
     /**
      * @inheritDoc
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function getValidationOptions(): array
+    {
+        return [
+            "include" => "arrayoption|array",
+            "exckude" => "arrayoption|array",
+            "output" => "stringoption:./|required",
+            "format" => "stringoption:singlemd|required",
+            "fontsettings" => "arrayoption|array",
+            "fontdefault" => "stringoption:dejavusans",
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function handle(InputInterface $input, OutputInterface $output): int
     {
         $config = new MultiDocConfig();
-        $config->setIncludeDirectories((array)$input->getOption('include'));
-        $config->setExcludeDirectories((array)$input->getOption('exclude'));
-        $config->setOutputTo((string)$input->getOption('output'));
-        $config->setOutputFormat((string)$input->getOption('format'));
+
+        $config->setIncludeDirectories($this->validatedOption('include', []));
+        $config->setExcludeDirectories($this->validatedOption('exclude', []));
+        $config->setOutputTo($this->validatedOption('output', './'));
+        $config->setOutputFormat($this->validatedOption('format', 'singlepd'));
+        $config->setFontDefault($this->validatedOption('fontdefault', ''));
+
+        foreach ($this->validatedOption("fontsettings") ?? [] as $fontsetting) {
+            list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);
+            $config->addFontsSettings($fontName, $fontType, $fontFile);
+        }
 
         $creatorService = new MultiDocCreatorService($config);
         $creatorService->render();
 
-        return Command::SUCCESS;
+        return MultiDocApplicationAbstractCommand::SUCCESS;
     }
 }

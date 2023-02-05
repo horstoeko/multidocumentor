@@ -10,8 +10,8 @@
 namespace horstoeko\multidocumentor\Console;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
 use horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinitionList;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocApplicationListRenderers extends Command
+class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractCommand
 {
     /**
      * @inheritDoc
@@ -40,7 +40,7 @@ class MultiDocApplicationListRenderers extends Command
     /**
      * @inheritDoc
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function handle(InputInterface $input, OutputInterface $output): int
     {
         $config = new MultiDocConfig();
 
@@ -61,6 +61,6 @@ class MultiDocApplicationListRenderers extends Command
         $table->setStyle('box');
         $table->render();
 
-        return Command::SUCCESS;
+        return MultiDocApplicationAbstractCommand::SUCCESS;
     }
 }

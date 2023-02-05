@@ -326,6 +326,20 @@ class MultiDocConfig extends ConsoleApplication
     }
 
     /**
+     * Add a font config
+     *
+     * @param string $name
+     * @param string $type
+     * @param string $filename
+     * @return MultiDocConfig
+     */
+    public function addFontsSettings(string $name, string $type, string $filename): MultiDocConfig
+    {
+        $this->fontsSettings[$name][$type] = $filename;
+        return $this;
+    }
+
+    /**
      * Get the default font
      *
      * @return string

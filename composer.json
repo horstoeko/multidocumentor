@@ -1,7 +1,7 @@
 {
     "name": "horstoeko/multidocumentor",
-    "keywords": [],
-    "description": "A library",
+    "keywords": ["Documentation","Generator","PDF","MarkDown"],
+    "description": "A library for generating documentation in various formats",
     "homepage": "https://github.com/horstoeko/multidocumentor",
     "type": "package",
     "license": "MIT",
@@ -34,6 +34,7 @@
         "league/plates": "3.*",
         "mpdf/mpdf": "^8.0",
         "phpdocumentor/reflection": "~4.0",
+        "rakit/validation": "^1.4",
         "symfony/console": "^5|^6",
         "symfony/finder": "^5|^6",
         "twig/twig": "^3.0"
@@ -57,8 +58,8 @@
         "phpcbf12": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr12.xml -q ./src ./tests",
         "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --xdebug",
         "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle --xdebug",
-        "docmd": "./src/Console/MultiDocConsole create --include=./src --output=./doc --format=singlemd",
-        "docpdf": "./src/Console/MultiDocConsole create --include=./src --output=./doc --format=singlepdf",
+        "docmd": "./src/Console/MultiDocConsole create --include=./src/ --output=./doc --format=singlemd",
+        "docpdf": "./src/Console/MultiDocConsole create --include=./src/ --output=./doc --format=singlepdf --fontsettings=opensans,R,OpenSans-Light.ttf --fontsettings=opensans,I,OpenSans-Italic.ttf --fontsettings=opensans,B,OpenSans-Bold.ttf",
         "doc": [
             "@docmd",
             "@docpdf"
