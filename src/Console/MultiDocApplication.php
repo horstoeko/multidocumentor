@@ -9,9 +9,10 @@
 
 namespace horstoeko\multidocumentor\Console;
 
-use Symfony\Component\Console\Application as ConsoleApplication;
 use horstoeko\multidocumentor\Console\MultiDocApplicationCreateCommand;
+use horstoeko\multidocumentor\Console\MultiDocApplicationCreateMultipleCommand;
 use horstoeko\multidocumentor\Console\MultiDocApplicationListRenderers;
+use Symfony\Component\Console\Application as ConsoleApplication;
 
 /**
  * Class representing the MultiDoc Console Application
@@ -35,6 +36,7 @@ class MultiDocApplication extends ConsoleApplication
         parent::__construct($name, $version);
 
         $this->add(new MultiDocApplicationCreateCommand());
+        $this->add(new MultiDocApplicationCreateMultipleCommand());
         $this->add(new MultiDocApplicationListRenderers());
     }
 }

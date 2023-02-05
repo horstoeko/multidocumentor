@@ -50,7 +50,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
     {
         return [
             "include" => "arrayoption|array",
-            "exckude" => "arrayoption|array",
+            "exclude" => "arrayoption|array",
             "output" => "stringoption:./|required",
             "format" => "stringoption:singlemd|required",
             "fontsettings" => "arrayoption|array",
