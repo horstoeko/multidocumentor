@@ -1,5 +1,7 @@
 body {
     font-family: opensans;
+    padding: 10pt;
+    padding-top: 0pt;
 }
 
 a {

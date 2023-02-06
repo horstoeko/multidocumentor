@@ -44,32 +44,30 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
     }
 
     /**
-     * Create inline fonts by font definition
+     * Create inline fonts by font definition as an array evaluatable in twig template
      *
-     * @return string
+     * @return array
      */
-    private function createInlineFonts(): string
+    private function createInlineFonts(): array
     {
-        $inlineFonts = "";
+        $inlineFonts = [];
 
         foreach ($this->config->getFontsSettings() as $fontFamily => $fontsetting) {
             foreach ($fontsetting as $fontStyle => $fontFilename) {
-                $fontfilename = $this->config->getFontsDirectory() . DIRECTORY_SEPARATOR . $fontFilename;
+                $fullQualifiedFontFilename = $this->config->getFontsDirectory() . DIRECTORY_SEPARATOR . $fontFilename;
 
-                if (!is_file($fontfilename)) {
+                if (!is_file($fullQualifiedFontFilename)) {
                     continue;
                 }
 
-                $fontWeight = $fontStyle == "B" ? "bold" : "normal";
-                $fontStyle = $fontStyle == "I" ? "italic" : "normal";
-
-                $inlineFonts .= sprintf(
-                    "@font-face {font-family: '%s'; font-style: %s; font-weight: %s; src: url(data:font/ttf;charset=utf-8;base64,%s)}\n",
-                    $fontFamily,
-                    $fontStyle,
-                    $fontWeight,
-                    \base64_encode(file_get_contents($fontfilename))
-                );
+                $inlineFonts[] = [
+                    "definedfontstyle" => $fontStyle,
+                    "fontfilename" => $fontFilename,
+                    "fontfamily" => $fontFamily,
+                    "fontweight" => $fontStyle == "B" ? "bold" : "normal",
+                    "fontstyle" => $fontStyle == "I" ? "italic" : "normal",
+                    "fontbase64content" => \base64_encode(file_get_contents($fullQualifiedFontFilename)),
+                ];
             }
         }
 

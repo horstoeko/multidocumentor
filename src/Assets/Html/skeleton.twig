@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <title>Documentation</title>
         <style>
-            {{inlinefonts|raw}}
+            {% for inlinefont in inlinefonts %}
+                /* {{inlinefont.fontfilename}} */
+                @font-face {font-family: '{{inlinefont.fontfamily}}'; font-style: {{inlinefont.fontstyle}}; font-weight: {{inlinefont.fontweight}}; src: url(data:font/ttf;charset=utf-8;base64,{{inlinefont.fontbase64content}})}
+            {% endfor %}
             {{inlinecss|raw}}
         </style>
     </head>
