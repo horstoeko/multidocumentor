@@ -34,7 +34,7 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
      */
     protected function configure()
     {
-        $this->setName('createmultiple');
+        $this->setName('multidoc:createmultiple');
         $this->setDescription('Generate the documentation in multiple formats');
         $this->setHelp('Generate the documentation in multiple formats');
         $this->addOption('include', 'i', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to include');

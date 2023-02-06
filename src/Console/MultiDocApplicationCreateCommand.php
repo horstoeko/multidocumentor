@@ -32,7 +32,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
      */
     protected function configure()
     {
-        $this->setName('create');
+        $this->setName('multidoc:create');
         $this->setDescription('Generate the documentation');
         $this->setHelp('Generate the documentation');
         $this->addOption('include', 'i', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Directory to include');

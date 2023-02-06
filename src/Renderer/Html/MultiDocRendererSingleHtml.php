@@ -11,6 +11,7 @@ namespace horstoeko\multidocumentor\Renderer\Html;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Renderer\Html\MultiDocWrapIntoHtmlSkeletonTrait;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
 
@@ -25,6 +26,8 @@ use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
  */
 class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
 {
+    use MultiDocWrapIntoHtmlSkeletonTrait;
+
     /**
      * The internal markup service
      *
@@ -65,7 +68,7 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
 
         $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.html";
 
-        file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
+        file_put_contents($destinationFilename, $this->wrapIntoHtmlSkeleton($this->markupService->getMarkupOutput()));
 
         return $this;
     }
