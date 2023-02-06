@@ -35,6 +35,13 @@ interface MultiDocMarkupServiceInterface
     public function getMarkupTemplateDirectory(): string;
 
     /**
+     * Trigger which called before the getMarkupOutput method is run
+     *
+     * @return MultiDocMarkupServiceInterface
+     */
+    public function beforeGetMarkupOutput(): MultiDocMarkupServiceInterface;
+
+    /**
      * Return the created markup
      *
      * @return string

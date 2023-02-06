@@ -11,9 +11,8 @@ namespace horstoeko\multidocumentor\Renderer\Html;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Renderer\Html\MultiDocWrapIntoHtmlSkeletonTrait;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
-use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
+use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlSkeletonService;
 use phpDocumentor\Reflection\Php\Class_ as PhpDocumentorClass;
 use phpDocumentor\Reflection\Php\Interface_ as PhpDocumentorInterface;
 use phpDocumentor\Reflection\Php\Trait_ as PhpDocumentorTrait;
@@ -29,8 +28,6 @@ use phpDocumentor\Reflection\Php\Trait_ as PhpDocumentorTrait;
  */
 class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
 {
-    use MultiDocWrapIntoHtmlSkeletonTrait;
-
     /**
      * The internal markup service
      *
@@ -45,7 +42,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     {
         parent::__construct($config);
 
-        $this->markupService = new MultiDocMarkupHtmlService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlSkeletonService($this->config);
     }
 
     /**
@@ -86,7 +83,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderSingleHtml(string $destinationFilename): MultiDocRendererInterface
     {
-        file_put_contents($destinationFilename,  $this->wrapIntoHtmlSkeleton($this->markupService->getMarkupOutput()));
+        file_put_contents($destinationFilename,  $this->markupService->getMarkupOutput());
 
         return $this;
     }

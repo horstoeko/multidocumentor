@@ -7,10 +7,14 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\multidocumentor\Renderer\Html;
+namespace horstoeko\multidocumentor\Services;
+
+use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
+use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 
 /**
- * Trait for wrapping a rendererd HTML into a HTNL skeleton
+ * Service class which renders the markup in plain HTML format wrapped into
+ * a HTML skeleton
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
@@ -18,8 +22,26 @@ namespace horstoeko\multidocumentor\Renderer\Html;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-trait MultiDocWrapIntoHtmlSkeletonTrait
+class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
 {
+    /**
+     * @inheritDoc
+     *
+     * @return MultiDocMarkupServiceInterface
+     */
+    public function beforeGetMarkupOutput(): MultiDocMarkupServiceInterface
+    {
+        $this->markup = $this->render(
+            "skeleton.twig",
+            [
+                "inlinefonts" => $this->createInlineFonts(),
+                "inlinecss" => $this->createInlineCss(),
+                "content" => $this->markup,
+            ]);
+
+        return $this;
+    }
+
     /**
      * Create inline fonts by font definition
      *
@@ -61,47 +83,5 @@ trait MultiDocWrapIntoHtmlSkeletonTrait
     private function createInlineCss(): string
     {
         return file_get_contents($this->config->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
-    }
-
-    /**
-     * Create the HTML skeleton
-     *
-     * @return string
-     */
-    private function createHtmlSkeleton(): string
-    {
-        $skeleton = <<<SKELETON
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <title>Documentation</title>
-            <style>
-              {{inlinefonts}}
-              {{inlinecss}}
-            </style>
-          </head>
-          <body>
-            {{content}}
-          </body>
-        </html>
-        SKELETON;
-
-        return $skeleton;
-    }
-
-    /**
-     * Wrap rendered HTML into the skeleton
-     *
-     * @param string $renderedHtml
-     * @return string
-     */
-    private function wrapIntoHtmlSkeleton(string $renderedHtml): string
-    {
-        return str_replace(
-            ["{{inlinefonts}}", "{{inlinecss}}", "{{content}}"],
-            [$this->createInlineFonts(), $this->createInlineCss(), $renderedHtml],
-            $this->createHtmlSkeleton()
-        );
     }
 }

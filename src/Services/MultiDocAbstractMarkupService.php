@@ -43,7 +43,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      *
      * @var string
      */
-    private $markup;
+    protected $markup;
 
     /**
      * Constructur
@@ -74,8 +74,17 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
+    public function beforeGetMarkupOutput(): MultiDocMarkupServiceInterface
+    {
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getMarkupOutput(): string
     {
+        $this->beforeGetMarkupOutput();
         return $this->markup;
     }
 
