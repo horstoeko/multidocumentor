@@ -50,7 +50,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * @inheritDoc
      */
-    public function setLocalFiles(array $files): MultiDocRenderServiceInterface
+    public function setIncludedFiles(array $files): MultiDocRenderServiceInterface
     {
         $this->localFiles = $files;
         return $this;

@@ -26,7 +26,7 @@ interface MultiDocRenderServiceInterface
      * @param  \phpDocumentor\Reflection\File\LocalFile[] $files
      * @return MultiDocRenderServiceInterface
      */
-    public function setLocalFiles(array $files): MultiDocRenderServiceInterface;
+    public function setIncludedFiles(array $files): MultiDocRenderServiceInterface;
 
     /**
      * Render the documentation from files
