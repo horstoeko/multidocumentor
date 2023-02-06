@@ -94,6 +94,13 @@ class MultiDocConfig extends ConsoleApplication
     protected $fontDefault = "";
 
     /**
+     * List of custom renderers
+     *
+     * @var string[]
+     */
+    protected $customRenderers = [];
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -358,6 +365,40 @@ class MultiDocConfig extends ConsoleApplication
     public function setFontDefault(string $fontDefault): MultiDocConfig
     {
         $this->fontDefault = $fontDefault;
+        return $this;
+    }
+
+    /**
+     * Returns a list of all custom renderers
+     *
+     * @return string[]
+     */
+    public function getCustomRenderers(): array
+    {
+        return $this->customRenderers;
+    }
+
+    /**
+     * Set a list of custom renderers
+     *
+     * @param string[] $customRenderers
+     * @return MultiDocConfig
+     */
+    public function setCustomRenderer(array $customRenderers): MultiDocConfig
+    {
+        $this->customRenderers = $customRenderers;
+        return $this;
+    }
+
+    /**
+     * Add a custom renderer
+     *
+     * @param string $customRenderer
+     * @return MultiDocConfig
+     */
+    public function addCustomRenderer(string $customRenderer): MultiDocConfig
+    {
+        $this->customRenderers[] = $customRenderer;
         return $this;
     }
 }

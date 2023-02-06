@@ -55,6 +55,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "format" => "stringoption:singlemd|required",
             "fontsettings" => "arrayoption|array",
             "fontdefault" => "stringoption:dejavusans",
+            "renderers" => "arrayoption|array",
         ];
     }
 
