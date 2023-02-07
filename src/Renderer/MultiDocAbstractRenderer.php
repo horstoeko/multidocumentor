@@ -20,11 +20,6 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
  * @author   D. Erling <horstoeko@erling.com.de>
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
- *
- * @property string $shortName
- * @property string $description
- * @method string getShortName
- * @method string getDescription
  */
 abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
 {

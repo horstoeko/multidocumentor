@@ -30,7 +30,7 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('multidoc:renderers');
         $this->setDescription('List all registed renderers');

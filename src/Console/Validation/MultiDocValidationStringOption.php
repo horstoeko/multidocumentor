@@ -67,6 +67,6 @@ class MultiDocValidationStringOption extends Rule implements ModifyValue
      */
     protected function isEmptyValue($value): bool
     {
-        return false === (new Required)->check($value, []);
+        return false === (new Required)->check($value);
     }
 }

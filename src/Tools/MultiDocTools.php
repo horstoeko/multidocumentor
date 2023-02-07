@@ -38,8 +38,8 @@ class MultiDocTools
     /**
      * Determine if the given key exists in the provided array.
      *
-     * @param  \ArrayAccess|array $array
-     * @param  string|int         $key
+     * @param  array      $array
+     * @param  string|int $key
      * @return bool
      */
     public static function arrayKeyExists($array, $key)
@@ -136,8 +136,8 @@ class MultiDocTools
     /**
      * Convert an object to an associate array
      *
-     * @param  [type] $obj
-     * @return void
+     * @param  object $obj
+     * @return mixed
      */
     public static function objectToArray($obj)
     {
@@ -155,9 +155,9 @@ class MultiDocTools
     /**
      * Checks if a class implementes an interface
      *
-     * @param string $className
+     * @param  string $className
      * The class identified by it's class name
-     * @param string $interface
+     * @param  string $interface
      * The inteface
      * @return boolean
      */

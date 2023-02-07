@@ -381,7 +381,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Set a list of custom renderers
      *
-     * @param string[] $customRenderers
+     * @param  string[] $customRenderers
      * @return MultiDocConfig
      */
     public function setCustomRenderer(array $customRenderers): MultiDocConfig
@@ -393,7 +393,7 @@ class MultiDocConfig extends ConsoleApplication
     /**
      * Add a custom renderer
      *
-     * @param string $customRenderer
+     * @param  string $customRenderer
      * @return MultiDocConfig
      */
     public function addCustomRenderer(string $customRenderer): MultiDocConfig

@@ -145,7 +145,8 @@ class MultiDocRendererFactoryDefinitionList
      */
     private function initDefaultRenderers(): MultiDocRendererFactoryDefinitionList
     {
-        $this->addRendererDefinitions([
+        $this->addRendererDefinitions(
+            [
             MultiDocRendererSinglePdf::class,
             MultiDocRendererMultiplePdf::class,
             MultiDocRendererSingleMarkDownFromHtml::class,
@@ -154,7 +155,8 @@ class MultiDocRendererFactoryDefinitionList
             MultiDocRendererMultipleMarkDown::class,
             MultiDocRendererSingleHtml::class,
             MultiDocRendererMultipleHtml::class,
-        ]);
+            ]
+        );
 
         return $this;
     }
@@ -176,7 +178,7 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Add multiple definitions
      *
-     * @param array $classNames
+     * @param  array $classNames
      * @return MultiDocRendererFactoryDefinitionList
      */
     private function addRendererDefinitions(array $classNames): MultiDocRendererFactoryDefinitionList
@@ -191,7 +193,7 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Add a renderer definition to list
      *
-     * @param string $className
+     * @param  string $className
      * @return MultiDocRendererFactoryDefinitionList
      */
     private function addRendererDefinition(string $className): MultiDocRendererFactoryDefinitionList

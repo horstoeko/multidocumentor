@@ -30,7 +30,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('multidoc:create');
         $this->setDescription('Generate the documentation');

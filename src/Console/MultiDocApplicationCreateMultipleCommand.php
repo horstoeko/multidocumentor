@@ -32,7 +32,7 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('multidoc:createmultiple');
         $this->setDescription('Generate the documentation in multiple formats');
@@ -77,9 +77,9 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
     /**
      * Handle an output in a defined format
      *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param string $format
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
+     * @param  string          $format
      * @return integer
      */
     protected function handleFormat(InputInterface $input, OutputInterface $output, string $format): int
