@@ -46,6 +46,22 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
+    public static function getShortName(): string
+    {
+        return "multiplepdf";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDescription(): string
+    {
+        return "Renders multiple PDF (.pdf) files";
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function render(): MultiDocRendererInterface
     {
         foreach ($this->reflectedFiles as $file) {

@@ -11,6 +11,7 @@ namespace horstoeko\multidocumentor\Tools;
 
 use Closure;
 use ArrayAccess;
+use ReflectionClass;
 
 /**
  * Class representing a collection of tools
@@ -149,5 +150,19 @@ class MultiDocTools
         } else {
             return $obj;
         }
+    }
+
+    /**
+     * Checks if a class implementes an interface
+     *
+     * @param string $className
+     * The class identified by it's class name
+     * @param string $interface
+     * The inteface
+     * @return boolean
+     */
+    public static function classImplementsInterface(string $className, string $interface): bool
+    {
+        return (new ReflectionClass($className))->implementsInterface(MultiDocRendererInterface::class);
     }
 }

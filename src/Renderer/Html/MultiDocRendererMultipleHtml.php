@@ -48,6 +48,22 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
+    public static function getShortName(): string
+    {
+        return "multiplehtml";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDescription(): string
+    {
+        return "Renders multiple HTML files";
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function render(): MultiDocRendererInterface
     {
         foreach ($this->reflectedFiles as $file) {

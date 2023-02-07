@@ -53,6 +53,22 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
+    public static function getShortName(): string
+    {
+        return "multiplemdbyhtml";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDescription(): string
+    {
+        return "Renders multiple markdown (.md) files from a created HTML file";
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function render(): MultiDocRendererInterface
     {
         foreach ($this->reflectedFiles as $file) {

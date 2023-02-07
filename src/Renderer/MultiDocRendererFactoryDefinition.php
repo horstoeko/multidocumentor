@@ -9,6 +9,10 @@
 
 namespace horstoeko\multidocumentor\Renderer;
 
+use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Tools\MultiDocTools;
+
 /**
  * class which is a factory definition for a renderer
  *
@@ -21,20 +25,6 @@ namespace horstoeko\multidocumentor\Renderer;
 class MultiDocRendererFactoryDefinition
 {
     /**
-     * A short name for a renderer
-     *
-     * @var string
-     */
-    protected $name = "";
-
-    /**
-     * A longer introduction for a renderer
-     *
-     * @var string
-     */
-    protected $description = "";
-
-    /**
      * The classname of the renderer to use
      *
      * @var string
@@ -42,30 +32,38 @@ class MultiDocRendererFactoryDefinition
     protected $classname = "";
 
     /**
+     * The class instance
+     *
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface
+     */
+    protected $classInstance = null;
+
+    /**
      * Constructor
      *
-     * @param string $name
-     * @param string $description
+     * @param MultiDocConfig $config
      * @param string $classname
      */
-    public function __construct(string $name, string $description, string $classname)
+    public function __construct(MultiDocConfig $config, string $classname)
     {
-        $this->name = $name;
-        $this->description = $description;
+        if (MultiDocTools::classImplementsInterface($classname, MultiDocRendererInterface::class) === false) {
+            throw new \InvalidArgumentException(sprintf("%s does not implement %s", $classname, MultiDocRendererInterface::class));
+        }
+
         $this->classname = $classname;
+        $this->classInstance = new $classname($config);
     }
 
     /**
      * Create a new renderer definition
      *
-     * @param  string $name
-     * @param  string $description
-     * @param  string $classname
+     * @param MultiDocConfig $config
+     * @param string $classname
      * @return MultiDocRendererFactoryDefinition
      */
-    public static function make(string $name, string $description, string $classname): MultiDocRendererFactoryDefinition
+    public static function make(MultiDocConfig $config, string $classname): MultiDocRendererFactoryDefinition
     {
-        return new self($name, $description, $classname);
+        return new self($config, $classname);
     }
 
     /**
@@ -73,9 +71,9 @@ class MultiDocRendererFactoryDefinition
      *
      * @return string
      */
-    public function getName(): string
+    public function getShortName(): string
     {
-        return $this->name;
+        return $this->classname::getShortName();
     }
 
     /**
@@ -85,7 +83,7 @@ class MultiDocRendererFactoryDefinition
      */
     public function getDescription(): string
     {
-        return $this->description;
+        return $this->classname::getDescription();
     }
 
     /**
@@ -96,5 +94,15 @@ class MultiDocRendererFactoryDefinition
     public function getClassname(): string
     {
         return $this->classname;
+    }
+
+    /**
+     * Instanciate the class
+     *
+     * @return MultiDocRendererInterface
+     */
+    public function getClassInstance(): MultiDocRendererInterface
+    {
+        return $this->classInstance;
     }
 }

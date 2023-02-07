@@ -21,6 +21,20 @@ namespace horstoeko\multidocumentor\Interfaces;
 interface MultiDocRendererInterface
 {
     /**
+     * Get the shortname for this renderer
+     *
+     * @return string
+     */
+    public static function getShortName(): string;
+
+    /**
+     * Get a description for this renderer
+     *
+     * @return string
+     */
+    public static function getDescription(): string;
+
+    /**
      * Set the file to render
      *
      * @param  \phpDocumentor\Reflection\Php\File[] $files

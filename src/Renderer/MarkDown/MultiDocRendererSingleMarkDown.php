@@ -45,6 +45,22 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
+    public static function getShortName(): string
+    {
+        return "singlemd";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDescription(): string
+    {
+        return "Renders a single markdown (.md) file";
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function render(): MultiDocRendererInterface
     {
         $this->markupService->initializeService();

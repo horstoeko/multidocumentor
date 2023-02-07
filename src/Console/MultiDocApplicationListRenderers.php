@@ -52,7 +52,7 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
 
         $tableItems = array_map(
             function ($renderer) {
-                return ['', $renderer->getName(), $renderer->getDescription()];
+                return ['', $renderer->getShortName(), $renderer->getDescription()];
             },
             $renderers
         );

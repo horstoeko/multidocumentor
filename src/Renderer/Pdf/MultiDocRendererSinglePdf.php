@@ -43,6 +43,22 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
+    public static function getShortName(): string
+    {
+        return "singlepdf";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDescription(): string
+    {
+        return "Renders a a single PDF (.pdf) file";
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function render(): MultiDocRendererInterface
     {
         $pdf = new MultiDocPdfFile($this->config);
