@@ -43,7 +43,7 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getShortName(): string
+    public function getShortName(): string
     {
         return "singlepdf";
     }
@@ -51,7 +51,7 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getDescription(): string
+    public function getDescription(): string
     {
         return "Renders a a single PDF (.pdf) file";
     }

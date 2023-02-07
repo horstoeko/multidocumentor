@@ -46,7 +46,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getShortName(): string
+    public function getShortName(): string
     {
         return "multiplepdf";
     }
@@ -54,7 +54,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getDescription(): string
+    public function getDescription(): string
     {
         return "Renders multiple PDF (.pdf) files";
     }

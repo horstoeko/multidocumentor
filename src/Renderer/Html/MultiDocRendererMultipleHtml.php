@@ -48,7 +48,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getShortName(): string
+    public function getShortName(): string
     {
         return "multiplehtml";
     }
@@ -56,7 +56,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getDescription(): string
+    public function getDescription(): string
     {
         return "Renders multiple HTML files";
     }

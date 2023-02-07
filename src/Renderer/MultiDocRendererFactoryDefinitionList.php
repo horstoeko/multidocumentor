@@ -42,9 +42,9 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * A List of defined renderers
      *
-     * @var \horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinition[]
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface[]
      */
-    protected $rendererDefinitions = [];
+    protected $rendererInstances = [];
 
     /**
      * Constructor
@@ -64,18 +64,18 @@ class MultiDocRendererFactoryDefinitionList
      *
      * @param  integer $index
      * @param  boolean $raiseExceptionIfNotFound
-     * @return MultiDocRendererFactoryDefinition|null
+     * @return MultiDocRendererInterface|null
      */
-    public function findByIndex(int $index, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererFactoryDefinition
+    public function findByIndex(int $index, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererInterface
     {
-        if (!isset($this->rendererDefinitions[$index])) {
+        if (!isset($this->rendererInstances[$index])) {
             if ($raiseExceptionIfNotFound === true) {
                 throw new \Exception(sprintf('No renderer registered at index %s', $index));
             }
             return null;
         }
 
-        return $this->rendererDefinitions[$index];
+        return $this->rendererInstances[$index];
     }
 
     /**
@@ -83,27 +83,27 @@ class MultiDocRendererFactoryDefinitionList
      *
      * @param  string  $name
      * @param  boolean $raiseExceptionIfNotFound
-     * @return MultiDocRendererFactoryDefinition|null
+     * @return MultiDocRendererInterface|null
      */
-    public function findByName(string $name, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererFactoryDefinition
+    public function findByName(string $name, bool $raiseExceptionIfNotFound = true): ?MultiDocRendererInterface
     {
-        $rendererDefinitions = array_filter(
-            $this->rendererDefinitions,
-            function (MultiDocRendererFactoryDefinition $definition) use ($name) {
-                return strcasecmp($definition->getShortName(), $name) === 0;
+        $rendererInstances = array_filter(
+            $this->rendererInstances,
+            function (MultiDocRendererInterface $instance) use ($name) {
+                return strcasecmp($instance->getShortName(), $name) === 0;
             }
         );
 
-        $rendererDefinitionsFirst = reset($rendererDefinitions);
+        $rendererInstance = reset($rendererInstances);
 
-        if ($rendererDefinitionsFirst === false) {
+        if ($rendererInstance === false) {
             if ($raiseExceptionIfNotFound === true) {
                 throw new \Exception(sprintf('Cannot determine the renderer %s', $name));
             }
             return null;
         }
 
-        return $rendererDefinitionsFirst;
+        return $rendererInstance;
     }
 
     /**
@@ -131,11 +131,11 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Returns a list of all registered renderers
      *
-     * @return \horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinition[]
+     * @return MultiDocRendererInterface[]
      */
     public function getAllRegisteredRenderers(): array
     {
-        return $this->rendererDefinitions;
+        return $this->rendererInstances;
     }
 
     /**
@@ -146,21 +146,21 @@ class MultiDocRendererFactoryDefinitionList
     private function initDefaultRenderers(): MultiDocRendererFactoryDefinitionList
     {
         $this->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererSinglePdf::class)
+            MultiDocRendererSinglePdf::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererMultiplePdf::class)
+            MultiDocRendererMultiplePdf::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererSingleMarkDownFromHtml::class)
+            MultiDocRendererSingleMarkDownFromHtml::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererMultipleMarkDownFromHtml::class)
+            MultiDocRendererMultipleMarkDownFromHtml::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererSingleMarkDown::class)
+            MultiDocRendererSingleMarkDown::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererMultipleMarkDown::class)
+            MultiDocRendererMultipleMarkDown::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererSingleHtml::class)
+            MultiDocRendererSingleHtml::class
         )->addRendererDefinition(
-            MultiDocRendererFactoryDefinition::make($this->config, MultiDocRendererMultipleHtml::class)
+            MultiDocRendererMultipleHtml::class
         );
 
         return $this;
@@ -175,7 +175,7 @@ class MultiDocRendererFactoryDefinitionList
     {
         foreach ($this->config->getCustomRenderers() as $customRendererClassName) {
             if (MultiDocTools::classImplementsInterface($customRendererClassName, MultiDocRendererInterface::class) === true) {
-                $this->addRendererDefinition(MultiDocRendererFactoryDefinition::make($this->config, $customRendererClassName));
+                $this->addRendererDefinition($customRendererClassName);
             }
         }
 
@@ -185,12 +185,12 @@ class MultiDocRendererFactoryDefinitionList
     /**
      * Add a renderer definition to list
      *
-     * @param  MultiDocRendererFactoryDefinition $rendererDefinition
+     * @param string $className
      * @return MultiDocRendererFactoryDefinitionList
      */
-    private function addRendererDefinition(MultiDocRendererFactoryDefinition $rendererDefinition): MultiDocRendererFactoryDefinitionList
+    private function addRendererDefinition(string $className): MultiDocRendererFactoryDefinitionList
     {
-        $this->rendererDefinitions[] = $rendererDefinition;
+        $this->rendererInstances[] = new $className($this->config);
         return $this;
     }
 }

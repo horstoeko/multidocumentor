@@ -45,7 +45,7 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getShortName(): string
+    public function getShortName(): string
     {
         return "singlehtml";
     }
@@ -53,7 +53,7 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getDescription(): string
+    public function getDescription(): string
     {
         return "Renders a single HTML files";
     }

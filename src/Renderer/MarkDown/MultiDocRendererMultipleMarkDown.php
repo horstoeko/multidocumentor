@@ -48,7 +48,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getShortName(): string
+    public function getShortName(): string
     {
         return "multiplemd";
     }
@@ -56,7 +56,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public static function getDescription(): string
+    public function getDescription(): string
     {
         return "Renders multiple markdown (.md) files";
     }

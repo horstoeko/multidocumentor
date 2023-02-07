@@ -33,10 +33,8 @@ class MultiDocRendererFactory
     public static function createRenderer(MultiDocConfig $config): MultiDocRendererInterface
     {
         $rendererDefinitions = new MultiDocRendererFactoryDefinitionList($config);
-        $rendererDefinition = $rendererDefinitions->findByName($config->getOutputFormat());
+        $rendererInstance = $rendererDefinitions->findByName($config->getOutputFormat());
 
-        $classname = $rendererDefinition->getClassname();
-
-        return new $classname($config);
+        return $rendererInstance;
     }
 }

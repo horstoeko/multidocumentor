@@ -55,14 +55,14 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
      *
      * @return string
      */
-    abstract public static function getShortName(): string;
+    abstract public function getShortName(): string;
 
     /**
      * Get a description for this renderer
      *
      * @return string
      */
-    abstract public static function getDescription(): string;
+    abstract public function getDescription(): string;
 
     /**
      * @inheritDoc
@@ -77,37 +77,4 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
      * @inheritDoc
      */
     abstract public function render(): MultiDocRendererInterface;
-
-    /**
-     * Magic method for gettings properties
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function __get(string $name)
-    {
-        if (\strcasecmp($name, "shortName") === 0) {
-            return get_class($this)::getShortName();
-        }
-        if (\strcasecmp($name, "description") === 0) {
-            return get_class($this)::getDescription();
-        }
-    }
-
-    /**
-     * Magic methods for calling unknown method
-     *
-     * @param string $name
-     * @param array $arguments
-     * @return mixed
-     */
-    public function __call(string $name, array $arguments)
-    {
-        if (\strcasecmp($name, "getShortName") === 0) {
-            return get_class($this)::getShortName();
-        }
-        if (\strcasecmp($name, "getDescription") === 0) {
-            return get_class($this)::getDescription();
-        }
-    }
 }
