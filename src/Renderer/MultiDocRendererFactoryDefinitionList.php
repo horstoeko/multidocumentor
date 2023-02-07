@@ -9,17 +9,17 @@
 
 namespace horstoeko\multidocumentor\Renderer;
 
-use horstoeko\multidocumentor\Tools\MultiDocTools;
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
-use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererSingleHtml;
-use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
 use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererMultipleHtml;
-use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
+use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererSingleHtml;
 use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererMultipleMarkDown;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
 use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown as MultiDocRendererMultipleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
+use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
+use horstoeko\multidocumentor\Tools\MultiDocTools;
 
 /**
  * class which is a list of factory definitions for a renderer
@@ -145,23 +145,16 @@ class MultiDocRendererFactoryDefinitionList
      */
     private function initDefaultRenderers(): MultiDocRendererFactoryDefinitionList
     {
-        $this->addRendererDefinition(
-            MultiDocRendererSinglePdf::class
-        )->addRendererDefinition(
-            MultiDocRendererMultiplePdf::class
-        )->addRendererDefinition(
-            MultiDocRendererSingleMarkDownFromHtml::class
-        )->addRendererDefinition(
-            MultiDocRendererMultipleMarkDownFromHtml::class
-        )->addRendererDefinition(
-            MultiDocRendererSingleMarkDown::class
-        )->addRendererDefinition(
-            MultiDocRendererMultipleMarkDown::class
-        )->addRendererDefinition(
-            MultiDocRendererSingleHtml::class
-        )->addRendererDefinition(
-            MultiDocRendererMultipleHtml::class
-        );
+        $this->addRendererDefinitions([
+            MultiDocRendererSinglePdf::class,
+            MultiDocRendererMultiplePdf::class,
+            MultiDocRendererSingleMarkDownFromHtml::class,
+            MultiDocRendererMultipleMarkDownFromHtml::class,
+            MultiDocRendererSingleMarkDown::class,
+            MultiDocRendererMultipleMarkDown::class,
+            MultiDocRendererSingleHtml::class,
+            MultiDocRendererMultipleHtml::class,
+        ]);
 
         return $this;
     }
@@ -174,9 +167,22 @@ class MultiDocRendererFactoryDefinitionList
     private function initCustomRenderers(): MultiDocRendererFactoryDefinitionList
     {
         foreach ($this->config->getCustomRenderers() as $customRendererClassName) {
-            if (MultiDocTools::classImplementsInterface($customRendererClassName, MultiDocRendererInterface::class) === true) {
-                $this->addRendererDefinition($customRendererClassName);
-            }
+            $this->addRendererDefinition($customRendererClassName);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add multiple definitions
+     *
+     * @param array $classNames
+     * @return MultiDocRendererFactoryDefinitionList
+     */
+    private function addRendererDefinitions(array $classNames): MultiDocRendererFactoryDefinitionList
+    {
+        foreach ($classNames as $className) {
+            $this->addRendererDefinition($className);
         }
 
         return $this;
@@ -190,7 +196,12 @@ class MultiDocRendererFactoryDefinitionList
      */
     private function addRendererDefinition(string $className): MultiDocRendererFactoryDefinitionList
     {
+        if (MultiDocTools::classImplementsInterface($className, MultiDocRendererInterface::class) !== true) {
+            return $this;
+        }
+
         $this->rendererInstances[] = new $className($this->config);
+
         return $this;
     }
 }

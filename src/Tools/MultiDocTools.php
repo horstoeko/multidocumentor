@@ -163,6 +163,6 @@ class MultiDocTools
      */
     public static function classImplementsInterface(string $className, string $interface): bool
     {
-        return (new ReflectionClass($className))->implementsInterface(MultiDocRendererInterface::class);
+        return (new ReflectionClass($className))->implementsInterface($interface);
     }
 }
