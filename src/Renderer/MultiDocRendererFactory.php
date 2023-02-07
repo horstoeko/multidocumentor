@@ -11,7 +11,7 @@ namespace horstoeko\multidocumentor\Renderer;
 
 use horstoeko\multidocumentor\Config\MultiDocConfig;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinitionList;
+use horstoeko\multidocumentor\Renderer\MultiDocRendererClassList;
 
 /**
  * class which is a factory for a renderer
@@ -32,8 +32,9 @@ class MultiDocRendererFactory
      */
     public static function createRenderer(MultiDocConfig $config): MultiDocRendererInterface
     {
-        $rendererDefinitions = new MultiDocRendererFactoryDefinitionList($config);
-        $rendererInstance = $rendererDefinitions->findByName($config->getOutputFormat());
+        $rendererDefinitions = new MultiDocRendererClassList($config);
+        $rendererClass = $rendererDefinitions->findByName($config->getOutputFormat());
+        $rendererInstance = new $rendererClass($config);
 
         return $rendererInstance;
     }

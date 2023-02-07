@@ -50,14 +50,14 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
      *
      * @return string
      */
-    abstract public function getShortName(): string;
+    abstract public static function getShortName(): string;
 
     /**
      * Get a description for this renderer
      *
      * @return string
      */
-    abstract public function getDescription(): string;
+    abstract public static function getDescription(): string;
 
     /**
      * @inheritDoc

@@ -50,7 +50,7 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public function getShortName(): string
+    public static function getShortName(): string
     {
         return "singlemdbyhtml";
     }
@@ -58,7 +58,7 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
     /**
      * @inheritDoc
      */
-    public function getDescription(): string
+    public static function getDescription(): string
     {
         return "Renders a single markdown (.md) files from a created HTML file";
     }

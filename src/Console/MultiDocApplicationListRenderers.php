@@ -9,12 +9,13 @@
 
 namespace horstoeko\multidocumentor\Console;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
-use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
-use horstoeko\multidocumentor\Renderer\MultiDocRendererFactoryDefinitionList;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
+use horstoeko\multidocumentor\Config\MultiDocConfig;
 use Symfony\Component\Console\Output\OutputInterface;
+use horstoeko\multidocumentor\Renderer\MultiDocRendererClassList;
+use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
+use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
 
 /**
  * Class representing the MultiDoc Console Application "Create"-Commands
@@ -44,7 +45,7 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
     {
         $config = new MultiDocConfig();
 
-        $renderersDefinitionList = new MultiDocRendererFactoryDefinitionList($config);
+        $renderersDefinitionList = new MultiDocRendererClassList($config);
         $renderers = $renderersDefinitionList->getAllRegisteredRenderers();
 
         $table = new Table($output);
@@ -52,7 +53,7 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
 
         $tableItems = array_map(
             function ($renderer) {
-                return ['', $renderer->getShortName(), $renderer->getDescription()];
+                return ['', $renderer::getShortName(), $renderer::getDescription()];
             },
             $renderers
         );

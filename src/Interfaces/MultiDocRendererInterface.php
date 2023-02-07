@@ -25,14 +25,14 @@ interface MultiDocRendererInterface
      *
      * @return string
      */
-    public function getShortName(): string;
+    public static function getShortName(): string;
 
     /**
      * Get a description for this renderer
      *
      * @return string
      */
-    public function getDescription(): string;
+    public static function getDescription(): string;
 
     /**
      * Set the file to render
