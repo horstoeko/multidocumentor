@@ -35,7 +35,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * Files to handle
      *
-     * @param array<\phpDocumentor\Reflection\File\LocalFile> $includedFiles
+     * @param \phpDocumentor\Reflection\File\LocalFile[] $includedFiles
      */
     protected $includedFiles = [];
 

@@ -34,7 +34,10 @@ class MultiDocApplication extends ConsoleApplication
      */
     public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {
-        parent::__construct("MultiDoc Console Application", ComposerInstalledVersions::getVersion('horstoeko/multidocumentor'));
+        $name = $name == 'UNKNOWN' ? "MultiDoc Console Application" : $name;
+        $version = $version == 'UNKNOWN' ? ComposerInstalledVersions::getVersion('horstoeko/multidocumentor') : $version;
+
+        parent::__construct($name, $version);
 
         $this->add(new MultiDocApplicationCreateCommand());
         $this->add(new MultiDocApplicationCreateMultipleCommand());

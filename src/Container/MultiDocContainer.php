@@ -59,7 +59,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @method void setCustomRenderers(array $renderers)
  * @method void setEventDispatcher(\Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher)
  *
- * @method void addFontsSettings(string $type, string $type, string $filename)
+ * @method void addFontsSettings(string $fontName, string $fontType, string $fontFile)
  */
 class MultiDocContainer
 {
