@@ -74,6 +74,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $config->setOutputTo($this->validatedOption('output'));
         $config->setOutputFormat($this->validatedOption('format'));
         $config->setFontDefault($this->validatedOption('fontdefault'));
+        $config->setCustomRenderers($this->validatedOption('renderers'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);
