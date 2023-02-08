@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
@@ -26,20 +26,20 @@ use Mpdf\Mpdf;
 class MultiDocPdfFile extends Mpdf
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * Constructor
      *
-     * @param MultiDocConfig $config
+     * @param MultiDocContainer $container
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
 
         $defaultConfig = (new ConfigVariables())->getDefaults();
         $defaultFontDirs = $defaultConfig['fontDir'];
@@ -52,9 +52,9 @@ class MultiDocPdfFile extends Mpdf
         parent::__construct(
             [
                 'tempDir' => sys_get_temp_dir() . '/mpdf',
-                'fontDir' => array_merge($defaultFontDirs, [$this->config->getFontsDirectory()]),
-                'fontdata' => $defaultFontData + $this->config->getFontsSettings(),
-                'default_font' => $this->config->getFontDefault(),
+                'fontDir' => array_merge($defaultFontDirs, [$this->container->getFontsDirectory()]),
+                'fontdata' => $defaultFontData + $this->container->getFontsSettings(),
+                'default_font' => $this->container->getFontDefault(),
             ]
         );
     }

@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\Html;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlSkeletonService;
@@ -38,11 +38,11 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        parent::__construct($config);
+        parent::__construct($container);
 
-        $this->markupService = new MultiDocMarkupHtmlSkeletonService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlSkeletonService($this->container);
     }
 
     /**
@@ -88,7 +88,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     public function getCss(): string
     {
-        return file_get_contents($this->config->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
+        return file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
     }
 
     /**
@@ -112,7 +112,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderClass(PhpDocumentorClass $class): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".html";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".html";
 
         $this->markupService->initializeService();
         $this->markupService->createFromClass($class);
@@ -130,7 +130,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderInterface(PhpDocumentorInterface $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".html";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".html";
 
         $this->markupService->initializeService();
         $this->markupService->createFromInterface($interface);
@@ -148,7 +148,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderTrait(PhpDocumentorTrait $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".html";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".html";
 
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);

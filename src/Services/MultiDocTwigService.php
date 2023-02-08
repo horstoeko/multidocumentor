@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocTwigServiceInterface;
 use horstoeko\multidocumentor\Twig\MultiDocTwigEngine;
 
@@ -25,11 +25,11 @@ use horstoeko\multidocumentor\Twig\MultiDocTwigEngine;
 class MultiDocTwigService implements MultiDocTwigServiceInterface
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * The Twig engine
@@ -41,9 +41,9 @@ class MultiDocTwigService implements MultiDocTwigServiceInterface
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
         $this->twigEngine = new MultiDocTwigEngine();
     }
 

@@ -11,7 +11,7 @@ namespace horstoeko\multidocumentor\Console;
 
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use Symfony\Component\Console\Output\OutputInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocRendererClassList;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
@@ -43,9 +43,9 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
      */
     protected function handle(InputInterface $input, OutputInterface $output): int
     {
-        $config = new MultiDocConfig();
+        $container = new MultiDocContainer();
 
-        $renderersDefinitionList = new MultiDocRendererClassList($config);
+        $renderersDefinitionList = new MultiDocRendererClassList($container);
         $renderers = $renderersDefinitionList->getAllRegisteredRenderers();
 
         $table = new Table($output);

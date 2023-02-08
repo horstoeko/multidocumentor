@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocCreatorServiceInterface;
 use horstoeko\multidocumentor\Services\MultiDocFinderService;
 
@@ -25,11 +25,11 @@ use horstoeko\multidocumentor\Services\MultiDocFinderService;
 class MultiDocCreatorService implements MultiDocCreatorServiceInterface
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * Finder Service
@@ -48,14 +48,14 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
         ini_set("pcre.backtrack_limit", "5000000");
 
-        $this->config = $config;
+        $this->container = $container;
 
-        $this->finderService = new MultiDocFinderService($config);
-        $this->renderService = new MultiDocRenderService($config);
+        $this->finderService = new MultiDocFinderService($container);
+        $this->renderService = new MultiDocRenderService($container);
     }
 
     /**

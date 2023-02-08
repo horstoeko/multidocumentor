@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\MarkDownFromHtml;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
@@ -42,11 +42,11 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        parent::__construct($config);
+        parent::__construct($container);
 
-        $this->markupService = new MultiDocMarkupHtmlService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlService($this->container);
         $this->htmlConverter = new HtmlConverter();
     }
 
@@ -109,7 +109,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
      */
     private function renderClass(PhpDocumentorClass $class): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
 
         $this->markupService->initializeService();
         $this->markupService->createFromClass($class);
@@ -127,7 +127,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
      */
     private function renderInterface(PhpDocumentorInterface $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
 
         $this->markupService->initializeService();
         $this->markupService->createFromInterface($interface);
@@ -145,7 +145,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
      */
     private function renderTrait(PhpDocumentorTrait $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".md";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".md";
 
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);

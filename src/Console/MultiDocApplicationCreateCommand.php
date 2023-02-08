@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Console;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
 use horstoeko\multidocumentor\Services\MultiDocCreatorService;
 use Symfony\Component\Console\Input\InputInterface;
@@ -67,26 +67,26 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
      */
     protected function handle(InputInterface $input, OutputInterface $output): int
     {
-        $config = new MultiDocConfig();
+        $container = new MultiDocContainer();
 
-        $config->setIncludeDirectories($this->validatedOption('include'));
-        $config->setExcludeDirectories($this->validatedOption('exclude'));
-        $config->setOutputTo($this->validatedOption('output'));
-        $config->setOutputFormat($this->validatedOption('format'));
-        $config->setFontDefault($this->validatedOption('fontdefault'));
-        $config->setCustomRenderers($this->validatedOption('renderers'));
+        $container->setIncludeDirectories($this->validatedOption('include'));
+        $container->setExcludeDirectories($this->validatedOption('exclude'));
+        $container->setOutputTo($this->validatedOption('output'));
+        $container->setOutputFormat($this->validatedOption('format'));
+        $container->setFontDefault($this->validatedOption('fontdefault'));
+        $container->setCustomRenderers($this->validatedOption('renderers'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);
-            $config->addFontsSettings($fontName, $fontType, $fontFile);
+            $container->addFontsSettings($fontName, $fontType, $fontFile);
         }
 
         foreach ($this->validatedOption("options") as $option) {
             list($optionName, $optionValue) = explode(",", $option);
-            $config->$optionName = $optionValue;
+            $container->$optionName = $optionValue;
         }
 
-        $creatorService = new MultiDocCreatorService($config);
+        $creatorService = new MultiDocCreatorService($container);
         $creatorService->render();
 
         return MultiDocApplicationAbstractCommand::SUCCESS;

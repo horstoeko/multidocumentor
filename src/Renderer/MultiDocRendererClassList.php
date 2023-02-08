@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererMultipleHtml;
 use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererSingleHtml;
@@ -33,11 +33,11 @@ use horstoeko\multidocumentor\Tools\MultiDocTools;
 class MultiDocRendererClassList
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * A List of defined renderer classes
@@ -49,11 +49,11 @@ class MultiDocRendererClassList
     /**
      * Constructor
      *
-     * @param MultiDocConfig $config
+     * @param MultiDocContainer $container
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
 
         $this->initDefaultRenderers();
         $this->initCustomRenderers();
@@ -162,13 +162,13 @@ class MultiDocRendererClassList
     }
 
     /**
-     * Initialize custom renderers from config
+     * Initialize custom renderers from container
      *
      * @return MultiDocRendererClassList
      */
     private function initCustomRenderers(): MultiDocRendererClassList
     {
-        foreach ($this->config->getCustomRenderers() as $customRendererClassName) {
+        foreach ($this->container->getCustomRenderers() as $customRendererClassName) {
             $this->addRendererClass($customRendererClassName);
         }
 

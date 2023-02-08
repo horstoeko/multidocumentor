@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 
 /**
@@ -24,11 +24,11 @@ use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * Files to handle
@@ -40,9 +40,9 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
     }
 
     /**

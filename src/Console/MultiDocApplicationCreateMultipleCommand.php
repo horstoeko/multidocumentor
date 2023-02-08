@@ -12,7 +12,7 @@ namespace horstoeko\multidocumentor\Console;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use Symfony\Component\Console\Output\OutputInterface;
 use horstoeko\multidocumentor\Services\MultiDocCreatorService;
 use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;

@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
@@ -36,11 +36,11 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        parent::__construct($config);
+        parent::__construct($container);
 
-        $this->markupService = new MultiDocMarkupHtmlService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlService($this->container);
     }
 
     /**
@@ -87,9 +87,9 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
      */
     private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
-        $pdf = new MultiDocPdfFile($this->config);
+        $pdf = new MultiDocPdfFile($this->container);
         $pdf->WriteHTML(
-            file_get_contents($this->config->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
+            file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
         $pdf->WriteHTML($this->markupService->getMarkupOutput());
@@ -106,7 +106,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
      */
     private function renderClass(PhpDocumentorClass $class): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
 
         $this->markupService->initializeService();
         $this->markupService->createFromClass($class);
@@ -124,7 +124,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
      */
     private function renderInterface(PhpDocumentorInterface $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
 
         $this->markupService->initializeService();
         $this->markupService->createFromInterface($interface);
@@ -142,7 +142,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
      */
     private function renderTrait(PhpDocumentorTrait $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
 
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);

@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRenderServiceInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocRendererFactory;
 use phpDocumentor\Reflection\Php\ProjectFactory;
@@ -26,11 +26,11 @@ use phpDocumentor\Reflection\Php\ProjectFactory;
 class MultiDocRenderService implements MultiDocRenderServiceInterface
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * Files to handle
@@ -42,9 +42,9 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
     }
 
     /**
@@ -68,7 +68,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
          */
         $project = $projectFactory->create('Project to document', $this->includedFiles);
 
-        $renderer = MultiDocRendererFactory::createRenderer($this->config);
+        $renderer = MultiDocRendererFactory::createRenderer($this->container);
         $renderer->setReflectedFiles($project->getFiles());
         $renderer->render();
 

@@ -52,9 +52,9 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
     {
         $inlineFonts = [];
 
-        foreach ($this->config->getFontsSettings() as $fontFamily => $fontsetting) {
+        foreach ($this->container->getFontsSettings() as $fontFamily => $fontsetting) {
             foreach ($fontsetting as $fontStyle => $fontFilename) {
-                $fullQualifiedFontFilename = $this->config->getFontsDirectory() . DIRECTORY_SEPARATOR . $fontFilename;
+                $fullQualifiedFontFilename = $this->container->getFontsDirectory() . DIRECTORY_SEPARATOR . $fontFilename;
 
                 if (!is_file($fullQualifiedFontFilename)) {
                     continue;
@@ -81,6 +81,6 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
      */
     private function createInlineCss(): string
     {
-        return file_get_contents($this->config->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
+        return file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
     }
 }

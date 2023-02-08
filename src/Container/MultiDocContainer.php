@@ -7,20 +7,61 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\multidocumentor\Config;
+namespace horstoeko\multidocumentor\Container;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * Class representing the MultiDoc Configuration
+ * Class representing the MultiDoc Container
  *
  * @category MultiDocumentor
  * @package  MultiDocumentor
  * @author   D. Erling <horstoeko@erling.com.de>
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
+ *
+ * @property array $includeDirectories
+ * @property array $excludeDirectories
+ * @property string $outputTo
+ * @property string $outputFormat
+ * @property string $assetDirectory
+ * @property string $htmlDirectory
+ * @property string $markdownDirectory
+ * @property string $fontsDirectory
+ * @property array $fontsSettings
+ * @property string $fontDefault
+ * @property array $customRenderers
+ * @property \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+ *
+ * @method array getIncludeDirectories()
+ * @method array getExcludeDirectories()
+ * @method string getOutputTo()
+ * @method string getOutputFormat()
+ * @method string getAssetDirectory()
+ * @method string getHtmlDirectory()
+ * @method string getMarkdownDirectory()
+ * @method string getFontsDirectory()
+ * @method array getFontsSettings()
+ * @method string getFontDefault()
+ * @method array getCustomRenderers()
+ * @method \Symfony\Component\EventDispatcher\EventDispatcher getEventDispatcher()
+ *
+ * @method void setIncludeDirectories(array $includeDirectories)
+ * @method void setExcludeDirectories(array $excludeDirectories)
+ * @method void setOutputTo(string $outputTo)
+ * @method void setOutputFormat(string $outputFormat)
+ * @method void setAssetDirectory(string $assetDirectory)
+ * @method void setHtmlDirectory(string $htmlDirectory)
+ * @method void setMarkdownDirectory(string $markdownDirectory)
+ * @method void setFontsDirectory(string $fontsDirectory)
+ * @method void setFontsSettings(array $fontSettings)
+ * @method void setFontDefault(string $fondDefault)
+ * @method void setCustomRenderers(array $renderers)
+ * @method void setEventDispatcher(\Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher)
+ *
+ * @method void addFontsSettings(string $type, string $type, string $filename)
  */
-class MultiDocConfig
+class MultiDocContainer
 {
     /**
      * The container that holds all settings
@@ -51,7 +92,7 @@ class MultiDocConfig
     /**
      * Magic getter
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)
@@ -62,8 +103,8 @@ class MultiDocConfig
     /**
      * Magic setter
      *
-     * @param string $name
-     * @param mixed $value
+     * @param  string $name
+     * @param  mixed  $value
      * @return void
      */
     public function __set($name, $value)
@@ -74,9 +115,9 @@ class MultiDocConfig
     /**
      * Magic call
      *
-     * @param string $name
-     * @param array $arguments
-     * @return void
+     * @param  string $name
+     * @param  array  $arguments
+     * @return mixed
      */
     public function __call(string $name, array $arguments)
     {

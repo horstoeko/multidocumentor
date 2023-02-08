@@ -28,7 +28,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function getMarkupTemplateDirectory(): string
     {
-        return $this->config->getHtmlDirectory();
+        return $this->container->getHtmlDirectory();
     }
 
     /**

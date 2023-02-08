@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\Html;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlSkeletonService;
@@ -35,11 +35,11 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        parent::__construct($config);
+        parent::__construct($container);
 
-        $this->markupService = new MultiDocMarkupHtmlSkeletonService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlSkeletonService($this->container);
     }
 
     /**
@@ -79,7 +79,7 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
             }
         }
 
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.html";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.html";
 
         file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
 

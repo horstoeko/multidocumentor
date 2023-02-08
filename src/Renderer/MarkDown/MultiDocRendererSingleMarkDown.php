@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\MarkDown;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Services\MultiDocMarkupMarkdownService;
@@ -35,11 +35,11 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        parent::__construct($config);
+        parent::__construct($container);
 
-        $this->markupService = new MultiDocMarkupMarkdownService($this->config);
+        $this->markupService = new MultiDocMarkupMarkdownService($this->container);
     }
 
     /**
@@ -79,7 +79,7 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
             }
         }
 
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.md";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.md";
 
         file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
 

@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Services\MultiDocTwigService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 
@@ -25,11 +25,11 @@ use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
 abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInterface
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * The HTML Engine
@@ -48,12 +48,12 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * Constructur
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
         $this->markup = "";
 
-        $this->twigService = new MultiDocTwigService($this->config);
+        $this->twigService = new MultiDocTwigService($this->container);
         $this->twigService->addTemplateDirectory($this->getMarkupTemplateDirectory());
     }
 
@@ -102,7 +102,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      */
     public function render(string $name, array $data = array()): string
     {
-        return $this->twigService->render($name, array_merge($data, ["_config" => $this->config]));
+        return $this->twigService->render($name, array_merge($data, ["_config" => $this->container, "_container" => $this->container]));
     }
 
     /**

@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocFinderServiceInterface;
 use phpDocumentor\Reflection\File\LocalFile;
 use Symfony\Component\Finder\Finder;
@@ -26,11 +26,11 @@ use Symfony\Component\Finder\Finder;
 class MultiDocFinderService implements MultiDocFinderServiceInterface
 {
     /**
-     * Configuration
+     * Container (Settings)
      *
-     * @var \horstoeko\multidocumentor\Config\MultiDocConfig
+     * @var \horstoeko\multidocumentor\Container\MultiDocContainer
      */
-    protected $config;
+    protected $container;
 
     /**
      * Internal finder component
@@ -42,9 +42,9 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        $this->config = $config;
+        $this->container = $container;
 
         $this->finder = new Finder();
         $this->finder->ignoreUnreadableDirs();
@@ -52,7 +52,7 @@ class MultiDocFinderService implements MultiDocFinderServiceInterface
         $this->finder->ignoreVCSIgnored(true);
         $this->finder->sortByName();
 
-        $this->finder->in($this->config->getIncludeDirectories())->exclude($this->config->getExcludeDirectories());
+        $this->finder->in($this->container->getIncludeDirectories())->exclude($this->container->getExcludeDirectories());
     }
 
     /**

@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Renderer\Pdf;
 
-use horstoeko\multidocumentor\Config\MultiDocConfig;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
 use horstoeko\multidocumentor\Renderer\MultiDocAbstractRenderer;
 use horstoeko\multidocumentor\Services\MultiDocMarkupHtmlService;
@@ -33,11 +33,11 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
     /**
      * Constructor
      */
-    public function __construct(MultiDocConfig $config)
+    public function __construct(MultiDocContainer $container)
     {
-        parent::__construct($config);
+        parent::__construct($container);
 
-        $this->markupService = new MultiDocMarkupHtmlService($this->config);
+        $this->markupService = new MultiDocMarkupHtmlService($this->container);
     }
 
     /**
@@ -61,10 +61,10 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
      */
     public function render(): MultiDocRendererInterface
     {
-        $pdf = new MultiDocPdfFile($this->config);
+        $pdf = new MultiDocPdfFile($this->container);
 
         $pdf->WriteHTML(
-            file_get_contents($this->config->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
+            file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
 
@@ -82,7 +82,7 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
             }
         }
 
-        $destinationFilename = rtrim($this->config->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
 
         $pdf->WriteHTML($this->markupService->getMarkupOutput());
         $pdf->Output($destinationFilename, 'F');
