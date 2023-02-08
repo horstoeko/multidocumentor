@@ -1,22 +1,23 @@
-<h2>Constants</h2>
-{% for constant in constants %}
-    {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
-        {% set summary = constant.getDocBlock().getSummary() %}
-    {% else %}
-        {% set summary = '' %}
-    {% endif %}
-    {% if constant.getDocBlock() != null and constant.getDocBlock().getDescription() != '' %}
-        {% set description = constant.getDocBlock().getDescription() %}
-    {% else %}
-        {% set description = '' %}
-    {% endif %}
-    {% set formattedConstantName = constant.getName() %}
+<div class="keeptogether">
+    <h2>Constants</h2>
+    {% for constant in constants %}
+        {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
+            {% set summary = constant.getDocBlock().getSummary() %}
+        {% else %}
+            {% set summary = '' %}
+        {% endif %}
+        {% if constant.getDocBlock() != null and constant.getDocBlock().getDescription() != '' %}
+            {% set description = constant.getDocBlock().getDescription() %}
+        {% else %}
+            {% set description = '' %}
+        {% endif %}
+        {% set formattedConstantName = constant.getName() %}
 
-<h3>{{ formattedConstantName }}</h3>
+        <h3>{{ formattedConstantName }}</h3>
 
-<pre>{{ formattedConstantName }}</pre>
+        <pre>{{ formattedConstantName }}</pre>
 
-{% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
-{% if description != "" %}{{ description|parsedown }}{% endif %}
-{% endfor %}
-
+        {% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
+        {% if description != "" %}{{ description|parsedown }}{% endif %}
+    {% endfor %}
+</div>

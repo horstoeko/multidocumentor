@@ -1,33 +1,35 @@
-<h2 class="underline">Summary</h2>
-{% if methods.public | length > 0 %}
-    <h3>Public methods</h3>
-    <ul>
-    {% for method in methods.public %}
-        <li>
-            {{ method }}()
-        </li>
-    {% endfor %}
-    </ul>
-{% endif %}
+<div class="keeptogether">
+    <h2 class="underline">Summary</h2>
+    {% if methods.public | length > 0 %}
+        <h3>Public methods</h3>
+        <ul>
+        {% for method in methods.public %}
+            <li>
+                {{ method }}()
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
-{% if methods.protected | length > 0 %}
-    <h3>Protected methods</h3>
-    <ul>
-    {% for method in methods.protected %}
-        <li>
-            {{ method }}()
-        </li>
-    {% endfor %}
-    </ul>
-{% endif %}
+    {% if methods.protected | length > 0 %}
+        <h3>Protected methods</h3>
+        <ul>
+        {% for method in methods.protected %}
+            <li>
+                {{ method }}()
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
-{% if methods.private | length > 0 %}
-    <h3>Private methods</h3>
-    <ul>
-    {% for method in methods.private %}
-        <li>
-            {{ method }}()
-        </li>
-    {% endfor %}
-    </ul>
-{% endif %}
+    {% if methods.private | length > 0 %}
+        <h3>Private methods</h3>
+        <ul>
+        {% for method in methods.private %}
+            <li>
+                {{ method }}()
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
