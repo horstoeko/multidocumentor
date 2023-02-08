@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Config;
 
-use Symfony\Component\Console\Application as ConsoleApplication;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class representing the MultiDoc Configuration
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Application as ConsoleApplication;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/multidocumentor
  */
-class MultiDocConfig extends ConsoleApplication
+class MultiDocConfig
 {
     /**
      * The container that holds all settings
@@ -45,6 +45,7 @@ class MultiDocConfig extends ConsoleApplication
         $this->fontsSettings = [];
         $this->fontDefault = "";
         $this->customRenderers = [];
+        $this->eventDispatcher = new EventDispatcher;
     }
 
     /**
