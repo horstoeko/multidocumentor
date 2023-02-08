@@ -41,6 +41,10 @@ h1.objectheader {
     page-break-before: always;
 }
 
+h1.objectheader:first-of-type {
+    page-break-before: avoid;
+}
+
 .underline {
     padding-bottom: 5px;
     border-bottom: 1px solid #e4e4e4;
