@@ -41,6 +41,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $this->addOption('format', 'f', InputOption::VALUE_REQUIRED, 'The output format of documentation');
         $this->addOption('fontsettings', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Font settings');
         $this->addOption('fontdefault', null, InputOption::VALUE_REQUIRED, 'Set the default font');
+        $this->addOption('renderers', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional renderers');
+        $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
     }
 
     /**
@@ -56,6 +58,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "fontsettings" => "arrayoption|array",
             "fontdefault" => "stringoption:dejavusans",
             "renderers" => "arrayoption|array",
+            "options" => "arrayoption|array",
         ];
     }
 
@@ -72,9 +75,14 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $config->setOutputFormat($this->validatedOption('format'));
         $config->setFontDefault($this->validatedOption('fontdefault'));
 
-        foreach ($this->validatedOption("fontsettings") ?? [] as $fontsetting) {
+        foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);
             $config->addFontsSettings($fontName, $fontType, $fontFile);
+        }
+
+        foreach ($this->validatedOption("options") as $option) {
+            list($optionName, $optionValue) = explode(",", $option);
+            $config->$optionName = $optionValue;
         }
 
         $creatorService = new MultiDocCreatorService($config);

@@ -43,6 +43,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
         $this->addOption('format', 'f', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The output format of documentation');
         $this->addOption('fontsettings', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Font settings');
         $this->addOption('fontdefault', null, InputOption::VALUE_REQUIRED, 'Set the default font');
+        $this->addOption('renderers', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional renderers');
+        $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
     }
 
     /**
@@ -57,6 +59,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             "format" => "arrayoption|array",
             "fontsettings" => "arrayoption|array",
             "fontdefault" => "stringoption:dejavusans",
+            "renderers" => "arrayoption|array",
+            "options" => "arrayoption|array",
         ];
     }
 
@@ -92,7 +96,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             '--output' => $this->validatedOption('output'),
             '--format' => $format,
             '--fontdefault' => $this->validatedOption('fontdefault'),
-            '--fontsettings' => $this->validatedOption('fontsettings'),
+            '--renderers' => $this->validatedOption('renderers'),
+            '--options' => $this->validatedOption('options'),
         ];
 
         $commandInput = new ArrayInput($arguments);
