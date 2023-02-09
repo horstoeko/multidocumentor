@@ -11,6 +11,8 @@ namespace horstoeko\multidocumentor\Events;
 
 use horstoeko\multidocumentor\Events\MultiDocEvent;
 use horstoeko\multidocumentor\Events\MultiDocLogEvent;
+use horstoeko\multidocumentor\Resources\MultiDocMessageCodes;
+use horstoeko\multidocumentor\Resources\MultiDocMessageTexts;
 use Symfony\Component\EventDispatcher\EventDispatcher as SymfonyEventDispatcher;
 
 /**
@@ -27,12 +29,12 @@ class MultiDocEventDispatcher extends SymfonyEventDispatcher
     /**
      * Dispatches a Log Event
      *
-     * @param  string $message
-     * @param  array  $additionalInformation
+     * @param string $messageCode
+     * @param array $parameters
      * @return MultiDocEvent
      */
-    public function dispatchLogEvent(string $message, array $additionalInformation = []): MultiDocEvent
+    public function dispatchLogEvent(string $messageCode, array $parameters = []): MultiDocEvent
     {
-        return $this->dispatch(new MultiDocLogEvent($message, $additionalInformation));
+        return $this->dispatch(new MultiDocLogEvent($messageCode, $parameters));
     }
 }

@@ -10,6 +10,7 @@
 namespace horstoeko\multidocumentor\Events;
 
 use horstoeko\multidocumentor\Events\MultiDocEvent;
+use horstoeko\multidocumentor\Resources\MultiDocMessageTexts;
 
 /**
  * Class representing a MultiDoc Log Event
@@ -23,11 +24,11 @@ use horstoeko\multidocumentor\Events\MultiDocEvent;
 class MultiDocLogEvent extends MultiDocEvent
 {
     /**
-     * Log message
+     * An (optional) internal code for the message event
      *
      * @var string
      */
-    protected $message = "";
+    protected $messageCode = "";
 
     /**
      * Additional information for this event
@@ -39,12 +40,12 @@ class MultiDocLogEvent extends MultiDocEvent
     /**
      * Constructor
      *
-     * @param string $message
-     * @param array  $parameters
+     * @param string $messageCode
+     * @param array $parameters
      */
-    public function __construct(string $message, ...$parameters)
+    public function __construct(string $messageCode = "", array $parameters = [])
     {
-        $this->message = $message;
+        $this->messageCode = $messageCode;
         $this->parameters = $parameters;
     }
 
@@ -55,7 +56,17 @@ class MultiDocLogEvent extends MultiDocEvent
      */
     public function getMessage(): string
     {
-        return vsprintf($this->message, $this->parameters);
+        return MultiDocMessageTexts::getText($this->messageCode, $this->parameters);
+    }
+
+    /**
+     * Get the internal (optional) message code
+     *
+     * @return string
+     */
+    public function getMessageCode(): string
+    {
+        return $this->messageCode;
     }
 
     /**
