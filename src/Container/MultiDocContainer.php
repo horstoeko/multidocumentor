@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Container;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
 
 /**
  * Class representing the MultiDoc Container
@@ -31,7 +31,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @property array $fontsSettings
  * @property string $fontDefault
  * @property array $customRenderers
- * @property \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+ * @property \horstoeko\multidocumentor\Events\MultiDocEventDispatcher $eventDispatcher
  *
  * @method array getIncludeDirectories()
  * @method array getExcludeDirectories()
@@ -44,7 +44,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @method array getFontsSettings()
  * @method string getFontDefault()
  * @method array getCustomRenderers()
- * @method \Symfony\Component\EventDispatcher\EventDispatcher getEventDispatcher()
+ * @method \horstoeko\multidocumentor\Events\MultiDocEventDispatcher getEventDispatcher()
  *
  * @method void setIncludeDirectories(array $includeDirectories)
  * @method void setExcludeDirectories(array $excludeDirectories)
@@ -57,7 +57,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @method void setFontsSettings(array $fontSettings)
  * @method void setFontDefault(string $fondDefault)
  * @method void setCustomRenderers(array $renderers)
- * @method void setEventDispatcher(\Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher)
+ * @method void setEventDispatcher(\horstoeko\multidocumentor\Events\MultiDocEventDispatcher $eventDispatcher)
  *
  * @method void addFontsSettings(string $fontName, string $fontType, string $fontFile)
  */
@@ -86,7 +86,7 @@ class MultiDocContainer
         $this->fontsSettings = [];
         $this->fontDefault = "";
         $this->customRenderers = [];
-        $this->eventDispatcher = new EventDispatcher;
+        $this->eventDispatcher = new MultiDocEventDispatcher;
     }
 
     /**

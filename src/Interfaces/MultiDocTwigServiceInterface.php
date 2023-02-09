@@ -9,6 +9,8 @@
 
 namespace horstoeko\multidocumentor\Interfaces;
 
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+
 /**
  * Interface for service class which will render the twig templates
  *
@@ -20,6 +22,11 @@ namespace horstoeko\multidocumentor\Interfaces;
  */
 interface MultiDocTwigServiceInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(MultiDocContainer $container);
+
     /**
      * Add a directory where to find the needed templates
      *

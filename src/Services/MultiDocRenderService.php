@@ -40,7 +40,7 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
     protected $includedFiles = [];
 
     /**
-     * Constructor
+     * @inheritDoc
      */
     public function __construct(MultiDocContainer $container)
     {

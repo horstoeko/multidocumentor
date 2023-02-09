@@ -9,13 +9,12 @@
 
 namespace horstoeko\multidocumentor\Console;
 
+use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+use horstoeko\multidocumentor\Renderer\MultiDocRendererClassList;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
-use horstoeko\multidocumentor\Container\MultiDocContainer;
 use Symfony\Component\Console\Output\OutputInterface;
-use horstoeko\multidocumentor\Renderer\MultiDocRendererClassList;
-use horstoeko\multidocumentor\Interfaces\MultiDocRendererInterface;
-use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
 
 /**
  * Class representing the MultiDoc Console Application "Create"-Commands

@@ -9,6 +9,8 @@
 
 namespace horstoeko\multidocumentor\Interfaces;
 
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+
 /**
  * Interface for a service class which will create the documentation
  *
@@ -20,6 +22,11 @@ namespace horstoeko\multidocumentor\Interfaces;
  */
 interface MultiDocCreatorServiceInterface
 {
+    /**
+     * Constructur
+     */
+    public function __construct(MultiDocContainer $container);
+
     /**
      * Starts the creation of the documentation
      *

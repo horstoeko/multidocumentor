@@ -9,6 +9,8 @@
 
 namespace horstoeko\multidocumentor\Interfaces;
 
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+
 /**
  * Interface for a service class which renders the markup
  *
@@ -20,6 +22,11 @@ namespace horstoeko\multidocumentor\Interfaces;
  */
 interface MultiDocMarkupServiceInterface
 {
+    /**
+     * Constructur
+     */
+    public function __construct(MultiDocContainer $container);
+
     /**
      * Initialize (e.g. the internal markup Content Container)
      *

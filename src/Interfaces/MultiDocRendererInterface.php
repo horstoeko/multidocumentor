@@ -9,6 +9,8 @@
 
 namespace horstoeko\multidocumentor\Interfaces;
 
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+
 /**
  * Interface for a service class which renders the output documents
  *
@@ -20,6 +22,13 @@ namespace horstoeko\multidocumentor\Interfaces;
  */
 interface MultiDocRendererInterface
 {
+    /**
+     * Constructor
+     *
+     * @param MultiDocContainer $container
+     */
+    public function __construct(MultiDocContainer $container);
+
     /**
      * Get the shortname for this renderer
      *

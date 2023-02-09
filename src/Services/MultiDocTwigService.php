@@ -39,7 +39,7 @@ class MultiDocTwigService implements MultiDocTwigServiceInterface
     protected $twigEngine;
 
     /**
-     * Constructor
+     * @inheritDoc
      */
     public function __construct(MultiDocContainer $container)
     {

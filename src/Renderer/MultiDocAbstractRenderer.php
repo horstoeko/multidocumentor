@@ -38,7 +38,7 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
     protected $reflectedFiles = [];
 
     /**
-     * Constructor
+     * @inheritDoc
      */
     public function __construct(MultiDocContainer $container)
     {
@@ -46,16 +46,12 @@ abstract class MultiDocAbstractRenderer implements MultiDocRendererInterface
     }
 
     /**
-     * Get the shortname for this renderer
-     *
-     * @return string
+     * @inheritDoc
      */
     abstract public static function getShortName(): string;
 
     /**
-     * Get a description for this renderer
-     *
-     * @return string
+     * @inheritDoc
      */
     abstract public static function getDescription(): string;
 

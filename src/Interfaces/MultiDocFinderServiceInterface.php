@@ -9,6 +9,8 @@
 
 namespace horstoeko\multidocumentor\Interfaces;
 
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+
 /**
  * Interface for a service class which will give us all files to handle
  *
@@ -20,6 +22,11 @@ namespace horstoeko\multidocumentor\Interfaces;
  */
 interface MultiDocFinderServiceInterface
 {
+    /**
+     * Constructur
+     */
+    public function __construct(MultiDocContainer $container);
+
     /**
      * Get all found files
      *

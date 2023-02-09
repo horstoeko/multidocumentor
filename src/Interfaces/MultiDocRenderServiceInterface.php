@@ -9,6 +9,8 @@
 
 namespace horstoeko\multidocumentor\Interfaces;
 
+use horstoeko\multidocumentor\Container\MultiDocContainer;
+
 /**
  * Interface for a service class which will render the documentation
  *
@@ -20,6 +22,11 @@ namespace horstoeko\multidocumentor\Interfaces;
  */
 interface MultiDocRenderServiceInterface
 {
+    /**
+     * Constructur
+     */
+    public function __construct(MultiDocContainer $container);
+
     /**
      * Set the files which are to handle
      *
