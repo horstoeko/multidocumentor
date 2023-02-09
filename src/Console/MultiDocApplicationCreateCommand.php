@@ -71,6 +71,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
     {
         $container = new MultiDocContainer();
 
+        $container->getEventDispatcher()->addSubscriber($this);
+
         $container->setIncludeDirectories($this->validatedOption('include'));
         $container->setExcludeDirectories($this->validatedOption('exclude'));
         $container->setOutputTo($this->validatedOption('output'));
@@ -110,7 +112,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
      * @param MultiDocLogEvent $logEvent
      * @return void
      */
-    public function onAfterInitApplication(MultiDocLogEvent $logEvent): void
+    public function onLogEvent(MultiDocLogEvent $logEvent): void
     {
         $this->outputInterface->writeln($logEvent->getMessage());
     }
