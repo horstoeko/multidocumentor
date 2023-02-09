@@ -142,7 +142,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
      */
     private function renderTrait(PhpDocumentorTrait $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".pdf";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Trait" . $interface->getName() . ".pdf";
 
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);

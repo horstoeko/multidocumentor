@@ -148,7 +148,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderTrait(PhpDocumentorTrait $interface): MultiDocRendererInterface
     {
-        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Traut" . $interface->getName() . ".html";
+        $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Trait" . $interface->getName() . ".html";
 
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);
