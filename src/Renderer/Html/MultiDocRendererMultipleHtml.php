@@ -99,7 +99,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderSingleHtml(string $destinationFilename): MultiDocRendererInterface
     {
-        file_put_contents($destinationFilename,  $this->markupService->getMarkupOutput());
+        file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
 
         return $this;
     }

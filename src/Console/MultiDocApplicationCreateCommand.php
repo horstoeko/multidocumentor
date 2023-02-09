@@ -109,7 +109,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
     /**
      * Logging Event subscriber
      *
-     * @param MultiDocLogEvent $logEvent
+     * @param  MultiDocLogEvent $logEvent
      * @return void
      */
     public function onLogEvent(MultiDocLogEvent $logEvent): void

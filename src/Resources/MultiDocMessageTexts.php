@@ -35,8 +35,8 @@ class MultiDocMessageTexts
     /**
      * Get text by code
      *
-     * @param string $code
-     * @param array $parameters
+     * @param  string $code
+     * @param  array  $parameters
      * @return string
      */
     public static function getText(string $code, array $parameters = []): string

@@ -41,7 +41,7 @@ class MultiDocLogEvent extends MultiDocEvent
      * Constructor
      *
      * @param string $messageCode
-     * @param array $parameters
+     * @param array  $parameters
      */
     public function __construct(string $messageCode = "", array $parameters = [])
     {
