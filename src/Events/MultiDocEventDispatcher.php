@@ -27,8 +27,8 @@ class MultiDocEventDispatcher extends SymfonyEventDispatcher
     /**
      * Dispatches a Log Event
      *
-     * @param string $message
-     * @param array $additionalInformation
+     * @param  string $message
+     * @param  array  $additionalInformation
      * @return MultiDocEvent
      */
     public function dispatchLogEvent(string $message, array $additionalInformation = []): MultiDocEvent

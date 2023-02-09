@@ -34,18 +34,18 @@ class MultiDocLogEvent extends MultiDocEvent
      *
      * @var array
      */
-    protected $additionalInformation = [];
+    protected $parameters = [];
 
     /**
      * Constructor
      *
      * @param string $message
-     * @param array $additionalInformation
+     * @param array  $parameters
      */
-    public function __construct(string $message, array $additionalInformation = [])
+    public function __construct(string $message, ...$parameters)
     {
         $this->message = $message;
-        $this->additionalInformation = $additionalInformation;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -55,7 +55,7 @@ class MultiDocLogEvent extends MultiDocEvent
      */
     public function getMessage(): string
     {
-        return $this->message;
+        return vsprintf($this->message, $this->parameters);
     }
 
     /**
@@ -65,6 +65,6 @@ class MultiDocLogEvent extends MultiDocEvent
      */
     public function getAdditionalInformation(): array
     {
-        return $this->additionalInformation;
+        return $this->parameters;
     }
 }

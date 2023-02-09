@@ -42,6 +42,20 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     protected $validation = null;
 
     /**
+     * The input interface
+     *
+     * @var \Symfony\Component\Console\Input\InputInterface
+     */
+    protected $inputInterface = null;
+
+    /**
+     * The output interface
+     *
+     * @var \Symfony\Component\Console\Output\OutputInterface
+     */
+    protected $outputInterface = null;
+
+    /**
      * @inheritDoc
      */
     public function __construct(string $name = null)
@@ -124,6 +138,9 @@ abstract class MultiDocApplicationAbstractCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->inputInterface = $input;
+        $this->outputInterface = $output;
+
         if ($this->validateOptionsWithMessage($input, $output) === false) {
             return Command::FAILURE;
         }
