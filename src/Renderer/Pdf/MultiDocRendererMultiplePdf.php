@@ -85,7 +85,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
      * @param  string $destinationFilename
      * @return MultiDocRendererInterface
      */
-    private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
+    private function renderSingleHtml(string $destinationFilename): MultiDocRendererInterface
     {
         $pdf = new MultiDocPdfFile($this->container);
         $pdf->WriteHTML(
@@ -111,7 +111,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
         $this->markupService->initializeService();
         $this->markupService->createFromClass($class);
 
-        $this->renderSingleMarkDown($destinationFilename);
+        $this->renderSingleHtml($destinationFilename);
 
         return $this;
     }
@@ -129,7 +129,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
         $this->markupService->initializeService();
         $this->markupService->createFromInterface($interface);
 
-        $this->renderSingleMarkDown($destinationFilename);
+        $this->renderSingleHtml($destinationFilename);
 
         return $this;
     }
@@ -147,7 +147,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
         $this->markupService->initializeService();
         $this->markupService->createFromTrait($interface);
 
-        $this->renderSingleMarkDown($destinationFilename);
+        $this->renderSingleHtml($destinationFilename);
 
         return $this;
     }
