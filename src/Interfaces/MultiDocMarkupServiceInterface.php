@@ -87,9 +87,10 @@ interface MultiDocMarkupServiceInterface
      * @param  string $name
      * @param  string $summary
      * @param  string $description
+     * @param  array  $tags
      * @return MultiDocMarkupServiceInterface
      */
-    public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface;
+    public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface;
 
     /**
      * Write a summary

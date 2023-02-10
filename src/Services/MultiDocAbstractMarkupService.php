@@ -117,7 +117,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    abstract public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface;
+    abstract public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc

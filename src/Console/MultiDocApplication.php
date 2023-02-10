@@ -9,11 +9,11 @@
 
 namespace horstoeko\multidocumentor\Console;
 
+use Composer\InstalledVersions as ComposerInstalledVersions;
 use horstoeko\multidocumentor\Console\MultiDocApplicationCreateCommand;
 use horstoeko\multidocumentor\Console\MultiDocApplicationCreateMultipleCommand;
 use horstoeko\multidocumentor\Console\MultiDocApplicationListRenderers;
 use Symfony\Component\Console\Application as ConsoleApplication;
-use Composer\InstalledVersions as ComposerInstalledVersions;
 
 /**
  * Class representing the MultiDoc Console Application
@@ -29,8 +29,8 @@ class MultiDocApplication extends ConsoleApplication
     /**
      * Constructor
      *
-     * @param string $name
-     * @param string $version
+     * @param string $name The Name of the application
+     * @param string $version The version of the application
      */
     public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {

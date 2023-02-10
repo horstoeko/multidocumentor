@@ -34,7 +34,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function writeHeader(string $name, string $summary, string $description): MultiDocMarkupServiceInterface
+    public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface
     {
         $this->renderAndAddToOutput(
             'header.twig',
@@ -42,6 +42,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
                 'name' => $name,
                 'summary' => $summary,
                 'description' => $description,
+                'tags' => $tags,
             ]
         );
 
@@ -126,8 +127,9 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     {
         $summary = $class->getDocBlock() !== null ? $class->getDocBlock()->getSummary() : '';
         $description = $class->getDocBlock() !== null ? $class->getDocBlock()->getDescription() : '';
+        $tags = $class->getDocBlock() !== null ? $class->getDocBlock()->getTags() : [];
 
-        $this->writeHeader($class->getName(), $summary, $description);
+        $this->writeHeader($class->getName(), $summary, $description, $tags);
         $this->writeSummary($class->getConstants(), $class->getProperties(), $class->getMethods());
         $this->writeConstants($class->getConstants());
         $this->writeProperties($class->getProperties());
@@ -143,8 +145,9 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     {
         $summary = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getSummary() : '';
         $description = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getDescription() : '';
+        $tags = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getTags() : [];
 
-        $this->writeHeader($interface->getName(), $summary, $description);
+        $this->writeHeader($interface->getName(), $summary, $description, $tags);
         $this->writeSummary($interface->getConstants(), array(), $interface->getMethods());
         $this->writeConstants($interface->getConstants());
         $this->writeMethods($interface->getMethods());
@@ -159,8 +162,9 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     {
         $summary = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getSummary() : '';
         $description = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getDescription() : '';
+        $tags = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getTags() : [];
 
-        $this->writeHeader($trait->getName(), $summary, $description);
+        $this->writeHeader($trait->getName(), $summary, $description, $tags);
         $this->writeSummary(array(), $trait->getProperties(), $trait->getMethods());
         $this->writeProperties($trait->getProperties());
         $this->writeMethods($trait->getMethods());
