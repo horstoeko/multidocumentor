@@ -78,5 +78,10 @@ _backup*
 /build/logs/
 /build/pdepend/
 /build/phpdox/
+/build/phpdoc/
 /*.phar
 /composer.lock
+/examples/fullpdf.pdf
+/examples/order-x.xml
+/examples/order-x.pdf
+myfile_dbg.xml
