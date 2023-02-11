@@ -61,16 +61,7 @@
         "phpcbfsq": "./vendor/bin/phpcbf --standard=./build/phpcsrules_squiz.xml -q ./src ./tests",
         "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --xdebug",
         "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle --xdebug",
-        "docmd": "./src/Console/MultiDocConsole create --include=./src/ --output=./doc --format=singlemd",
-        "docpdf": "./src/Console/MultiDocConsole create --include=./src/ --output=./doc --format=singlepdf --fontsettings=opensans,R,OpenSans-Light.ttf --fontsettings=opensans,I,OpenSans-Italic.ttf --fontsettings=opensans,B,OpenSans-Bold.ttf",
-        "doc": [
-            "@docmd",
-            "@docpdf"
-        ],
-        "all": [
-            "@testsreal",
-            "@phpstan"
-        ]
+        "makedoc": "phing -f ./build.xml projectdoc"
     },
     "bin": ["src/Console/MultiDocConsole"]
 }
