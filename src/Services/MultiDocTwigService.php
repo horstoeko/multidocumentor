@@ -71,8 +71,20 @@ class MultiDocTwigService implements MultiDocTwigServiceInterface
     /**
      * @inheritDoc
      */
-    public function render(string $name, array $data): string
+    public function templateExists(string $name): bool
     {
+        return $this->twigEngine->templateExists($name);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function renderTemplate(string $name, array $data): string
+    {
+        if (!$this->templateExists($name)) {
+            return "";
+        }
+
         return $this->twigEngine->render($name, $data);
     }
 }

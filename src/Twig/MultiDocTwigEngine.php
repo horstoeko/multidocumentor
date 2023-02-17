@@ -61,6 +61,17 @@ class MultiDocTwigEngine
     }
 
     /**
+     * Check if a template named with $name exists
+     *
+     * @param string $name
+     * @return boolean
+     */
+    public function templateExists(string $name): bool
+    {
+        return $this->twigLoader->exists($name);
+    }
+
+    /**
      * Render a template
      *
      * @param  string $name

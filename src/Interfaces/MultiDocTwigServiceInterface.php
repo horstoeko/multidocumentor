@@ -44,11 +44,19 @@ interface MultiDocTwigServiceInterface
     public function addTemplateDirectory(string $directory): MultiDocTwigServiceInterface;
 
     /**
-     * Render a twig remplate
+     * Returns true if template with $name exists, otherwise false
+     *
+     * @param string $name
+     * @return boolean
+     */
+    public function templateExists(string $name): bool;
+
+    /**
+     * Render a twig remplate defined by it's $name
      *
      * @param  string $name
      * @param  array  $data
      * @return string
      */
-    public function render(string $name, array $data): string;
+    public function renderTemplate(string $name, array $data): string;
 }

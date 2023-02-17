@@ -42,9 +42,17 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
+    public function writeIntroduction(): MultiDocMarkupServiceInterface
+    {
+        return $this->renderAndAddToOutput('introduction.twig', []);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface
     {
-        $this->renderAndAddToOutput(
+        return $this->renderAndAddToOutput(
             'header.twig',
             [
                 'name' => $name,
@@ -53,8 +61,6 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
                 'tags' => $tags,
             ]
         );
-
-        return $this;
     }
 
     /**
@@ -80,7 +86,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
             $allMethods[strval($method->getVisibility())][] = $method->getName();
         }
 
-        $this->renderAndAddToOutput(
+        return $this->renderAndAddToOutput(
             'summary.twig',
             [
                 'methods' => $allMethods,
@@ -88,8 +94,6 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
                 'constants' => $allConstants
             ]
         );
-
-        return $this;
     }
 
     /**
