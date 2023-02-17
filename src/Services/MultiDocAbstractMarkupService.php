@@ -54,6 +54,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
         $this->markup = "";
 
         $this->twigService = new MultiDocTwigService($this->container);
+        $this->twigService->addTemplateDirectories($this->getCustomMarkupTemplateDirectories());
         $this->twigService->addTemplateDirectory($this->getMarkupTemplateDirectory());
     }
 
@@ -70,6 +71,11 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      * @inheritDoc
      */
     abstract public function getMarkupTemplateDirectory(): string;
+
+    /**
+     * @inheritDoc
+     */
+    abstract public function getCustomMarkupTemplateDirectories(): array;
 
     /**
      * @inheritDoc

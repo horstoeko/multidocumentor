@@ -50,6 +50,18 @@ class MultiDocTwigService implements MultiDocTwigServiceInterface
     /**
      * @inheritDoc
      */
+    public function addTemplateDirectories(array $directories): MultiDocTwigServiceInterface
+    {
+        foreach ($directories as $directory) {
+            $this->addTemplateDirectory($directory);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function addTemplateDirectory(string $directory): MultiDocTwigServiceInterface
     {
         $this->twigEngine->addTemplateDirectory($directory);

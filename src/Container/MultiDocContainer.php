@@ -26,7 +26,9 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @property string $outputFormat
  * @property string $assetDirectory
  * @property string $htmlDirectory
+ * @property array $customHtmlDirectories
  * @property string $markdownDirectory
+ * @property array $customMarkdownDirectories
  * @property string $fontsDirectory
  * @property array $fontsSettings
  * @property string $fontDefault
@@ -39,7 +41,9 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method string getOutputFormat()
  * @method string getAssetDirectory()
  * @method string getHtmlDirectory()
+ * @method array getCustomHtmlDirectories()
  * @method string getMarkdownDirectory()
+ * @method array getCustomMarkdownDirectories()
  * @method string getFontsDirectory()
  * @method array getFontsSettings()
  * @method string getFontDefault()
@@ -52,7 +56,9 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method void setOutputFormat(string $outputFormat)
  * @method void setAssetDirectory(string $assetDirectory)
  * @method void setHtmlDirectory(string $htmlDirectory)
+ * @method void setCustomHtmlDirectories(array $htmlDirectories)
  * @method void setMarkdownDirectory(string $markdownDirectory)
+ * @method void setCustomMarkdownDirectories(array $markdownDirectories)
  * @method void setFontsDirectory(string $fontsDirectory)
  * @method void setFontsSettings(array $fontSettings)
  * @method void setFontDefault(string $fondDefault)
@@ -75,6 +81,16 @@ class MultiDocContainer
      */
     public function __construct()
     {
+        $this->initDefaults();
+    }
+
+    /**
+     * Initializes the default values
+     *
+     * @return void
+     */
+    private function initDefaults(): void
+    {
         $this->includeDirectories = [];
         $this->excludeDirectories = [];
         $this->outputTo = "";
@@ -86,6 +102,8 @@ class MultiDocContainer
         $this->fontsSettings = [];
         $this->fontDefault = "";
         $this->customRenderers = [];
+        $this->customHtmlDirectories = [];
+        $this->customMarkdownDirectories = [];
         $this->eventDispatcher = new MultiDocEventDispatcher;
     }
 
@@ -97,6 +115,8 @@ class MultiDocContainer
      */
     public function __get($name)
     {
+        $name = lcfirst($name);
+
         return (isset($this->container[$name])) ? $this->container[$name] : null;
     }
 
@@ -109,6 +129,8 @@ class MultiDocContainer
      */
     public function __set($name, $value)
     {
+        $name = lcfirst($name);
+
         $this->container[$name] = $value;
     }
 
@@ -135,7 +157,6 @@ class MultiDocContainer
             return;
         }
         if (strcasecmp(substr($name, 0, 3), "add") === 0 && count($arguments) > 0) {
-            $containerItemName = lcFirst(substr($name, 3));
             $this->container[$containerItemName] = isset($this->container[$containerItemName]) && is_array($this->container[$containerItemName]) ? $this->container[$containerItemName] : [];
             $this->container[$containerItemName][] = $arguments;
             return;

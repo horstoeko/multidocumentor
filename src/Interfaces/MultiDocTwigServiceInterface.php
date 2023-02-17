@@ -28,6 +28,14 @@ interface MultiDocTwigServiceInterface
     public function __construct(MultiDocContainer $container);
 
     /**
+     * Add multiple directories where to find the needed templates
+     *
+     * @param  string[] $directories
+     * @return MultiDocTwigServiceInterface
+     */
+    public function addTemplateDirectories(array $directories): MultiDocTwigServiceInterface;
+
+    /**
      * Add a directory where to find the needed templates
      *
      * @param  string $directory

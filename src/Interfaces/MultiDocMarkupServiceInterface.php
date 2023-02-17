@@ -42,6 +42,13 @@ interface MultiDocMarkupServiceInterface
     public function getMarkupTemplateDirectory(): string;
 
     /**
+     * Get the directory where all the user-defined markup template files are located
+     *
+     * @return array
+     */
+    public function getCustomMarkupTemplateDirectories(): array;
+
+    /**
      * Trigger which called before the getMarkupOutput method is run
      *
      * @return MultiDocMarkupServiceInterface

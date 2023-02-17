@@ -34,6 +34,14 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
+    public function getCustomMarkupTemplateDirectories(): array
+    {
+        return $this->container->getCustomHtmlDirectories();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface
     {
         $this->renderAndAddToOutput(
