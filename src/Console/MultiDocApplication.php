@@ -29,7 +29,7 @@ class MultiDocApplication extends ConsoleApplication
     /**
      * Constructor
      *
-     * @param string $name The Name of the application
+     * @param string $name    The Name of the application
      * @param string $version The version of the application
      */
     public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
