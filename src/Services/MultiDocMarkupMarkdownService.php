@@ -26,7 +26,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function getMarkupTemplateDirectory(): string
+    public function getDefaultTemplateDirectory(): string
     {
         return $this->container->getMarkdownDirectory();
     }
@@ -34,7 +34,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function getCustomMarkupTemplateDirectories(): array
+    public function getCustomTemplateDirectories(): array
     {
         return $this->container->getCustomMarkdownDirectories();
     }

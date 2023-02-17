@@ -63,7 +63,7 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
      */
     public function render(): MultiDocRendererInterface
     {
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->writeIntroduction();
 
         foreach ($this->reflectedFiles as $file) {
@@ -82,7 +82,7 @@ class MultiDocRendererSingleHtml extends MultiDocAbstractRenderer
 
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.html";
 
-        file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
+        file_put_contents($destinationFilename, $this->markupService->getOutput());
 
         return $this;
     }

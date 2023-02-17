@@ -29,7 +29,7 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
      *
      * @return MultiDocMarkupServiceInterface
      */
-    public function beforeGetMarkupOutput(): MultiDocMarkupServiceInterface
+    public function beforeGetOutput(): MultiDocMarkupServiceInterface
     {
         $this->markup = $this->render(
             "skeleton.twig",

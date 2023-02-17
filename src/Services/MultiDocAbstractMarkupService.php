@@ -54,33 +54,34 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
         $this->markup = "";
 
         $this->twigService = new MultiDocTwigService($this->container);
-        $this->twigService->addTemplateDirectories($this->getCustomMarkupTemplateDirectories());
-        $this->twigService->addTemplateDirectory($this->getMarkupTemplateDirectory());
+        $this->twigService->addTemplateDirectories($this->getCustomTemplateDirectories());
+        $this->twigService->addTemplateDirectory($this->getDefaultTemplateDirectory());
     }
 
     /**
      * @inheritDoc
      */
-    public function initializeService(): MultiDocMarkupServiceInterface
+    public function initialize(): MultiDocMarkupServiceInterface
     {
         $this->markup = "";
+
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    abstract public function getMarkupTemplateDirectory(): string;
+    abstract public function getDefaultTemplateDirectory(): string;
 
     /**
      * @inheritDoc
      */
-    abstract public function getCustomMarkupTemplateDirectories(): array;
+    abstract public function getCustomTemplateDirectories(): array;
 
     /**
      * @inheritDoc
      */
-    public function beforeGetMarkupOutput(): MultiDocMarkupServiceInterface
+    public function beforeGetOutput(): MultiDocMarkupServiceInterface
     {
         return $this;
     }
@@ -88,18 +89,20 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    public function getMarkupOutput(): string
+    public function getOutput(): string
     {
-        $this->beforeGetMarkupOutput();
+        $this->beforeGetOutput();
+
         return $this->markup;
     }
 
     /**
      * @inheritDoc
      */
-    public function addToMarkupOutput(string $add): MultiDocMarkupServiceInterface
+    public function addOutput(string $stringToAddToMarkup): MultiDocMarkupServiceInterface
     {
-        $this->markup .= $add;
+        $this->markup .= $stringToAddToMarkup;
+
         return $this;
     }
 
@@ -108,7 +111,16 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      */
     public function render(string $name, array $data = array()): string
     {
-        return $this->twigService->renderTemplate($name, array_merge($data, ["_config" => $this->container, "_container" => $this->container]));
+        return $this->twigService->renderTemplate(
+            $name,
+            array_merge(
+                $data,
+                [
+                    "_config" => $this->container,
+                    "_container" => $this->container,
+                ]
+            )
+        );
     }
 
     /**
@@ -116,9 +128,15 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      */
     public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface
     {
-        $this->addToMarkupOutput($this->render($name, $data));
+        $this->addOutput($this->render($name, $data));
+
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    abstract public function writeIntroduction(): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc

@@ -68,7 +68,7 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->writeIntroduction();
 
         foreach ($this->reflectedFiles as $reflectedFile) {
@@ -85,7 +85,7 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
 
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "doc.pdf";
 
-        $pdf->WriteHTML($this->markupService->getMarkupOutput());
+        $pdf->WriteHTML($this->markupService->getOutput());
         $pdf->Output($destinationFilename, 'F');
 
         return $this;

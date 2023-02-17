@@ -89,7 +89,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
      */
     private function renderSingleMarkDown(string $destinationFilename): MultiDocRendererInterface
     {
-        file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
+        file_put_contents($destinationFilename, $this->markupService->getOutput());
 
         return $this;
     }
@@ -104,7 +104,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".md";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromClass($class);
 
         $this->renderSingleMarkDown($destinationFilename);
@@ -122,7 +122,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".md";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromInterface($interface);
 
         $this->renderSingleMarkDown($destinationFilename);
@@ -140,7 +140,7 @@ class MultiDocRendererMultipleMarkDown extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Trait" . $interface->getName() . ".md";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromTrait($interface);
 
         $this->renderSingleMarkDown($destinationFilename);

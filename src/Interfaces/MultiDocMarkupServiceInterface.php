@@ -32,43 +32,43 @@ interface MultiDocMarkupServiceInterface
      *
      * @return MultiDocMarkupServiceInterface
      */
-    public function initializeService(): MultiDocMarkupServiceInterface;
+    public function initialize(): MultiDocMarkupServiceInterface;
 
     /**
      * Get the directory where all the markup template files are located
      *
      * @return string
      */
-    public function getMarkupTemplateDirectory(): string;
+    public function getDefaultTemplateDirectory(): string;
 
     /**
      * Get the directory where all the user-defined markup template files are located
      *
      * @return array
      */
-    public function getCustomMarkupTemplateDirectories(): array;
+    public function getCustomTemplateDirectories(): array;
 
     /**
      * Trigger which called before the getMarkupOutput method is run
      *
      * @return MultiDocMarkupServiceInterface
      */
-    public function beforeGetMarkupOutput(): MultiDocMarkupServiceInterface;
+    public function beforeGetOutput(): MultiDocMarkupServiceInterface;
 
     /**
      * Return the created markup
      *
      * @return string
      */
-    public function getMarkupOutput(): string;
+    public function getOutput(): string;
 
     /**
      * Add data to markup output
      *
-     * @param  string $add
+     * @param  string $stringToAddToMarkup
      * @return MultiDocMarkupServiceInterface
      */
-    public function addToMarkupOutput(string $add): MultiDocMarkupServiceInterface;
+    public function addOutput(string $stringToAddToMarkup): MultiDocMarkupServiceInterface;
 
     /**
      * Render a markup

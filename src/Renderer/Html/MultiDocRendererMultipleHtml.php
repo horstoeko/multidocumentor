@@ -99,7 +99,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     private function renderSingleHtml(string $destinationFilename): MultiDocRendererInterface
     {
-        file_put_contents($destinationFilename, $this->markupService->getMarkupOutput());
+        file_put_contents($destinationFilename, $this->markupService->getOutput());
 
         return $this;
     }
@@ -114,7 +114,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".html";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromClass($class);
 
         $this->renderSingleHtml($destinationFilename);
@@ -132,7 +132,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".html";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromInterface($interface);
 
         $this->renderSingleHtml($destinationFilename);
@@ -150,7 +150,7 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Trait" . $interface->getName() . ".html";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromTrait($interface);
 
         $this->renderSingleHtml($destinationFilename);

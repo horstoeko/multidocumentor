@@ -92,7 +92,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
             file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
-        $pdf->WriteHTML($this->markupService->getMarkupOutput());
+        $pdf->WriteHTML($this->markupService->getOutput());
         $pdf->Output($destinationFilename, 'F');
 
         return $this;
@@ -108,7 +108,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Class" . $class->getName() . ".pdf";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromClass($class);
 
         $this->renderSingleHtml($destinationFilename);
@@ -126,7 +126,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Interface" . $interface->getName() . ".pdf";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromInterface($interface);
 
         $this->renderSingleHtml($destinationFilename);
@@ -144,7 +144,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     {
         $destinationFilename = rtrim($this->container->getOutputTo(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "Trait" . $interface->getName() . ".pdf";
 
-        $this->markupService->initializeService();
+        $this->markupService->initialize();
         $this->markupService->createFromTrait($interface);
 
         $this->renderSingleHtml($destinationFilename);
