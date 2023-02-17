@@ -64,6 +64,7 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
     public function render(): MultiDocRendererInterface
     {
         $this->markupService->initializeService();
+        $this->markupService->writeIntroduction();
 
         foreach ($this->reflectedFiles as $file) {
             foreach ($file->getClasses() as $class) {

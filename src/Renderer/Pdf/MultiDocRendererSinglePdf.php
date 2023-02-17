@@ -69,6 +69,7 @@ class MultiDocRendererSinglePdf extends MultiDocAbstractRenderer
         );
 
         $this->markupService->initializeService();
+        $this->markupService->writeIntroduction();
 
         foreach ($this->reflectedFiles as $reflectedFile) {
             foreach ($reflectedFile->getClasses() as $class) {
