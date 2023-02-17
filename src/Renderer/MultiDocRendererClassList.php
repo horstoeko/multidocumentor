@@ -15,8 +15,6 @@ use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererMultipleHtml;
 use horstoeko\multidocumentor\Renderer\Html\MultiDocRendererSingleHtml;
 use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererMultipleMarkDown;
 use horstoeko\multidocumentor\Renderer\MarkDown\MultiDocRendererSingleMarkDown;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererMultipleMarkDown as MultiDocRendererMultipleMarkDownFromHtml;
-use horstoeko\multidocumentor\Renderer\MarkDownFromHtml\MultiDocRendererSingleMarkDown as MultiDocRendererSingleMarkDownFromHtml;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererMultiplePdf;
 use horstoeko\multidocumentor\Renderer\Pdf\MultiDocRendererSinglePdf;
 use horstoeko\multidocumentor\Tools\MultiDocTools;
@@ -149,8 +147,6 @@ class MultiDocRendererClassList
             [
                 MultiDocRendererSinglePdf::class,
                 MultiDocRendererMultiplePdf::class,
-                MultiDocRendererSingleMarkDownFromHtml::class,
-                MultiDocRendererMultipleMarkDownFromHtml::class,
                 MultiDocRendererSingleMarkDown::class,
                 MultiDocRendererMultipleMarkDown::class,
                 MultiDocRendererSingleHtml::class,
