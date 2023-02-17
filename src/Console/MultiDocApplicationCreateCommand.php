@@ -44,7 +44,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $this->addOption('fontsettings', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Font settings');
         $this->addOption('fontdefault', null, InputOption::VALUE_REQUIRED, 'Set the default font');
         $this->addOption('renderers', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional renderers');
-        $this->addOption('templates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional template directories');
+        $this->addOption('htmltemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional html templates directories');
+        $this->addOption('markdowntemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional markdown templates directories');
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
     }
 
@@ -61,7 +62,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "fontsettings" => "arrayoption|array",
             "fontdefault" => "stringoption:dejavusans",
             "renderers" => "arrayoption|array",
-            "templates" => "arrayoption|array",
+            "htmltemplates" => "arrayoption|array",
+            "markdowntemplates" => "arrayoption|array",
             "options" => "arrayoption|array",
         ];
     }
@@ -81,8 +83,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $container->setOutputFormat($this->validatedOption('format'));
         $container->setFontDefault($this->validatedOption('fontdefault'));
         $container->setCustomRenderers($this->validatedOption('renderers'));
-        $container->setCustomHtmlDirectories($this->validatedOption('templates'));
-        $container->setCustomMarkdownDirectories($this->validatedOption('templates'));
+        $container->setCustomHtmlDirectories($this->validatedOption('htmltemplates'));
+        $container->setCustomMarkdownDirectories($this->validatedOption('markdowntemplates'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);

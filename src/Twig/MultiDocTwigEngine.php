@@ -63,7 +63,7 @@ class MultiDocTwigEngine
     /**
      * Check if a template named with $name exists
      *
-     * @param string $name
+     * @param  string $name
      * @return boolean
      */
     public function templateExists(string $name): bool

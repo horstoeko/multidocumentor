@@ -46,7 +46,7 @@ interface MultiDocTwigServiceInterface
     /**
      * Returns true if template with $name exists, otherwise false
      *
-     * @param string $name
+     * @param  string $name
      * @return boolean
      */
     public function templateExists(string $name): bool;
