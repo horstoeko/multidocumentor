@@ -1,3 +1,8 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_constantts_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_constants_" %}
+
 <div class="keeptogether">
     <h2>Constants</h2>
     {% for constant in constants %}
@@ -13,11 +18,27 @@
         {% endif %}
         {% set formattedConstantName = constant.getName() %}
 
+        {# --- Title ------------------------------------------------------------------------------------------ #}
+
+        {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
+
         <h3>{{ formattedConstantName }}</h3>
 
         <pre>{{ formattedConstantName }}</pre>
 
+        {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+
+        {# --- Description ------------------------------------------------------------------------------------ #}
+
+        {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
+
         {% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
         {% if description != "" %}{{ description|parsedown }}{% endif %}
+
+        {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
     {% endfor %}
 </div>

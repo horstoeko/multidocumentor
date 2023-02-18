@@ -1,9 +1,14 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_methods_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_methods_" %}
+
 <div class="keeptogether">
     <h2 class="underline">Methods</h2>
     {% for method in methods %}
         {% set argumentNames = [] %}
         {% for argument in method.getArguments() %}
-            {% set argumentvar = argument.getType() ~ " $" ~ argument.getName() %}
+            {% set argumentvar = '<span class="keyword">' ~ argument.getType() ~ "</span> $" ~ argument.getName() %}
             {% if argument.getDefault() %}
                 {% set argumentvar = argumentvar ~ " = " ~ argument.getDefault() %}
             {% endif %}
@@ -28,19 +33,52 @@
         {% set formattedMethodVisibilty = method.getVisibility() %}
         {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
 
+        {# --- Title ------------------------------------------------------------------------------------------ #}
+
+        {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
+
         <h3>{{ formattedMethodName }} ({{ formattedMethodVisibilty }})</h3>
 
-        <pre>{{ formattedCode }}</pre>
+        <pre>{{ formattedCode|raw }}</pre>
+
+        {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+
+        {# --- Description ------------------------------------------------------------------------------------ #}
+
+        {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
 
         {% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
         {% if description != "" %}{{ description|parsedown }}{% endif %}
 
+        {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
+
+        {# --- Parameters ------------------------------------------------------------------------------------ #}
+
+        {% include thistmplnameprefix1 ~ "beforeparameters.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforeparameters.twig" ignore missing %}
+
         {% if method.getArguments()|length > 0%}
             <h4>Parameters</h4>
+            <table class="methodarguments">
+                <tr>
+                    <th class="argumentname">Name</th>
+                    <th class="argumentdef">Definition</th>
+                </tr>
             {% for argument in method.getArguments() %}
-                {{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}<br/>
+                <tr>
+                    <td class="argumentname">${{ argument.getName() }}</td>
+                    <td class="argumentdef">{{ argument.getType() }}{% if argument.getDefault() %}, Default {{ argument.getDefault() }}{% endif %}</td>
+                </tr>
             {% endfor %}
+            </table>
         {% endif %}
+
+        {% include thistmplnameprefix1 ~ "afterparameters.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afterparameters.twig" ignore missing %}
 
     {% endfor %}
 </div>

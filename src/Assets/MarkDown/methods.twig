@@ -1,3 +1,7 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_methods_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_methods_" %}
 ## Methods
 {% for method in methods %}
 {% set argumentNames = [] %}

@@ -17,15 +17,6 @@ pre {
     color: black;
 }
 
-table {
-    width: 100%;
-}
-
-th, tr {
-    text-align: left;
-    padding-left: 30px;
-}
-
 em {
     font-size: 0.8em;
 }
@@ -79,4 +70,34 @@ h1.tall {
 div.keeptogether {
     page-break-inside: avoid;
     break-inside: avoid;
+}
+
+table.methodarguments {
+    width: 100%;
+    font-size: .8rem;
+    padding: 0;
+    margin: 0;
+}
+
+table.methodarguments th, td {
+    text-align: left;
+    padding: 0;
+    table-layout: fixed;
+}
+
+table.methodarguments th.argumentname, td.argumentname {
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+}
+
+table.methodarguments th.argumentdef, td.argumentdef {
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+}
+
+span.keyword {
+    color: darkred;
+    font-weight: bold;
 }

@@ -1,3 +1,7 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_properties_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_properties_" %}
 ## Properties
 {% for property in properties %}
 {% if property.getDocBlock() != null and property.getDocBlock().getSummary() != '' %}

@@ -1,3 +1,7 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_constantts_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_constants_" %}
 ## Constants
 {% for constant in constants %}
 {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}

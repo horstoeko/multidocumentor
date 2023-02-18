@@ -1,7 +1,27 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_summary_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_summary_" %}
+
 <div class="keeptogether">
     <h2 class="underline">Summary</h2>
+
+    {# --- Namespace ------------------------------------------------------------------------------------------ #}
+
+    {% include thistmplnameprefix1 ~ "beforenamespace.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "beforenamespace.twig" ignore missing %}
+
     <h3>Namespace</h3>
-    <p>{{objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\')}}</p>
+    <p>{{ objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\') }}</p>
+
+    {% include thistmplnameprefix1 ~ "afternamespace.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "afternamespace.twig" ignore missing %}
+
+    {# --- Public Methods ------------------------------------------------------------------------------------- #}
+
+    {% include thistmplnameprefix1 ~ "beforepublicmethods.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "beforepublicmethods.twig" ignore missing %}
+
     {% if methods.public | length > 0 %}
         <h3>Public methods</h3>
         <ul>
@@ -12,6 +32,14 @@
         {% endfor %}
         </ul>
     {% endif %}
+
+    {% include thistmplnameprefix1 ~ "afterpublicmethods.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "afterpublicmethods.twig" ignore missing %}
+
+    {# --- Protected Methods ---------------------------------------------------------------------------------- #}
+
+    {% include thistmplnameprefix1 ~ "beforeprotectedmethods.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "beforeprotectedmethods.twig" ignore missing %}
 
     {% if methods.protected | length > 0 %}
         <h3>Protected methods</h3>
@@ -24,6 +52,14 @@
         </ul>
     {% endif %}
 
+    {% include thistmplnameprefix1 ~ "afterprotectedmethods.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "afterprotectedmethods.twig" ignore missing %}
+
+    {# --- Private Methods ------------------------------------------------------------------------------------ #}
+
+    {% include thistmplnameprefix1 ~ "beforeprivatemethods.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "beforeprivatemethods.twig" ignore missing %}
+
     {% if methods.private | length > 0 %}
         <h3>Private methods</h3>
         <ul>
@@ -34,4 +70,7 @@
         {% endfor %}
         </ul>
     {% endif %}
+
+    {% include thistmplnameprefix1 ~ "afterprivatemethods.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "afterprivatemethods.twig" ignore missing %}
 </div>

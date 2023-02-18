@@ -1,12 +1,16 @@
+{% set thisobjecttype = objecttype|split('\\')|last|replace({"_": ""})|lower %}
+{% set thisobjectname = objectname|replace({"_": ""})|lower %}
+{% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_header_" %}
+{% set thistmplnameprefix2 = thisobjecttype ~ "_header_" %}
+
+{# --- Title ------------------------------------------------------------------------------------------ #}
+
+{% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
+
 <h1 class="objectheader">{{ name }}</h1>
 {% if summary != "" %}<i>{{ summary }}</i>{% endif %}
 {% if description != "" %}<p>{{ description }}</p>{% endif %}
-{#{% for tag in tags %}
-{% if loop.first %}
-<ul>
-{% endif %}
-<li>{{tag}}</li>
-{% if loop.last %}
-</ul>
-{% endif %}
-{% endfor %}#}
+
+{% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
