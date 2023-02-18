@@ -12,6 +12,7 @@ namespace horstoeko\multidocumentor\Tools;
 use Closure;
 use ArrayAccess;
 use ReflectionClass;
+use horstoeko\multidocumentor\Tools\MultiDocHtmlBeautifier;
 
 /**
  * Class representing a collection of tools
@@ -164,5 +165,27 @@ class MultiDocTools
     public static function classImplementsInterface(string $className, string $interface): bool
     {
         return (new ReflectionClass($className))->implementsInterface($interface);
+    }
+
+    /**
+     * Beautifies a HTML string
+     *
+     * @param  string $html
+     * @return string
+     */
+    public static function beautifyHtml(string $html): string
+    {
+        $htmlBeautifier = new MultiDocHtmlBeautifier([
+            'indent_inner_html' => false,
+            'indent_char' => " ",
+            'indent_size' => 4,
+            'wrap_line_length' => 32786,
+            'unformatted' => ['code', 'pre'],
+            'preserve_newlines' => false,
+            'max_preserve_newlines' => 32786,
+            'indent_scripts' => 'normal',
+        ]);
+
+        return $htmlBeautifier->beautify($html);
     }
 }

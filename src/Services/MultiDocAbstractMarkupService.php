@@ -12,6 +12,7 @@ namespace horstoeko\multidocumentor\Services;
 use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Services\MultiDocTwigService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
+use horstoeko\multidocumentor\Tools\MultiDocTools;
 
 /**
  * Basic Service class which renders the markup
@@ -93,7 +94,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     {
         $this->beforeGetOutput();
 
-        return $this->markup;
+        return MultiDocTools::beautifyHtml($this->markup);
     }
 
     /**
