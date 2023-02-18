@@ -141,8 +141,7 @@ class MultiDocHtmlBeautifier
 
             $this->newlines = 0;
             while ($input_char && in_array($input_char, $this->whitespace)) {
-                if (
-                    $this->options['preserve_newlines']
+                if ($this->options['preserve_newlines']
                     && $input_char === "\n"
                     && $this->newlines <= $this->options['max_preserve_newlines']
                 ) {
@@ -357,15 +356,13 @@ class MultiDocHtmlBeautifier
         }
         $tag_check = strtolower(substr($tag_complete, $tag_offset, max($tag_index - $tag_offset, 0)));
 
-        if (
-            $tag_complete[strlen($tag_complete) - 2] === '/'
+        if ($tag_complete[strlen($tag_complete) - 2] === '/'
             || in_array($tag_check, $this->singleToken)
         ) { //if this tag name is a single tag type (either in the list or has a closing /)
             if (!$peek) {
                 $this->tagType = 'SINGLE';
             }
-        } else if (
-            $tag_check === 'script' /*&&
+        } else if ($tag_check === 'script' /*&&
             (strpos($tag_complete, 'type') === false ||
             (strpos($tag_complete, 'type') !== false &&
             preg_match('/\b(text|application)\/(x-)?(javascript|ecmascript|jscript|livescript)/', $tag_complete)))*/
@@ -374,8 +371,7 @@ class MultiDocHtmlBeautifier
                 $this->record_tag($tag_check);
                 $this->tagType = 'SCRIPT';
             }
-        } else if (
-            $tag_check === 'style' /*&&
+        } else if ($tag_check === 'style' /*&&
             (strpos($tag_complete, 'type') === false ||
             (strpos($tag_complete, 'type') !==false && strpos($tag_complete, 'text/css') !== false))*/
         ) {
@@ -450,8 +446,7 @@ class MultiDocHtmlBeautifier
             $comment .= $input_char;
 
             // only need to check for the delimiter if the last chars match
-            if (
-                $comment[strlen($comment) - 1] === $delimiter[strlen($delimiter) - 1]
+            if ($comment[strlen($comment) - 1] === $delimiter[strlen($delimiter) - 1]
                 && strpos($comment, $delimiter) !== false
             ) {
                 break;
@@ -491,6 +486,10 @@ class MultiDocHtmlBeautifier
         $input_char = '';
         $content = '';
         $min_index = 0;
+
+        /**
+         * @var boolean
+         */
         $space = true;
 
         do {
@@ -502,7 +501,7 @@ class MultiDocHtmlBeautifier
             $this->pos++;
 
             if (in_array($input_char, $this->whitespace)) {
-                if (!$space) {
+                if ($space == false) {
                     $this->lineCharCount--;
                     continue;
                 }
@@ -576,9 +575,9 @@ class MultiDocHtmlBeautifier
         }
     }
 
-    private function get_full_indent($level)
+    private function get_full_indent(int $level): string
     {
-        $level = $this->indentLevel + $level || 0;
+        $level = $this->indentLevel + $level;
         if ($level < 1) {
             return '';
         }
@@ -692,111 +691,111 @@ class MultiDocHtmlBeautifier
             }
 
             switch ($this->tokenType) {
-                case 'TK_TAG_START':
-                    $this->print_newline(false, $this->output);
-                    $this->print_token($this->tokenText);
-                    if ($this->indentContent) {
-                        $this->indent();
-                        $this->indentContent = false;
-                    }
-                    $this->currentMode = 'CONTENT';
-                    break;
-                case 'TK_TAG_STYLE':
-                case 'TK_TAG_SCRIPT':
-                    $this->print_newline(false, $this->output);
-                    $this->print_token($this->tokenText);
-                    $this->currentMode = 'CONTENT';
-                    break;
-                case 'TK_TAG_END':
-                    //Print new line only if the tag has no content and has child
-                    if ($this->lastToken === 'TK_CONTENT' && $this->lastText === '') {
-                        $matches = array();
-                        preg_match('/\w+/', $this->tokenText, $matches);
-                        $tag_name = isset($matches[0]) ? $matches[0] : null;
-
-                        $tag_extracted_from_last_output = null;
-                        if (count($this->output)) {
-                            $matches = array();
-                            preg_match('/(?:<|{{#)\s*(\w+)/', $this->output[count($this->output) - 1], $matches);
-                            $tag_extracted_from_last_output = isset($matches[0]) ? $matches[0] : null;
-                        }
-                        if ($tag_extracted_from_last_output === null || $tag_extracted_from_last_output[1] !== $tag_name) {
-                            $this->print_newline(false, $this->output);
-                        }
-                    }
-                    $this->print_token($this->tokenText);
-                    $this->currentMode = 'CONTENT';
-                    break;
-                case 'TK_TAG_SINGLE':
-                    // Don't add a newline before elements that should remain unformatted.
+            case 'TK_TAG_START':
+                $this->print_newline(false, $this->output);
+                $this->print_token($this->tokenText);
+                if ($this->indentContent) {
+                    $this->indent();
+                    $this->indentContent = false;
+                }
+                $this->currentMode = 'CONTENT';
+                break;
+            case 'TK_TAG_STYLE':
+            case 'TK_TAG_SCRIPT':
+                $this->print_newline(false, $this->output);
+                $this->print_token($this->tokenText);
+                $this->currentMode = 'CONTENT';
+                break;
+            case 'TK_TAG_END':
+                //Print new line only if the tag has no content and has child
+                if ($this->lastToken === 'TK_CONTENT' && $this->lastText === '') {
                     $matches = array();
-                    preg_match('/^\s*<([a-z]+)/i', $this->tokenText, $matches);
-                    $tag_check = $matches ? $matches : null;
+                    preg_match('/\w+/', $this->tokenText, $matches);
+                    $tag_name = isset($matches[0]) ? $matches[0] : null;
 
-                    if (!$tag_check || !in_array($tag_check[1], $this->options['unformatted'])) {
+                    $tag_extracted_from_last_output = null;
+                    if (count($this->output) != 0) {
+                        $matches = array();
+                        preg_match('/(?:<|{{#)\s*(\w+)/', $this->output[count($this->output) - 1], $matches);
+                        $tag_extracted_from_last_output = isset($matches[0]) ? $matches[0] : null;
+                    }
+                    if (is_null($tag_extracted_from_last_output) || $tag_extracted_from_last_output[1] !== $tag_name) {
                         $this->print_newline(false, $this->output);
                     }
-                    $this->print_token($this->tokenText);
-                    $this->currentMode = 'CONTENT';
-                    break;
-                case 'TK_CONTENT':
-                    $this->print_token($this->tokenText);
-                    $this->currentMode = 'TAG';
-                    break;
-                case 'TK_STYLE':
-                case 'TK_SCRIPT':
-                    if ($this->tokenText !== '') {
-                        $this->print_newline(false, $this->output);
-                        $text = $this->tokenText;
-                        $_beautifier = false;
-                        $script_indent_level = 1;
+                }
+                $this->print_token($this->tokenText);
+                $this->currentMode = 'CONTENT';
+                break;
+            case 'TK_TAG_SINGLE':
+                // Don't add a newline before elements that should remain unformatted.
+                $matches = array();
+                preg_match('/^\s*<([a-z]+)/i', $this->tokenText, $matches);
+                $tag_check = $matches ? $matches : null;
 
-                        if ($this->tokenType === 'TK_SCRIPT') {
-                            $_beautifier = $this->jsBeautify;
-                        } else if ($this->tokenType === 'TK_STYLE') {
-                            $_beautifier = $this->cssBeautify;
-                        }
+                if (!$tag_check || !in_array($tag_check[1], $this->options['unformatted'])) {
+                    $this->print_newline(false, $this->output);
+                }
+                $this->print_token($this->tokenText);
+                $this->currentMode = 'CONTENT';
+                break;
+            case 'TK_CONTENT':
+                $this->print_token($this->tokenText);
+                $this->currentMode = 'TAG';
+                break;
+            case 'TK_STYLE':
+            case 'TK_SCRIPT':
+                if ($this->tokenText !== '') {
+                    $this->print_newline(false, $this->output);
+                    $text = $this->tokenText;
+                    $_beautifier = false;
+                    $script_indent_level = 1;
 
-                        if ($this->options['indent_scripts'] === "keep") {
-                            $script_indent_level = 0;
-                        } else if ($this->options['indent_scripts'] === "separate") {
-                            $script_indent_level = -$this->indentLevel;
-                        }
-
-                        $indentation = $this->get_full_indent($script_indent_level);
-                        if ($_beautifier) {
-                            // call the Beautifier if avaliable
-                            $text = $_beautifier(preg_replace('/^\s*/', $indentation, $text), $this->options);
-                        } else {
-                            // simply indent the string otherwise
-
-                            $matches = array();
-                            preg_match('/^\s*/', $text, $matches);
-                            $white = isset($matches[0]) ? $matches[0] : null;
-
-                            $matches = array();
-                            preg_match('/[^\n\r]*$/', $white, $matches);
-                            $dummy = isset($matches[0]) ? $matches[0] : null;
-
-                            $_level = count(explode($this->indentString, $dummy)) - 1;
-                            $reindent = $this->get_full_indent($script_indent_level - $_level);
-
-                            $text = preg_replace('/^\s*/', $indentation, $text);
-                            $text = preg_replace(
-                                '/\r\n|\r|\n/',
-                                "\n" . $reindent,
-                                $text
-                            );
-                            $text = preg_replace('/\s+$/', '', $text);
-                        }
-
-                        if ($text) {
-                            $this->print_token_raw($indentation . trim($text));
-                            $this->print_newline(false, $this->output);
-                        }
+                    if ($this->tokenType === 'TK_SCRIPT') {
+                        $_beautifier = $this->jsBeautify;
+                    } else if ($this->tokenType === 'TK_STYLE') {
+                        $_beautifier = $this->cssBeautify;
                     }
-                    $this->currentMode = 'TAG';
-                    break;
+
+                    if ($this->options['indent_scripts'] === "keep") {
+                        $script_indent_level = 0;
+                    } else if ($this->options['indent_scripts'] === "separate") {
+                        $script_indent_level = -$this->indentLevel;
+                    }
+
+                    $indentation = $this->get_full_indent($script_indent_level);
+                    if ($_beautifier) {
+                        // call the Beautifier if avaliable
+                        $text = $_beautifier(preg_replace('/^\s*/', $indentation, $text), $this->options);
+                    } else {
+                        // simply indent the string otherwise
+
+                        $matches = array();
+                        preg_match('/^\s*/', $text, $matches);
+                        $white = isset($matches[0]) ? $matches[0] : null;
+
+                        $matches = array();
+                        preg_match('/[^\n\r]*$/', $white, $matches);
+                        $dummy = isset($matches[0]) ? $matches[0] : null;
+
+                        $_level = count(explode($this->indentString, $dummy)) - 1;
+                        $reindent = $this->get_full_indent($script_indent_level - $_level);
+
+                        $text = preg_replace('/^\s*/', $indentation, $text);
+                        $text = preg_replace(
+                            '/\r\n|\r|\n/',
+                            "\n" . $reindent,
+                            $text
+                        );
+                        $text = preg_replace('/\s+$/', '', $text);
+                    }
+
+                    if ($text) {
+                        $this->print_token_raw($indentation . trim($text));
+                        $this->print_newline(false, $this->output);
+                    }
+                }
+                $this->currentMode = 'TAG';
+                break;
             }
 
             $this->lastToken = $this->tokenType;

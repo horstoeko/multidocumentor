@@ -175,7 +175,8 @@ class MultiDocTools
      */
     public static function beautifyHtml(string $html): string
     {
-        $htmlBeautifier = new MultiDocHtmlBeautifier([
+        $htmlBeautifier = new MultiDocHtmlBeautifier(
+            [
             'indent_inner_html' => false,
             'indent_char' => " ",
             'indent_size' => 4,
@@ -184,7 +185,8 @@ class MultiDocTools
             'preserve_newlines' => false,
             'max_preserve_newlines' => 32786,
             'indent_scripts' => 'normal',
-        ]);
+            ]
+        );
 
         return $htmlBeautifier->beautify($html);
     }
