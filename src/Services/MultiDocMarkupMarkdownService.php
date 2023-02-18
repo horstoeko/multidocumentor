@@ -50,11 +50,14 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface
+    public function writeHeader(\phpDocumentor\Reflection\Element $object, string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface
     {
         return $this->renderAndAddToOutput(
             'header.twig',
             [
+                'objecttype' => get_class($object),
+                'objectfqsen' => $object->getFqsen(),
+                'objectname' => $name,
                 'name' => $name,
                 'summary' => $summary,
                 'description' => $description,
@@ -66,7 +69,7 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function writeSummary(array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface
+    public function writeSummary(\phpDocumentor\Reflection\Element $object, array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface
     {
         $allConstants = $allProperties = $allMethods = array(
             'public' => [],
@@ -89,6 +92,9 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
         return $this->renderAndAddToOutput(
             'summary.twig',
             [
+                'objecttype' => get_class($object),
+                'objectfqsen' => $object->getFqsen(),
+                'objectname' => $object->getName(),
                 'methods' => $allMethods,
                 'properties' => $allProperties,
                 'constants' => $allConstants
@@ -99,10 +105,18 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function writeConstants(array $constants): MultiDocMarkupServiceInterface
+    public function writeConstants(\phpDocumentor\Reflection\Element $object, array $constants): MultiDocMarkupServiceInterface
     {
         if (!empty($constants)) {
-            $this->renderAndAddToOutput('constants.twig', array('constants' => $constants));
+            $this->renderAndAddToOutput(
+                'constants.twig',
+                [
+                    'objecttype' => get_class($object),
+                    'objectfqsen' => $object->getFqsen(),
+                    'objectname' => $object->getName(),
+                    'constants' => $constants,
+                ]
+            );
         }
 
         return $this;
@@ -111,10 +125,18 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function writeProperties(array $properties): MultiDocMarkupServiceInterface
+    public function writeProperties(\phpDocumentor\Reflection\Element $object, array $properties): MultiDocMarkupServiceInterface
     {
         if (!empty($properties)) {
-            $this->renderAndAddToOutput('properties.twig', array('properties' => $properties));
+            $this->renderAndAddToOutput(
+                'properties.twig',
+                [
+                    'objecttype' => get_class($object),
+                    'objectfqsen' => $object->getFqsen(),
+                    'objectname' => $object->getName(),
+                    'properties' => $properties,
+                ]
+            );
         }
 
         return $this;
@@ -123,10 +145,18 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function writeMethods(array $methods): MultiDocMarkupServiceInterface
+    public function writeMethods(\phpDocumentor\Reflection\Element $object, array $methods): MultiDocMarkupServiceInterface
     {
         if (!empty($methods)) {
-            $this->renderAndAddToOutput('methods.twig', array('methods' => $methods));
+            $this->renderAndAddToOutput(
+                'methods.twig',
+                [
+                    'objecttype' => get_class($object),
+                    'objectfqsen' => $object->getFqsen(),
+                    'objectname' => $object->getName(),
+                    'methods' => $methods,
+                ]
+            );
         }
 
         return $this;
@@ -141,11 +171,11 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
         $description = $class->getDocBlock() !== null ? $class->getDocBlock()->getDescription() : '';
         $tags = $class->getDocBlock() !== null ? $class->getDocBlock()->getTags() : [];
 
-        $this->writeHeader($class->getName(), $summary, $description, $tags);
-        $this->writeSummary($class->getConstants(), $class->getProperties(), $class->getMethods());
-        $this->writeConstants($class->getConstants());
-        $this->writeProperties($class->getProperties());
-        $this->writeMethods($class->getMethods());
+        $this->writeHeader($class, $class->getName(), $summary, $description, $tags);
+        $this->writeSummary($class, $class->getConstants(), $class->getProperties(), $class->getMethods());
+        $this->writeConstants($class, $class->getConstants());
+        $this->writeProperties($class, $class->getProperties());
+        $this->writeMethods($class, $class->getMethods());
 
         return $this;
     }
@@ -159,10 +189,10 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
         $description = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getDescription() : '';
         $tags = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getTags() : [];
 
-        $this->writeHeader($interface->getName(), $summary, $description, $tags);
-        $this->writeSummary($interface->getConstants(), array(), $interface->getMethods());
-        $this->writeConstants($interface->getConstants());
-        $this->writeMethods($interface->getMethods());
+        $this->writeHeader($interface, $interface->getName(), $summary, $description, $tags);
+        $this->writeSummary($interface, $interface->getConstants(), array(), $interface->getMethods());
+        $this->writeConstants($interface, $interface->getConstants());
+        $this->writeMethods($interface, $interface->getMethods());
 
         return $this;
     }
@@ -176,10 +206,10 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
         $description = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getDescription() : '';
         $tags = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getTags() : [];
 
-        $this->writeHeader($trait->getName(), $summary, $description, $tags);
-        $this->writeSummary(array(), $trait->getProperties(), $trait->getMethods());
-        $this->writeProperties($trait->getProperties());
-        $this->writeMethods($trait->getMethods());
+        $this->writeHeader($trait, $trait->getName(), $summary, $description, $tags);
+        $this->writeSummary($trait, array(), $trait->getProperties(), $trait->getMethods());
+        $this->writeProperties($trait, $trait->getProperties());
+        $this->writeMethods($trait, $trait->getMethods());
 
         return $this;
     }

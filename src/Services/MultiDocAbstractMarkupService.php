@@ -141,27 +141,27 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    abstract public function writeHeader(string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface;
+    abstract public function writeHeader(\phpDocumentor\Reflection\Element $object, string $name, string $summary, string $description, array $tags): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc
      */
-    abstract public function writeSummary(array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface;
+    abstract public function writeSummary(\phpDocumentor\Reflection\Element $object, array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc
      */
-    abstract public function writeConstants(array $constants): MultiDocMarkupServiceInterface;
+    abstract public function writeConstants(\phpDocumentor\Reflection\Element $object, array $constants): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc
      */
-    abstract public function writeProperties(array $properties): MultiDocMarkupServiceInterface;
+    abstract public function writeProperties(\phpDocumentor\Reflection\Element $object, array $properties): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc
      */
-    abstract public function writeMethods(array $methods): MultiDocMarkupServiceInterface;
+    abstract public function writeMethods(\phpDocumentor\Reflection\Element $object, array $methods): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc
