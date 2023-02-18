@@ -3,8 +3,16 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_summary_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_summary_" %}
 ## Summary
+{% include thistmplnameprefix1 ~ "beforenamespace.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforenamespace.twig" ignore missing %}
+{{ "" }}
 ### Namespace
+{{ "" }}
 {{objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\')}}
+{% include thistmplnameprefix1 ~ "afternamespace.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "afternamespace.twig" ignore missing %}
+{% include thistmplnameprefix1 ~ "beforepublicmethods.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforepublicmethods.twig" ignore missing %}
 {% if methods.public | length > 0 %}
 {{ "" }}
 ### Public methods
@@ -13,6 +21,10 @@
 {{ method|removeinvisible }}()
 {% endfor %}
 {% endif %}
+{% include thistmplnameprefix1 ~ "afterpublicmethods.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "afterpublicmethods.twig" ignore missing %}
+{% include thistmplnameprefix1 ~ "beforeprotectedmethods.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforeprotectedmethods.twig" ignore missing %}
 {% if methods.protected | length > 0 %}
 {{ "" }}
 ### Protected methods
@@ -21,6 +33,10 @@
 {{ method|removeinvisible }}()
 {% endfor %}
 {% endif %}
+{% include thistmplnameprefix1 ~ "afterprotectedmethods.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "afterprotectedmethods.twig" ignore missing %}
+{% include thistmplnameprefix1 ~ "beforeprivatemethods.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforeprivatemethods.twig" ignore missing %}
 {% if methods.private | length > 0 %}
 {{ "" }}
 ### Private methods
@@ -29,4 +45,6 @@
 {{ method|removeinvisible }}()
 {% endfor %}
 {% endif %}
+{% include thistmplnameprefix1 ~ "afterprivatemethods.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "afterprivatemethods.twig" ignore missing %}
 

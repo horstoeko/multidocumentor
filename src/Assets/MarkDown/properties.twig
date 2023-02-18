@@ -27,14 +27,22 @@
 {% set propertyname = property.getName()|removeinvisible %}
 {% set propertyvisibility = property.getVisibility()|removeinvisible %}
 {{ "" }}
+{% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
 ### {{ propertyname }} ({{ propertyvisibility }})
 {{ "" }}
 ```php
 {{ propertyname }}{{ separator }}{{ type }}
 ```
+{% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
 {{ "" }}
+{% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
 {% if summary != "" %}{{ summary }}{% endif %}
 {% if description != "" %}{{ description }}{% endif %}
+{% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
 {{ "" }}
 {% endfor %}
 {{ "\n" }}
