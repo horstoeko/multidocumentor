@@ -55,6 +55,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
         return $this->renderAndAddToOutput(
             'header.twig',
             [
+                'object' => $object,
                 'objecttype' => get_class($object),
                 'objectfqsen' => $object->getFqsen(),
                 'objectname' => $name,
@@ -92,6 +93,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
         return $this->renderAndAddToOutput(
             'summary.twig',
             [
+                'object' => $object,
                 'objecttype' => get_class($object),
                 'objectfqsen' => $object->getFqsen(),
                 'objectname' => $object->getName(),
@@ -111,6 +113,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
             $this->renderAndAddToOutput(
                 'constants.twig',
                 [
+                    'object' => $object,
                     'objecttype' => get_class($object),
                     'objectfqsen' => $object->getFqsen(),
                     'objectname' => $object->getName(),
@@ -131,6 +134,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
             $this->renderAndAddToOutput(
                 'properties.twig',
                 [
+                    'object' => $object,
                     'objecttype' => get_class($object),
                     'objectfqsen' => $object->getFqsen(),
                     'objectname' => $object->getName(),
@@ -151,6 +155,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
             $this->renderAndAddToOutput(
                 'methods.twig',
                 [
+                    'object' => $object,
                     'objecttype' => get_class($object),
                     'objectfqsen' => $object->getFqsen(),
                     'objectname' => $object->getName(),

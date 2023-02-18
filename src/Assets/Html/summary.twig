@@ -1,5 +1,7 @@
 <div class="keeptogether">
     <h2 class="underline">Summary</h2>
+    <h3>Namespace</h3>
+    <p>{{objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\')}}</p>
     {% if methods.public | length > 0 %}
         <h3>Public methods</h3>
         <ul>

@@ -29,6 +29,8 @@ class MultiDocApplication extends ConsoleApplication
     /**
      * Constructor
      *
+     * Create a new MultiDocApplication instance
+     *
      * @param string $name    The Name of the application
      * @param string $version The version of the application
      */
