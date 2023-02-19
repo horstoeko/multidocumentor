@@ -3,82 +3,109 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_methods_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_methods_" %}
 
-<div class="keeptogether">
-    <h2 class="underline">Methods</h2>
+<div class="{{thisobjecttype}} {{thisobjecttype}}methods nopagebreakinside">
+    <p class="heading">Methods</p>
+
     {% for method in methods %}
-        {% set argumentNames = [] %}
-        {% for argument in method.getArguments() %}
-            {% set argumentvar = '<span class="keyword">' ~ argument.getType() ~ "</span> $" ~ argument.getName() %}
-            {% if argument.getDefault() %}
-                {% set argumentvar = argumentvar ~ " = " ~ argument.getDefault() %}
-            {% endif %}
-            {% set argumentNames = argumentNames|merge([argumentvar]) %}
-        {% endfor %}
-        {% if method.getDocBlock() != null and method.getDocBlock().getSummary() != '' %}
-            {% set summary = method.getDocBlock().getSummary() %}
-        {% else %}
-            {% set summary = '' %}
-        {% endif %}
-        {% if method.getDocBlock() != null and method.getDocBlock().getDescription() != '' %}
-            {% set description = method.getDocBlock().getDescription() %}
-        {% else %}
-            {% set description = '' %}
-        {% endif %}
-        {% if method.getReturnType() != "mixed" %}
-            {% set methodreturntype = method.getReturnType() %}
-        {% else %}
-            {% set methodreturntype = '' %}
-        {% endif %}
-        {% set formattedMethodName = method.getName() %}
-        {% set formattedMethodVisibilty = method.getVisibility() %}
-        {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
-
-        {# --- Title ------------------------------------------------------------------------------------------ #}
-
-        {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
-
-        <h3>{{ formattedMethodName }} ({{ formattedMethodVisibilty }})</h3>
-
-        <pre>{{ formattedCode|raw }}</pre>
-
-        {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
-
-        {# --- Description ------------------------------------------------------------------------------------ #}
-
-        {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
-
-        {% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
-        {% if description != "" %}{{ description|parsedown }}{% endif %}
-
-        {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
-
-        {# --- Parameters ------------------------------------------------------------------------------------ #}
-
-        {% include thistmplnameprefix1 ~ "beforeparameters.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "beforeparameters.twig" ignore missing %}
-
-        {% if method.getArguments()|length > 0%}
-            <h4>Parameters</h4>
-            <table class="methodarguments">
-                <tr>
-                    <th class="argumentname">Name</th>
-                    <th class="argumentdef">Definition</th>
-                </tr>
+        <div class="method">
+            {% set argumentNames = [] %}
             {% for argument in method.getArguments() %}
-                <tr>
-                    <td class="argumentname">${{ argument.getName() }}</td>
-                    <td class="argumentdef">{{ argument.getType() }}{% if argument.getDefault() %}, Default {{ argument.getDefault() }}{% endif %}</td>
-                </tr>
+                {% set argumentvar = '<span class="keyword">' ~ argument.getType() ~ "</span>&nbsp;$" ~ argument.getName() %}
+                {% if argument.getDefault() %}
+                    {% set argumentvar = argumentvar ~ " = " ~ argument.getDefault() %}
+                {% endif %}
+                {% set argumentNames = argumentNames|merge([argumentvar]) %}
             {% endfor %}
-            </table>
-        {% endif %}
+            {% if method.getDocBlock() != null and method.getDocBlock().getSummary() != '' %}
+                {% set summary = method.getDocBlock().getSummary() %}
+            {% else %}
+                {% set summary = '' %}
+            {% endif %}
+            {% if method.getDocBlock() != null and method.getDocBlock().getDescription() != '' %}
+                {% set description = method.getDocBlock().getDescription() %}
+            {% else %}
+                {% set description = '' %}
+            {% endif %}
+            {% if method.getReturnType() != "mixed" %}
+                {% set methodreturntype = method.getReturnType() %}
+            {% else %}
+                {% set methodreturntype = '' %}
+            {% endif %}
+            {% set formattedMethodName = method.getName()|trim %}
+            {% set formattedMethodVisibilty = method.getVisibility() %}
+            {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
 
-        {% include thistmplnameprefix1 ~ "afterparameters.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "afterparameters.twig" ignore missing %}
+            {# --- Title ------------------------------------------------------------------------------------------ #}
 
+            <div class="leftspace">
+
+                {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
+
+                <p class="name">
+                    {{ formattedMethodName }} ({{ formattedMethodVisibilty }})
+                </p>
+                <p class="code">
+                    {{ formattedCode|raw }}
+                </p>
+
+                {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+
+            </div>
+
+            {# --- Description ------------------------------------------------------------------------------------ #}
+
+            <div class="leftspace">
+
+                {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
+
+                {% if summary != "" %}
+                    <p class="name">
+                        {{ summary|parsedown }}
+                    </p>
+                {% endif %}
+                {% if description != "" %}
+                    <p class="description">
+                        {{ description|parsedown }}
+                    </p>
+                {% endif %}
+
+                {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
+
+            </div>
+
+            {# --- Parameters ------------------------------------------------------------------------------------ #}
+
+            <div class="leftspace">
+                <div class="leftspace">
+                    {% include thistmplnameprefix1 ~ "beforeparameters.twig" ignore missing %}
+                    {% include thistmplnameprefix2 ~ "beforeparameters.twig" ignore missing %}
+
+                    {% if method.getArguments()|length > 0%}
+                        <p class="argumentsheading">
+                            Parameters
+                        </p>
+                        <div class="leftspace">
+                            {% for argument in method.getArguments() %}
+                                <p class="argumentdefinition">
+                                    {{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}
+                                </p>
+                                <p class="argumentdescription">
+                                    {% set argumentParam = method.getDocBlock().getTagsByName('param')|default([])|filter(v => v.getVariableName() == argument.name) %}
+                                    {{(argumentParam|first).getDescription()|parsedownnop}}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% include thistmplnameprefix1 ~ "afterparameters.twig" ignore missing %}
+                    {% include thistmplnameprefix2 ~ "afterparameters.twig" ignore missing %}
+                </div>
+            </div>
+        </div>
+        
     {% endfor %}
 </div>

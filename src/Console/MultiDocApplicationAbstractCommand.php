@@ -123,7 +123,7 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     /**
      * Return the validated value of an option with name $name
      *
-     * @param  string $name
+     * @param  string $name The name of the option
      * @return mixed
      */
     protected function validatedOption(string $name)

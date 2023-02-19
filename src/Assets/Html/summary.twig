@@ -3,74 +3,96 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_summary_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_summary_" %}
 
-<div class="keeptogether">
-    <h2 class="underline">Summary</h2>
+<div class="{{thisobjecttype}} {{thisobjecttype}}summary">
+    <p class="heading">Summary</p>
 
     {# --- Namespace ------------------------------------------------------------------------------------------ #}
 
-    {% include thistmplnameprefix1 ~ "beforenamespace.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "beforenamespace.twig" ignore missing %}
+    <div class="leftspace">
 
-    <h3>Namespace</h3>
-    <p>{{ objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\') }}</p>
+        {% include thistmplnameprefix1 ~ "beforenamespace.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforenamespace.twig" ignore missing %}
 
-    {% include thistmplnameprefix1 ~ "afternamespace.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "afternamespace.twig" ignore missing %}
+        <p class="nsheading">Namespace</p>
+        <p class="ns">{{ objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\') }}</p>
+
+        {% include thistmplnameprefix1 ~ "afternamespace.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afternamespace.twig" ignore missing %}
+
+    </div>
 
     {# --- Public Methods ------------------------------------------------------------------------------------- #}
 
-    {% include thistmplnameprefix1 ~ "beforepublicmethods.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "beforepublicmethods.twig" ignore missing %}
+    <div class="leftspace">
 
-    {% if methods.public | length > 0 %}
-        <h3>Public methods</h3>
-        <ul>
-        {% for method in methods.public %}
-            <li>
-                {{ method }}()
-            </li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+        {% include thistmplnameprefix1 ~ "beforepublicmethods.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforepublicmethods.twig" ignore missing %}
 
-    {% include thistmplnameprefix1 ~ "afterpublicmethods.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "afterpublicmethods.twig" ignore missing %}
+        {% if methods.public | length > 0 %}
+            <p class="publicmethodsheading">
+                Public methods
+            </p>
+            <ul>
+            {% for method in methods.public %}
+                <li>
+                    {{ method }}()
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% include thistmplnameprefix1 ~ "afterpublicmethods.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afterpublicmethods.twig" ignore missing %}
+
+    </div>
 
     {# --- Protected Methods ---------------------------------------------------------------------------------- #}
 
-    {% include thistmplnameprefix1 ~ "beforeprotectedmethods.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "beforeprotectedmethods.twig" ignore missing %}
+    <div class="leftspace">
 
-    {% if methods.protected | length > 0 %}
-        <h3>Protected methods</h3>
-        <ul>
-        {% for method in methods.protected %}
-            <li>
-                {{ method }}()
-            </li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+        {% include thistmplnameprefix1 ~ "beforeprotectedmethods.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforeprotectedmethods.twig" ignore missing %}
 
-    {% include thistmplnameprefix1 ~ "afterprotectedmethods.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "afterprotectedmethods.twig" ignore missing %}
+        {% if methods.protected | length > 0 %}
+            <p class="protectedmethodsheading">
+                Protected methods
+            </p>
+            <ul>
+            {% for method in methods.protected %}
+                <li>
+                    {{ method }}()
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% include thistmplnameprefix1 ~ "afterprotectedmethods.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afterprotectedmethods.twig" ignore missing %}
+
+    </div>
 
     {# --- Private Methods ------------------------------------------------------------------------------------ #}
 
-    {% include thistmplnameprefix1 ~ "beforeprivatemethods.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "beforeprivatemethods.twig" ignore missing %}
+    <div class="leftspace">
 
-    {% if methods.private | length > 0 %}
-        <h3>Private methods</h3>
-        <ul>
-        {% for method in methods.private %}
-            <li>
-                {{ method }}()
-            </li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+        {% include thistmplnameprefix1 ~ "beforeprivatemethods.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "beforeprivatemethods.twig" ignore missing %}
 
-    {% include thistmplnameprefix1 ~ "afterprivatemethods.twig" ignore missing %}
-    {% include thistmplnameprefix2 ~ "afterprivatemethods.twig" ignore missing %}
+        {% if methods.private | length > 0 %}
+            <p class="privatemethodsheading">
+                Private methods
+            </p>
+            <ul>
+            {% for method in methods.private %}
+                <li>
+                    {{ method }}()
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% include thistmplnameprefix1 ~ "afterprivatemethods.twig" ignore missing %}
+        {% include thistmplnameprefix2 ~ "afterprivatemethods.twig" ignore missing %}
+
+    </div>
 </div>

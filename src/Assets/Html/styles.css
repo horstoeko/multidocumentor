@@ -4,42 +4,10 @@ body {
     padding-top: 0pt;
 }
 
-a {
-    text-decoration: none;
-}
 
-pre {
-    background-color: transparent;
-    font-size: 0.9em;
-    border: .25px solid #e4e4e4;
-    border-radius: 4px;
-    padding: 4px;
-    color: black;
-}
-
-em {
-    font-size: 0.8em;
-}
-
-h1.objectheader {
-    background-color: #fefefe;
-    border: 1px solid #e4e4e4;
-    color: goldenrod;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
-    page-break-before: always;
-}
-
-h1.objectheader:first-of-type {
-    page-break-before: avoid;
-}
-
-h1.tall {
-    font-size: 30pt;
-    font-weight: bold;
-}
+/* ------------------------------------------------------------------------------------------------
+   -- General
+   ------------------------------------------------------------------------------------------------ */
 
 .pagebreakbefore {
     page-break-before: always;
@@ -51,51 +19,169 @@ h1.tall {
     break-before: avoid;
 }
 
-.pagebreakafter {
-    page-break-after: always;
-    break-after: always;
-}
-
-.nopagebreakafter {
-    page-break-after: avoid;
-    break-after: avoid;
-}
-
-.underline {
-    padding-bottom: 5px;
-    border-bottom: 1px solid #e4e4e4;
-    border-bottom-width: .25px;
-}
-
-div.keeptogether {
+.nopagebreakinside {
     page-break-inside: avoid;
     break-inside: avoid;
 }
 
-table.methodarguments {
-    width: 100%;
-    font-size: .8rem;
+.leftspace {
+    padding-left: 20px;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   -- Class, Header
+   ------------------------------------------------------------------------------------------------ */
+
+.class.classheader .heading {
+    color: goldenrod;
+}
+
+.class.classheader .summary {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.class.classheader .description {
+    font-weight: normal;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   -- Class, Summary
+   ------------------------------------------------------------------------------------------------ */
+
+.class.classsummary .heading {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.class.classsummary .nsheading {
+    font-weight: bold;
+    font-size: 1.17em;
+}
+
+.class.classsummary .publicmethodsheading {
+    font-weight: bold;
+    font-size: 1.17em;
+}
+
+.class.classsummary .protectedmethodsheading {
+    font-weight: bold;
+    font-size: 1.17em;
+}
+
+.class.classsummary .privatemethodsheading {
+    font-weight: bold;
+    font-size: 1.17em;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   -- Class, Constants
+   ------------------------------------------------------------------------------------------------ */
+
+.class.classconstants .heading {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.class.classconstants .property .name {
+    font-size: 1.17em;
+    font-weight: bold;
+    color: black;
+}
+
+.class.classconstants .property .code {
+    font-family: monospace;
+}
+
+.class.classconstants .property .summary {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.class.classconstants .property .description {
+    font-weight: normal;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   -- Class, Properties
+   ------------------------------------------------------------------------------------------------ */
+
+.class.classproperties .heading {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.class.classproperties .property .name {
+    font-size: 1.17em;
+    font-weight: bold;
+    color: black;
+}
+
+.class.classproperties .property .code {
+    font-family: monospace;
+}
+
+.class.classproperties .property .summary {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.class.classproperties .property .description {
+    font-weight: normal;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   -- Class, Methods
+   ------------------------------------------------------------------------------------------------ */
+
+.class.classmethods .heading {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.class.classmethods .method .name {
+    font-size: 1.17em;
+    font-weight: bold;
+    color: black;
+}
+
+.class.classmethods .method .code {
+    font-family: monospace;
+}
+
+.class.classmethods .method .summary {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.class.classmethods .method .description {
+    font-weight: normal;
+}
+
+.class.classmethods .method .argumentsheading {
+    color: darkblue;
+    font-weight: bold;
+}
+
+.class.classmethods .method .argumentdefinition {
+    font-weight: bold;
+}
+
+.class.classmethods .method .argumentdescription p {
     padding: 0;
     margin: 0;
+    display: inline;
 }
 
-table.methodarguments th, td {
-    text-align: left;
-    padding: 0;
-    table-layout: fixed;
-}
 
-table.methodarguments th.argumentname, td.argumentname {
-    width: 50%;
-    min-width: 50%;
-    max-width: 50%;
-}
-
-table.methodarguments th.argumentdef, td.argumentdef {
-    width: 50%;
-    min-width: 50%;
-    max-width: 50%;
-}
+/* ------------------------------------------------------------------------------------------------
+   -- Header
+   ------------------------------------------------------------------------------------------------ */
 
 span.keyword {
     color: darkred;

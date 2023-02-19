@@ -3,42 +3,65 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_constantts_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_constants_" %}
 
-<div class="keeptogether">
-    <h2>Constants</h2>
+<div class="{{thisobjecttype}} {{thisobjecttype}}constants nopagebreakinside">
+    <p class="heading">Constants</p>
+
     {% for constant in constants %}
-        {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
-            {% set summary = constant.getDocBlock().getSummary() %}
-        {% else %}
-            {% set summary = '' %}
-        {% endif %}
-        {% if constant.getDocBlock() != null and constant.getDocBlock().getDescription() != '' %}
-            {% set description = constant.getDocBlock().getDescription() %}
-        {% else %}
-            {% set description = '' %}
-        {% endif %}
-        {% set formattedConstantName = constant.getName() %}
+        <div class="constant">
+            {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
+                {% set summary = constant.getDocBlock().getSummary() %}
+            {% else %}
+                {% set summary = '' %}
+            {% endif %}
+            {% if constant.getDocBlock() != null and constant.getDocBlock().getDescription() != '' %}
+                {% set description = constant.getDocBlock().getDescription() %}
+            {% else %}
+                {% set description = '' %}
+            {% endif %}
+            {% set formattedConstantName = constant.getName() %}
 
-        {# --- Title ------------------------------------------------------------------------------------------ #}
+            {# --- Title ------------------------------------------------------------------------------------------ #}
 
-        {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
+            <div class="leftspace">
 
-        <h3>{{ formattedConstantName }}</h3>
+                {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
 
-        <pre>{{ formattedConstantName }}</pre>
+                <p class="name">
+                    {{ formattedConstantName }}
+                </p>
+                <p class="code">
+                    {{ formattedConstantName }}
+                </p>
 
-        {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+                {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
 
-        {# --- Description ------------------------------------------------------------------------------------ #}
+            </div>
 
-        {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
+            {# --- Description ------------------------------------------------------------------------------------ #}
 
-        {% if summary != "" %}<i>{{ summary|parsedown }}</i>{% endif %}
-        {% if description != "" %}{{ description|parsedown }}{% endif %}
+            <div class="leftspace">
 
-        {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
-        {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
+                {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
+
+                {% if summary != "" %}
+                    <p class="summary">
+                        {{ summary|parsedown }}
+                    </p>
+                {% endif %}
+                {% if description != "" %}
+                    <p class="description">
+                        {{ description|parsedown }}
+                    </p>
+                {% endif %}
+
+                {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
+                {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
+
+            </div>
+        </div>
+
     {% endfor %}
 </div>

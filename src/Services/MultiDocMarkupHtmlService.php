@@ -99,7 +99,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
                 'objectname' => $object->getName(),
                 'methods' => $allMethods,
                 'properties' => $allProperties,
-                'constants' => $allConstants
+                'constants' => $allConstants,
             ]
         );
     }

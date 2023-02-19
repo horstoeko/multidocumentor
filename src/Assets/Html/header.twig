@@ -5,12 +5,16 @@
 
 {# --- Title ------------------------------------------------------------------------------------------ #}
 
-{% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
-{% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
+<dkv class="{{thisobjecttype}} {{thisobjecttype}}header">
 
-<h1 class="objectheader">{{ name }}</h1>
-{% if summary != "" %}<i>{{ summary }}</i>{% endif %}
-{% if description != "" %}<p>{{ description }}</p>{% endif %}
+    {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
 
-{% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
-{% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+    <h1 class="heading pagebreakbefore">{{ name }}</h1>
+    {% if summary != "" %}<p class="summary">{{ summary }}</p>{% endif %}
+    {% if description != "" %}<p class="description">{{ description }}</p>{% endif %}
+
+    {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+    {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+
+</div>

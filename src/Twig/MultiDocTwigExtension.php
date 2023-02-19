@@ -9,7 +9,7 @@
 
 namespace horstoeko\multidocumentor\Twig;
 
-use Parsedown;
+use League\CommonMark\CommonMarkConverter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -34,6 +34,7 @@ class MultiDocTwigExtension extends AbstractExtension
         return [
             new TwigFilter("removeinvisible", [$this, 'removeInvisibleCharacters'], ['is_safe' => ['html']]),
             new TwigFilter("parsedown", [$this, 'parsedown'], ['is_safe' => ['html']]),
+            new TwigFilter("parsedownnop", [$this, 'parsedownNoParagrap'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -51,12 +52,32 @@ class MultiDocTwigExtension extends AbstractExtension
     /**
      * Parse markdown to HTML
      *
-     * @param  string $string
+     * @param  string $markDownString
      * @return string
      */
-    public function parsedown($string): string
+    public function parsedown($markDownString): string
     {
-        $parseDown = new Parsedown();
-        return $parseDown->text($string);
+        $converter = new CommonMarkConverter([
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
+
+        $htmlString = $converter->convertToHtml($markDownString ?? "");
+
+        return $htmlString;
+    }
+
+    /**
+     * Parse markdown to HTML. The wrapping paragraph will be removed
+     *
+     * @param  string $markDownString
+     * @return string
+     */
+    public function parsedownNoParagrap($markDownString): string
+    {
+        $htmlString = $this->parsedown($markDownString ?? "");
+        $htmlString = preg_replace('!^<p>(.*?)</p>$!i', '$1', $htmlString);
+
+        return $htmlString;
     }
 }
