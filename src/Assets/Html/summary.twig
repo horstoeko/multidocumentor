@@ -4,7 +4,7 @@
 {% set thistmplnameprefix2 = thisobjecttype ~ "_summary_" %}
 
 <div class="{{thisobjecttype}} {{thisobjecttype}}summary">
-    <p class="heading">Summary</p>
+    <p class="heading" id="{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</p>
 
     {# --- Namespace ------------------------------------------------------------------------------------------ #}
 
@@ -35,7 +35,7 @@
             <ul>
             {% for method in methods.public %}
                 <li>
-                    {{ method }}()
+                    <a href="#{{thisobjecttype}}_{{thisobjectname}}_method_{{method}}">{{ method }}()</a>
                 </li>
             {% endfor %}
             </ul>
@@ -60,7 +60,7 @@
             <ul>
             {% for method in methods.protected %}
                 <li>
-                    {{ method }}()
+                    <a href="#{{thisobjecttype}}_{{thisobjectname}}_method_{{method}}">{{ method }}()</a>
                 </li>
             {% endfor %}
             </ul>
@@ -85,7 +85,7 @@
             <ul>
             {% for method in methods.private %}
                 <li>
-                    {{ method }}()
+                    <a href="#{{thisobjecttype}}_{{thisobjectname}}_method_{{method}}">{{ method }}()</a>
                 </li>
             {% endfor %}
             </ul>

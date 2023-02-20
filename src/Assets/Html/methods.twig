@@ -7,7 +7,7 @@
     <p class="heading">Methods</p>
 
     {% for method in methods %}
-        <div class="method">
+        <div class="method mt-2-rem">
             {% set argumentNames = [] %}
             {% for argument in method.getArguments() %}
                 {% set argumentvar = '<span class="keyword">' ~ argument.getType() ~ "</span>&nbsp;$" ~ argument.getName() %}
@@ -31,9 +31,9 @@
             {% else %}
                 {% set methodreturntype = '' %}
             {% endif %}
-            {% set formattedMethodName = method.getName()|trim %}
+            {% set formattedMethodName = method.getName()|replace({"\n": "", "\r": "", "\t": ""}) %}
             {% set formattedMethodVisibilty = method.getVisibility() %}
-            {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
+            {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(",")  ~ ")" %}
 
             {# --- Title ------------------------------------------------------------------------------------------ #}
 
@@ -42,12 +42,15 @@
                 {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
                 {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
 
-                <p class="name">
+                <p class="name" id="{{thisobjecttype}}_{{thisobjectname}}_method_{{formattedMethodName}}">
                     {{ formattedMethodName }} ({{ formattedMethodVisibilty }})
                 </p>
-                <p class="code">
-                    {{ formattedCode|raw }}
+                <p class="links">
+                    <span class="mr-03-rem">&#8594;</span><a class="link" href="#{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</a>
                 </p>
+                <pre class="code">
+                    {{- formattedCode|raw -}}
+                </pre>
 
                 {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
                 {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
@@ -106,6 +109,6 @@
                 </div>
             </div>
         </div>
-        
+
     {% endfor %}
 </div>
