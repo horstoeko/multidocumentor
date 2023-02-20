@@ -94,7 +94,11 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     {
         $this->beforeGetOutput();
 
-        return MultiDocTools::beautifyHtml($this->markup);
+        if ($this->container->getBeautifyHtmlOutput() === true) {
+            $this->markup = MultiDocTools::beautifyHtml($this->markup);
+        }
+
+        return $this->markup;
     }
 
     /**

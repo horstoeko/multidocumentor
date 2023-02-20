@@ -50,7 +50,7 @@ class MultiDocCreatorService implements MultiDocCreatorServiceInterface
      */
     public function __construct(MultiDocContainer $container)
     {
-        ini_set("pcre.backtrack_limit", "5000000");
+        ini_set("pcre.backtrack_limit", PHP_INT_MAX);
 
         $this->container = $container;
 

@@ -26,6 +26,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @property string $outputFormat
  * @property string $assetDirectory
  * @property string $htmlDirectory
+ * @property string $cssFilename
  * @property array $customHtmlDirectories
  * @property string $markdownDirectory
  * @property array $customMarkdownDirectories
@@ -33,6 +34,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @property array $fontsSettings
  * @property string $fontDefault
  * @property array $customRenderers
+ * @property boolean $beautifyHtmlOutput
  * @property \horstoeko\multidocumentor\Events\MultiDocEventDispatcher $eventDispatcher
  *
  * @method array getIncludeDirectories()
@@ -41,6 +43,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method string getOutputFormat()
  * @method string getAssetDirectory()
  * @method string getHtmlDirectory()
+ * @method string getCssFilename()
  * @method array getCustomHtmlDirectories()
  * @method string getMarkdownDirectory()
  * @method array getCustomMarkdownDirectories()
@@ -48,6 +51,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method array getFontsSettings()
  * @method string getFontDefault()
  * @method array getCustomRenderers()
+ * @method booleab getBeautifyHtmlOutput()
  * @method \horstoeko\multidocumentor\Events\MultiDocEventDispatcher getEventDispatcher()
  *
  * @method void setIncludeDirectories(array $includeDirectories)
@@ -56,6 +60,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method void setOutputFormat(string $outputFormat)
  * @method void setAssetDirectory(string $assetDirectory)
  * @method void setHtmlDirectory(string $htmlDirectory)
+ * @method void setCssFilename(string $cssFilename)
  * @method void setCustomHtmlDirectories(array $htmlDirectories)
  * @method void setMarkdownDirectory(string $markdownDirectory)
  * @method void setCustomMarkdownDirectories(array $markdownDirectories)
@@ -63,6 +68,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method void setFontsSettings(array $fontSettings)
  * @method void setFontDefault(string $fondDefault)
  * @method void setCustomRenderers(array $renderers)
+ * @method void setBeautifyHtmlOutput(bool $beautifyHtmlOutput)
  * @method void setEventDispatcher(\horstoeko\multidocumentor\Events\MultiDocEventDispatcher $eventDispatcher)
  *
  * @method void addFontsSettings(string $fontName, string $fontType, string $fontFile)
@@ -97,6 +103,7 @@ class MultiDocContainer
         $this->outputFormat = "";
         $this->assetDirectory = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets");
         $this->htmlDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "Html");
+        $this->cssFilename = $this->htmlDirectory . DIRECTORY_SEPARATOR . "styles.css";
         $this->markdownDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "MarkDown");
         $this->fontsDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "Fonts");
         $this->fontsSettings = [];
@@ -104,6 +111,7 @@ class MultiDocContainer
         $this->customRenderers = [];
         $this->customHtmlDirectories = [];
         $this->customMarkdownDirectories = [];
+        $this->beautifyHtmlOutput = false;
         $this->eventDispatcher = new MultiDocEventDispatcher;
     }
 

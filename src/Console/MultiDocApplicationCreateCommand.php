@@ -46,6 +46,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $this->addOption('renderers', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional renderers');
         $this->addOption('htmltemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional html templates directories');
         $this->addOption('markdowntemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional markdown templates directories');
+        $this->addOption('css', null, InputOption::VALUE_REQUIRED, 'Directory where the css file is located');
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
     }
 
@@ -64,6 +65,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "renderers" => "arrayoption|array",
             "htmltemplates" => "arrayoption|array",
             "markdowntemplates" => "arrayoption|array",
+            "css" => "stringoption:" . dirname(__FILE__) . "/../Assets/Html/styles.css|required",
             "options" => "arrayoption|array",
         ];
     }
@@ -85,6 +87,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $container->setCustomRenderers($this->validatedOption('renderers'));
         $container->setCustomHtmlDirectories($this->validatedOption('htmltemplates'));
         $container->setCustomMarkdownDirectories($this->validatedOption('markdowntemplates'));
+        $container->setCssFilename($this->validatedOption('css'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);

@@ -89,7 +89,7 @@ class MultiDocRendererMultiplePdf extends MultiDocAbstractRenderer
     {
         $pdf = new MultiDocPdfFile($this->container);
         $pdf->WriteHTML(
-            file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css'),
+            file_get_contents($this->container->getCssFilename()),
             \Mpdf\HTMLParserMode::HEADER_CSS
         );
         $pdf->WriteHTML($this->markupService->getOutput());

@@ -81,6 +81,6 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
      */
     private function createInlineCss(): string
     {
-        return file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
+        return file_get_contents($this->container->getCssFilename());
     }
 }

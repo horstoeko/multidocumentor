@@ -82,16 +82,6 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
     }
 
     /**
-     * Return CSS content
-     *
-     * @return string
-     */
-    public function getCss(): string
-    {
-        return file_get_contents($this->container->getHtmlDirectory() . DIRECTORY_SEPARATOR . 'styles.css');
-    }
-
-    /**
      * Render a single markdown file
      *
      * @param  string $destinationFilename
