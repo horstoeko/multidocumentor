@@ -1,13 +1,12 @@
+/* ------------------------------------------------------------------------------------------------
+-- General
+------------------------------------------------------------------------------------------------ */
+
 body {
     font-family: opensans;
     padding: 10pt;
     padding-top: 0pt;
 }
-
-
-/* ------------------------------------------------------------------------------------------------
-   -- General
-   ------------------------------------------------------------------------------------------------ */
 
 .pagebreakbefore {
     page-break-before: always;
@@ -68,178 +67,193 @@ body {
     -webkit-transform: rotate(45deg);
 }
 
+@media screen {
 
-/* ------------------------------------------------------------------------------------------------
-   -- Class, Header
-   ------------------------------------------------------------------------------------------------ */
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Header
+    ------------------------------------------------------------------------------------------------ */
 
-.class.classheader .heading {
-    color: goldenrod;
+    .class.classheader .heading {
+        color: goldenrod;
+    }
+
+    .class.classheader .summary {
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .class.classheader .description {
+        font-weight: normal;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Summary
+    ------------------------------------------------------------------------------------------------ */
+
+    .class.classsummary .heading {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .class.classsummary .nsheading {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .class.classsummary .publicmethodsheading {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .class.classsummary .protectedmethodsheading {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .class.classsummary .privatemethodsheading {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Constants
+    ------------------------------------------------------------------------------------------------ */
+
+    .class.classconstants .heading {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .class.classconstants .constant .name {
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .class.classconstants .constant .code {
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #dcdcdc;
+        padding: 6px;
+    }
+
+    .class.classconstants .constant .summary {
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .class.classconstants .constant .description {
+        font-weight: normal;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Properties
+    ------------------------------------------------------------------------------------------------ */
+
+    .class.classproperties .heading {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .class.classproperties .property .name {
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .class.classproperties .property .links {
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .class.classproperties .property .code {
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #dcdcdc;
+        padding: 6px;
+    }
+
+    .class.classproperties .property .summary {
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .class.classproperties .property .description {
+        font-weight: normal;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Methods
+    ------------------------------------------------------------------------------------------------ */
+
+    .class.classmethods .heading {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .class.classmethods .method .name {
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .class.classmethods .method .links {
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .class.classmethods .method .code {
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #dcdcdc;
+        padding: 6px;
+    }
+
+    .class.classmethods .method .summary {
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .class.classmethods .method .description {
+        font-weight: normal;
+    }
+
+    .class.classmethods .method .argumentsheading {
+        color: darkblue;
+        font-weight: bold;
+    }
+
+    .class.classmethods .method .argumentdefinition {
+        font-weight: bold;
+        display: inline;
+    }
+
+    .class.classmethods .method .argumentdescription p {
+        padding: 0;
+        margin: 0;
+        display: inline;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Header
+    ------------------------------------------------------------------------------------------------ */
+
+    span.keyword {
+        color: darkred;
+        font-weight: bold;
+    }
 }
 
-.class.classheader .summary {
-    font-style: italic;
-    font-weight: bold;
-}
 
-.class.classheader .description {
-    font-weight: normal;
-}
-
-
-/* ------------------------------------------------------------------------------------------------
-   -- Class, Summary
-   ------------------------------------------------------------------------------------------------ */
-
-.class.classsummary .heading {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.class.classsummary .nsheading {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.class.classsummary .publicmethodsheading {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.class.classsummary .protectedmethodsheading {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.class.classsummary .privatemethodsheading {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-
-/* ------------------------------------------------------------------------------------------------
-   -- Class, Constants
-   ------------------------------------------------------------------------------------------------ */
-
-.class.classconstants .heading {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.class.classconstants .property .name {
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-}
-
-.class.classconstants .property .code {
-    font-family: monospace;
-    font-size: 19px;
-    border: 1px solid #dcdcdc;
-    padding: 6px;
-}
-
-.class.classconstants .property .summary {
-    font-style: italic;
-    font-weight: bold;
-}
-
-.class.classconstants .property .description {
-    font-weight: normal;
-}
-
-
-/* ------------------------------------------------------------------------------------------------
-   -- Class, Properties
-   ------------------------------------------------------------------------------------------------ */
-
-.class.classproperties .heading {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.class.classproperties .property .name {
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-}
-
-.class.classproperties .property .code {
-    font-family: monospace;
-    font-size: 19px;
-    border: 1px solid #dcdcdc;
-    padding: 6px;
-}
-
-.class.classproperties .property .summary {
-    font-style: italic;
-    font-weight: bold;
-}
-
-.class.classproperties .property .description {
-    font-weight: normal;
-}
-
-
-/* ------------------------------------------------------------------------------------------------
-   -- Class, Methods
-   ------------------------------------------------------------------------------------------------ */
-
-.class.classmethods .heading {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.class.classmethods .method .name {
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-}
-
-.class.classmethods .method .links {
-    font-size: 12px;
-    padding: 0;
-    margin: 0;
-}
-
-.class.classmethods .method .code {
-    font-family: monospace;
-    font-size: 19px;
-    border: 1px solid #dcdcdc;
-    padding: 6px;
-}
-
-.class.classmethods .method .summary {
-    font-style: italic;
-    font-weight: bold;
-}
-
-.class.classmethods .method .description {
-    font-weight: normal;
-}
-
-.class.classmethods .method .argumentsheading {
-    color: darkblue;
-    font-weight: bold;
-}
-
-.class.classmethods .method .argumentdefinition {
-    font-weight: bold;
-    display: inline;
-}
-
-.class.classmethods .method .argumentdescription p {
-    padding: 0;
-    margin: 0;
-    display: inline;
-}
-
-
-/* ------------------------------------------------------------------------------------------------
-   -- Header
-   ------------------------------------------------------------------------------------------------ */
-
-span.keyword {
-    color: darkred;
-    font-weight: bold;
+@media screen {
+    .class.classheader .heading {
+        color: goldenrod;
+    }
 }
