@@ -86,3 +86,4 @@ _backup*
 /examples/order-x.pdf
 myfile_dbg.xml
 /doc
+makedoc
