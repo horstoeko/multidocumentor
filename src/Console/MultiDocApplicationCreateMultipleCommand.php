@@ -9,13 +9,11 @@
 
 namespace horstoeko\multidocumentor\Console;
 
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use horstoeko\multidocumentor\Container\MultiDocContainer;
-use Symfony\Component\Console\Output\OutputInterface;
-use horstoeko\multidocumentor\Services\MultiDocCreatorService;
 use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class representing the MultiDoc Console Application "CreateMultipleFormats"-Commands.
@@ -44,6 +42,9 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
         $this->addOption('fontsettings', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Font settings');
         $this->addOption('fontdefault', null, InputOption::VALUE_REQUIRED, 'Set the default font');
         $this->addOption('renderers', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional renderers');
+        $this->addOption('htmltemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional html templates directories');
+        $this->addOption('markdowntemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional markdown templates directories');
+        $this->addOption('css', null, InputOption::VALUE_REQUIRED, 'Directory where the css file is located');
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
     }
 
@@ -60,6 +61,9 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             "fontsettings" => "arrayoption|array",
             "fontdefault" => "stringoption:dejavusans",
             "renderers" => "arrayoption|array",
+            "htmltemplates" => "arrayoption|array",
+            "markdowntemplates" => "arrayoption|array",
+            "css" => "stringoption:" . dirname(__FILE__) . "/../Assets/Html/styles.css|required",
             "options" => "arrayoption|array",
         ];
     }
@@ -97,6 +101,9 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             '--format' => $format,
             '--fontdefault' => $this->validatedOption('fontdefault'),
             '--renderers' => $this->validatedOption('renderers'),
+            '--htmltemplates' => $this->validatedOption('htmltemplates'),
+            '--markdowntemplates' => $this->validatedOption('markdowntemplates'),
+            '--css' => $this->validatedOption('css'),
             '--options' => $this->validatedOption('options'),
         ];
 
