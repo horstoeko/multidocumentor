@@ -3,11 +3,11 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_constantts_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_constants_" %}
 
-<div class="{{thisobjecttype}} {{thisobjecttype}}constants">
-    <p class="heading">Constants</p>
+<div class="{{thisobjecttype}} {{thisobjecttype}}constants {{thisobjecttype}}__constants">
+    <p class="heading {{thisobjecttype}}__constants__heading">Constants</p>
 
     {% for constant in constants %}
-        <div class="constant">
+        <div class="constant {{thisobjecttype}}__constants__constant">
             {% if constant.getDocBlock() != null and constant.getDocBlock().getSummary() != '' %}
                 {% set summary = constant.getDocBlock().getSummary() %}
             {% else %}
@@ -27,13 +27,13 @@
                 {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
                 {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
 
-                <p class="name">
+                <p class="name {{thisobjecttype}}__constants__constant__name">
                     {{ formattedConstantName }}
                 </p>
-                <p class="links">
+                <p class="links {{thisobjecttype}}__constants__constant_links">
                     <span class="mr-03-rem">&#8594;</span><a class="link" href="#{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</a>
                 </p>
-                <p class="code">
+                <p class="code {{thisobjecttype}}__constants__constant__code">
                     {{ formattedConstantName }}
                 </p>
 
@@ -50,13 +50,13 @@
                 {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
 
                 {% if summary != "" %}
-                    <p class="summary">
-                        {{ summary|parsedown }}
+                    <p class="summary {{thisobjecttype}}__constants__constant__summary">
+                        {{ summary|parsedown|stripoutertag('p') }}
                     </p>
                 {% endif %}
                 {% if description != "" %}
-                    <p class="description">
-                        {{ description|parsedown }}
+                    <p class="description {{thisobjecttype}}__constants__constant__description">
+                        {{ description|parsedown|stripoutertag('p') }}
                     </p>
                 {% endif %}
 

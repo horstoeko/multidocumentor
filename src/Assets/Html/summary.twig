@@ -3,8 +3,8 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_summary_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_summary_" %}
 
-<div class="{{thisobjecttype}} {{thisobjecttype}}summary">
-    <p class="heading" id="{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</p>
+<div class="{{thisobjecttype}} {{thisobjecttype}}summary {{thisobjecttype}}__summary">
+    <p class="heading {{thisobjecttype}}__summary__heading" id="{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</p>
 
     {# --- Namespace ------------------------------------------------------------------------------------------ #}
 
@@ -13,8 +13,8 @@
         {% include thistmplnameprefix1 ~ "beforenamespace.twig" ignore missing %}
         {% include thistmplnameprefix2 ~ "beforenamespace.twig" ignore missing %}
 
-        <p class="nsheading">Namespace</p>
-        <p class="ns">{{ objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\') }}</p>
+        <p class="nsheading {{thisobjecttype}}__summary__nsheading">Namespace</p>
+        <p class="ns {{thisobjecttype}}__summary__ns">{{ objectfqsen|split('\\')|slice(0,objectfqsen|split('\\')|length - 1)|join('\\') }}</p>
 
         {% include thistmplnameprefix1 ~ "afternamespace.twig" ignore missing %}
         {% include thistmplnameprefix2 ~ "afternamespace.twig" ignore missing %}
@@ -29,7 +29,7 @@
         {% include thistmplnameprefix2 ~ "beforepublicmethods.twig" ignore missing %}
 
         {% if methods.public | length > 0 %}
-            <p class="publicmethodsheading">
+            <p class="publicmethodsheading {{thisobjecttype}}__summary__publicmethodsheading">
                 Public methods
             </p>
             <ul>
@@ -54,7 +54,7 @@
         {% include thistmplnameprefix2 ~ "beforeprotectedmethods.twig" ignore missing %}
 
         {% if methods.protected | length > 0 %}
-            <p class="protectedmethodsheading">
+            <p class="protectedmethodsheading {{thisobjecttype}}__summary__protectedmethodsheading">
                 Protected methods
             </p>
             <ul>
@@ -79,7 +79,7 @@
         {% include thistmplnameprefix2 ~ "beforeprivatemethods.twig" ignore missing %}
 
         {% if methods.private | length > 0 %}
-            <p class="privatemethodsheading">
+            <p class="privatemethodsheading {{thisobjecttype}}__summary__privatemethodsheading">
                 Private methods
             </p>
             <ul>

@@ -3,11 +3,11 @@
 {% set thistmplnameprefix1 = thisobjecttype ~ "_" ~ thisobjectname ~ "_methods_" %}
 {% set thistmplnameprefix2 = thisobjecttype ~ "_methods_" %}
 
-<div class="{{thisobjecttype}} {{thisobjecttype}}methods">
-    <p class="heading">Methods</p>
+<div class="{{thisobjecttype}} {{thisobjecttype}}methods {{thisobjecttype}}__methods">
+    <p class="heading nopagebreakinside {{thisobjecttype}}__methods__heading">Methods</p>
 
     {% for method in methods %}
-        <div class="method mt-2-rem">
+        <div class="method {{thisobjecttype}}__methods__method">
             {% set argumentNames = [] %}
             {% for argument in method.getArguments() %}
                 {% set argumentvar = '<span class="keyword">' ~ argument.getType() ~ "</span>&nbsp;$" ~ argument.getName() %}
@@ -33,7 +33,7 @@
             {% endif %}
             {% set formattedMethodName = method.getName()|replace({"\n": "", "\r": "", "\t": ""}) %}
             {% set formattedMethodVisibilty = method.getVisibility() %}
-            {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(",")  ~ ")" %}
+            {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
 
             {# --- Title ------------------------------------------------------------------------------------------ #}
 
@@ -42,15 +42,20 @@
                 {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
                 {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
 
-                <p class="name" id="{{thisobjecttype}}_{{thisobjectname}}_method_{{formattedMethodName}}">
+                <p class="name {{thisobjecttype}}__methods__method__name" id="{{thisobjecttype}}_{{thisobjectname}}_method_{{formattedMethodName}}">
                     {{ formattedMethodName }} ({{ formattedMethodVisibilty }})
                 </p>
-                <p class="links">
-                    <span class="mr-03-rem">&#8594;</span><a class="link" href="#{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</a>
-                </p>
-                <pre class="code">
-                    {{- formattedCode|raw -}}
-                </pre>
+
+                <div class="leftspace">
+
+                    <p class="links {{thisobjecttype}}__methods__method__links">
+                        <span class="mr-03-rem">&#8594;</span><a class="link" href="#{{thisobjecttype}}_{{thisobjectname}}_summary">Summary</a>
+                    </p>
+                    <pre class="code {{thisobjecttype}}__methods__method__code">
+                        {{- formattedCode|raw -}}
+                    </pre>
+
+                </div>
 
                 {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
                 {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
@@ -60,24 +65,26 @@
             {# --- Description ------------------------------------------------------------------------------------ #}
 
             <div class="leftspace">
+                <div class="leftspace">
 
-                {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
-                {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
+                    {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
+                    {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
 
-                {% if summary != "" %}
-                    <p class="name">
-                        {{ summary|parsedown }}
-                    </p>
-                {% endif %}
-                {% if description != "" %}
-                    <p class="description">
-                        {{ description|parsedown }}
-                    </p>
-                {% endif %}
+                    {% if summary != "" %}
+                        <p class="summary {{thisobjecttype}}__methods__method__summary">
+                            {{ summary|parsedown|stripoutertag('p') }}
+                        </p>
+                    {% endif %}
+                    {% if description != "" %}
+                        <p class="description {{thisobjecttype}}__methods__method__description">
+                            {{ description|parsedown|stripoutertag('p') }}
+                        </p>
+                    {% endif %}
 
-                {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
-                {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
+                    {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
+                    {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
 
+                </div>
             </div>
 
             {# --- Parameters ------------------------------------------------------------------------------------ #}
@@ -88,17 +95,17 @@
                     {% include thistmplnameprefix2 ~ "beforeparameters.twig" ignore missing %}
 
                     {% if method.getArguments()|length > 0%}
-                        <p class="argumentsheading">
+                        <p class="argumentsheading {{thisobjecttype}}__methods__method__argumentsheading">
                             Parameters
                         </p>
                         <div class="leftspace">
                             {% for argument in method.getArguments() %}
-                                <p class="argumentdefinition">
+                                <p class="argumentdefinition {{thisobjecttype}}__methods__method__argumentdefinition">
                                     {{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}
                                 </p>
-                                <p class="argumentdescription">
+                                <p class="argumentdescription {{thisobjecttype}}__methods__method__argumentdescription">
                                     {% set argumentParam = method.getDocBlock().getTagsByName('param')|default([])|filter(v => v.getVariableName() == argument.name) %}
-                                    {{(argumentParam|first).getDescription()|parsedownnop}}
+                                    {{(argumentParam|first).getDescription()|parsedownnop|stripoutertag('p')}}
                                 </p>
                             {% endfor %}
                         </div>

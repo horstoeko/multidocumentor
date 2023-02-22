@@ -24,19 +24,9 @@ body {
 }
 
 .leftspace {
+    margin: 0;
+    padding: 0;
     padding-left: 20px;
-}
-
-.mt-1-rem {
-    margin-top: 16px;
-}
-
-.mt-2-rem {
-    margin-top: 32px;
-}
-
-.mr-03-rem {
-    margin-right: 5px;
 }
 
 .arrow {
@@ -73,15 +63,21 @@ body {
     -- Class, Header
     ------------------------------------------------------------------------------------------------ */
 
+    .trait.traitheader .heading,
+    .interface.interfaceheader .heading,
     .class.classheader .heading {
         color: goldenrod;
     }
 
+    .trait.traitheader .summary,
+    .interface.interfaceheader .summary,
     .class.classheader .summary {
         font-style: italic;
         font-weight: bold;
     }
 
+    .trait.traitheader .description,
+    .interface.interfaceheader .description,
     .class.classheader .description {
         font-weight: normal;
     }
@@ -91,26 +87,36 @@ body {
     -- Class, Summary
     ------------------------------------------------------------------------------------------------ */
 
+    .trait.traitsummary .heading,
+    .interface.interfacesummary .heading,
     .class.classsummary .heading {
         font-weight: bold;
         font-size: 24px;
     }
 
+    .trait.traitsummary .nsheading,
+    .interface.interfacesummary .nsheading,
     .class.classsummary .nsheading {
         font-weight: bold;
         font-size: 18px;
     }
 
+    .trait.traitsummary .publicmethodsheading,
+    .interface.interfacesummary .publicmethodsheading,
     .class.classsummary .publicmethodsheading {
         font-weight: bold;
         font-size: 18px;
     }
 
+    .trait.traitsummary .protectedmethodsheading,
+    .interface.interfacesummary .protectedmethodsheading,
     .class.classsummary .protectedmethodsheading {
         font-weight: bold;
         font-size: 18px;
     }
 
+    .trait.traitsummary .privatemethodsheading,
+    .interface.interfacesummary .privatemethodsheading,
     .class.classsummary .privatemethodsheading {
         font-weight: bold;
         font-size: 18px;
@@ -121,17 +127,29 @@ body {
     -- Class, Constants
     ------------------------------------------------------------------------------------------------ */
 
+    .trait.traitconstants .heading,
+    .interface.interfaceconstants .heading,
     .class.classconstants .heading {
         font-weight: bold;
         font-size: 24px;
     }
 
+    .trait.traitconstants .constant,
+    .interface.interfaceconstants .constant,
+    .class.classconstants .constant {
+        margin-top: 2rem;
+    }
+
+    .trait.traitconstants .constant .name,
+    .interface.interfaceconstants .constant .name,
     .class.classconstants .constant .name {
         font-size: 18px;
         font-weight: bold;
         color: black;
     }
 
+    .trait.traitconstants .constant .code,
+    .interface.interfaceconstants .constant .code,
     .class.classconstants .constant .code {
         font-family: monospace;
         font-size: 14px;
@@ -139,11 +157,15 @@ body {
         padding: 6px;
     }
 
+    .trait.traitconstants .constant .summary,
+    .interface.interfaceconstants .constant .summary,
     .class.classconstants .constant .summary {
         font-style: italic;
         font-weight: bold;
     }
 
+    .trait.traitconstants .constant .description,
+    .interface.interfaceconstants .constant .description,
     .class.classconstants .constant .description {
         font-weight: normal;
     }
@@ -153,23 +175,38 @@ body {
     -- Class, Properties
     ------------------------------------------------------------------------------------------------ */
 
+    .trait.traitproperties .heading,
+    .interface.interfaceproperties .heading,
     .class.classproperties .heading {
         font-weight: bold;
         font-size: 24px;
     }
 
+    .trait.traitproperties .property,
+    .interface.interfaceproperties .property,
+    .class.classproperties .property {
+        margin-top: 2rem;
+    }
+
+    .trait.traitproperties .property .name,
+    .interface.interfaceproperties .property .name,
     .class.classproperties .property .name {
         font-size: 18px;
         font-weight: bold;
         color: black;
     }
 
+    .trait.traitproperties .property .links,
+    .interface.interfaceproperties .property .links,
     .class.classproperties .property .links {
         font-size: 12px;
         padding: 0;
         margin: 0;
+        display: none;
     }
 
+    .trait.traitproperties .property .code,
+    .interface.interfaceproperties .property .code,
     .class.classproperties .property .code {
         font-family: monospace;
         font-size: 14px;
@@ -177,11 +214,15 @@ body {
         padding: 6px;
     }
 
+    .trait.traitproperties .property .summary,
+    .interface.interfaceproperties .property .summary,
     .class.classproperties .property .summary {
         font-style: italic;
         font-weight: bold;
     }
 
+    .trait.traitproperties .property .description,
+    .interface.interfaceproperties .property .description,
     .class.classproperties .property .description {
         font-weight: normal;
     }
@@ -191,23 +232,38 @@ body {
     -- Class, Methods
     ------------------------------------------------------------------------------------------------ */
 
+    .trait.traitmethods .heading,
+    .interface.interfacemethods .heading,
     .class.classmethods .heading {
         font-weight: bold;
         font-size: 24px;
     }
 
+    .trait.traitmethods .method,
+    .interface.interfacemethods .method,
+    .class.classmethods .method {
+        margin-top: 2rem;
+    }
+
+    .trait.traitmethods .method .name,
+    .interface.interfacemethods .method .name,
     .class.classmethods .method .name {
         font-size: 18px;
         font-weight: bold;
         color: black;
     }
 
+    .trait.traitmethods .method .links,
+    .interface.interfacemethods .method .links,
     .class.classmethods .method .links {
         font-size: 12px;
         padding: 0;
         margin: 0;
+        display: none;
     }
 
+    .trait.traitmethods .method .code,
+    .interface.interfacemethods .method .code,
     .class.classmethods .method .code {
         font-family: monospace;
         font-size: 14px;
@@ -215,25 +271,35 @@ body {
         padding: 6px;
     }
 
+    .trait.traitmethods .method .summary,
+    .interface.interfacemethods .method .summary,
     .class.classmethods .method .summary {
         font-style: italic;
-        font-weight: bold;
+        font-weight: normal;
     }
 
+    .trait.traitmethods .method .description,
+    .interface.interfacemethods .method .description,
     .class.classmethods .method .description {
         font-weight: normal;
     }
 
+    .trait.traitmethods .method .argumentsheading,
+    .interface.interfacemethods .method .argumentsheading,
     .class.classmethods .method .argumentsheading {
         color: darkblue;
         font-weight: bold;
     }
 
+    .trait.traitmethods .method .argumentdefinition,
+    .interface.interfacemethods .method .argumentdefinition,
     .class.classmethods .method .argumentdefinition {
         font-weight: bold;
         display: inline;
     }
 
+    .trait.traitmethods .method .argumentdescription p,
+    .interface.interfacemethods .method .argumentdescription p,
     .class.classmethods .method .argumentdescription p {
         padding: 0;
         margin: 0;
@@ -242,7 +308,7 @@ body {
 
 
     /* ------------------------------------------------------------------------------------------------
-    -- Header
+    -- Keyword
     ------------------------------------------------------------------------------------------------ */
 
     span.keyword {
@@ -252,8 +318,325 @@ body {
 }
 
 
-@media screen {
-    .class.classheader .heading {
+@media print {
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Header
+    ------------------------------------------------------------------------------------------------ */
+
+    .trait__header__heading,
+    .interface__header__heading,
+    .class__header__heading {
         color: goldenrod;
+        padding: 0;
+        margin: 0;
+    }
+
+    .trait__header__summary,
+    .interface__header__summary,
+    .class__header__summary {
+        font-style: italic;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+    }
+
+    .trait__header__description,
+    .interface__header__description,
+    .class__header__description {
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Summary
+    ------------------------------------------------------------------------------------------------ */
+
+    .trait__summary__heading,
+    .interface__summary__heading,
+    .class__summary__heading {
+        font-weight: bold;
+        font-size: 24px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__summary__nsheading,
+    .interface__summary__nsheading,
+    .class__summary__nsheading {
+        font-weight: bold;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__summary__ns,
+    .interface__summary__ns,
+    .class__summary__ns {
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__summary__publicmethodsheading,
+    .interface__summary__publicmethodsheading,
+    .class__summary__publicmethodsheading {
+        font-weight: bold;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__summary__protectedmethodsheading,
+    .interface__summary__protectedmethodsheading,
+    .class__summary__protectedmethodsheading {
+        font-weight: bold;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__summary__privatemethodsheading,
+    .interface__summary__privatemethodsheading,
+    .class__summary__privatemethodsheading {
+        font-weight: bold;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+   }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Methods
+    ------------------------------------------------------------------------------------------------ */
+
+    .trait__methods__heading,
+    .interface__methods__heading,
+    .class__methods__heading {
+        font-weight: bold;
+        font-size: 24px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__name,
+    .interface__methods__method__name,
+    .class__methods__method__name {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__links,
+    .interface__methods__method__links,
+    .class__methods__method__links {
+        font-size: 12px;
+        display: none;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__code,
+    .interface__methods__method__code,
+    .class__methods__method__code {
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #dcdcdc;
+        padding: .5rem;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__summary,
+    .interface__methods__method__summary,
+    .class__methods__method__summary {
+        font-style: italic;
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__description,
+    .interface__methods__method__description,
+    .class__methods__method__description {
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__argumentsheading,
+    .interface__methods__method__argumentsheading,
+    .class__methods__method__argumentsheading {
+        color: darkblue;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-top: 1rem;
+    }
+
+    .trait__methods__method__argumentdefinition,
+    .interface__methods__method__argumentdefinition,
+    .class__methods__method__argumentdefinition {
+        font-weight: bold;
+        display: inline;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__methods__method__argumentdescription,
+    .trait__methods__method__argumentdescription p,
+    .interface__methods__method__argumentdescription,
+    .interface__methods__method__argumentdescription p,
+    .class__methods__method__argumentdescription,
+    .class__methods__method__argumentdescription p {
+        display: inline;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Properties
+    ------------------------------------------------------------------------------------------------ */
+
+    .trait__properties__heading,
+    .interface__properties__heading,
+    .class__properties__heading {
+        font-weight: bold;
+        font-size: 24px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__properties__property__name,
+    .interface__properties__property__name,
+    .class__properties__property__name {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__properties__property__links,
+    .interface__properties__property__links,
+    .class__properties__property__links {
+        font-size: 12px;
+        display: none;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__properties__property__code,
+    .interface__properties__property__code,
+    .class__properties__property__code {
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #dcdcdc;
+        padding: .5rem;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__properties__property__summary,
+    .interface__properties__property__summary,
+    .class__properties__property__summary {
+        font-style: italic;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__properties__property__description,
+    .interface__properties__property__description,
+    .class__properties__property__description {
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Class, Constants
+    ------------------------------------------------------------------------------------------------ */
+
+    .trait__constants__heading,
+    .interface__constants__heading,
+    .class__constants__heading {
+        font-weight: bold;
+        font-size: 24px;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__constants__constant__name,
+    .interface__constants__constant__name,
+    .class__constants__constant__name {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__constants__constant__code,
+    .interface__constants__constant__code,
+    .class__constants__constant__code {
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #dcdcdc;
+        padding: .5px;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__constants__constant__summary,
+    .interface__constants__constant__summary,
+    .class__constants__constant__summary {
+        font-style: italic;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+    .trait__constants__constant__description,
+    .interface__constants__constant__description,
+    .class__constants__constant__description {
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+        margin-top: .5rem;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------
+    -- Keyword
+    ------------------------------------------------------------------------------------------------ */
+
+    .keyword {
+        color: darkred;
+        font-weight: bold;
     }
 }
