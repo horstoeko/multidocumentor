@@ -9,9 +9,10 @@
 
 namespace horstoeko\multidocumentor\Twig;
 
-use League\CommonMark\CommonMarkConverter;
-use Twig\Extension\AbstractExtension;
+use DOMDocument;
 use Twig\TwigFilter;
+use Twig\Extension\AbstractExtension;
+use League\CommonMark\CommonMarkConverter;
 
 /**
  * Class for multiDoc twig extensions
@@ -35,6 +36,7 @@ class MultiDocTwigExtension extends AbstractExtension
             new TwigFilter("removeinvisible", [$this, 'removeInvisibleCharacters'], ['is_safe' => ['html']]),
             new TwigFilter("parsedown", [$this, 'parsedown'], ['is_safe' => ['html']]),
             new TwigFilter("parsedownnop", [$this, 'parsedownNoParagrap'], ['is_safe' => ['html']]),
+            new TwigFilter("stripoutertag", [$this, 'stripoutertag'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -77,6 +79,37 @@ class MultiDocTwigExtension extends AbstractExtension
     {
         $htmlString = $this->parsedown($markDownString ?? "");
         $htmlString = preg_replace('!^<p>(.*?)</p>$!i', '$1', $htmlString);
+
+        return $htmlString;
+    }
+
+    /**
+     * Strip outermost specific tag
+     *
+     * @param  string $markupString
+     * @param  string $tagName
+     * @return string
+     */
+    public function stripoutertag($htmlString, $tagName): string
+    {
+        if (trim($htmlString) == "") {
+            return $htmlString;
+        }
+
+        $doc = new DOMDocument();
+        $doc->loadHTML($htmlString);
+
+        $elements = $doc->getElementsByTagName($tagName);
+
+        if (count($elements) == 0) {
+            return $htmlString;
+        }
+
+        $htmlString = "";
+
+        foreach ($elements[0]->childNodes as $child) {
+            $htmlString .= $elements[0]->ownerDocument->saveHTML($child);
+        }
 
         return $htmlString;
     }
