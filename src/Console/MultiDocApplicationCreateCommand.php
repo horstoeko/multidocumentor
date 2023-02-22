@@ -9,14 +9,14 @@
 
 namespace horstoeko\multidocumentor\Console;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use horstoeko\multidocumentor\Container\MultiDocContainer;
-use horstoeko\multidocumentor\Services\MultiDocCreatorService;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use horstoeko\multidocumentor\Console\MultiDocApplicationAbstractCommand;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Events\MultiDocLogEvent;
+use horstoeko\multidocumentor\Services\MultiDocCreatorService;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class representing the MultiDoc Console Application "Create"-Commands
