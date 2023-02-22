@@ -38,8 +38,8 @@
 ```php
 {{ formattedCode }}
 ```
-{% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
-{% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
+{%- include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing -%}
+{%- include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing -%}
 {{ "" }}
 {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
@@ -48,5 +48,15 @@
 {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
 {{ "" }}
+{% if method.getArguments()|length > 0%}
+{{ "" }}
+#### Parameters
+{{ "" }}
+{% for argument in method.getArguments() %}
+##### {{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}
+{% set argumentParam = method.getDocBlock().getTagsByName('param')|default([])|filter(v => v.getVariableName() == argument.name) %}
+{{(argumentParam|first).getDescription()|parsedownnop|stripoutertag('p')}}
+{% endfor %}
+{% endif %}
 {% endfor %}
 {{ "\n" }}
