@@ -53,8 +53,8 @@
 #### Parameters
 {{ "" }}
 {% for argument in method.getArguments() %}
-##### {{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}
 {% set argumentParam = method.getDocBlock().getTagsByName('param')|default([])|filter(v => v.getVariableName() == argument.name) %}
+*{{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}*
 {{(argumentParam|first).getDescription()|parsedownnop|stripoutertag('p')}}
 {% endfor %}
 {% endif %}
