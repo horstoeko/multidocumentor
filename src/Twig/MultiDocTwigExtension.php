@@ -59,10 +59,12 @@ class MultiDocTwigExtension extends AbstractExtension
      */
     public function parsedown($markDownString): string
     {
-        $converter = new CommonMarkConverter([
+        $converter = new CommonMarkConverter(
+            [
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
-        ]);
+            ]
+        );
 
         $htmlString = $converter->convertToHtml($markDownString ?? "");
 
