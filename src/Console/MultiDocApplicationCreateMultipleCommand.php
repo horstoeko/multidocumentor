@@ -46,6 +46,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
         $this->addOption('markdowntemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional markdown templates directories');
         $this->addOption('css', null, InputOption::VALUE_REQUIRED, 'Directory where the css file is located');
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
+        $this->addOption('pageheader', null, InputOption::VALUE_REQUIRED, 'The content of the page header (PDF only)');
+        $this->addOption('pagefooter', null, InputOption::VALUE_REQUIRED, 'The content of the page footer (PDF only)');
     }
 
     /**
@@ -65,6 +67,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             "markdowntemplates" => "arrayoption|array",
             "css" => "stringoption:" . dirname(__FILE__) . "/../Assets/Html/styles.css|required",
             "options" => "arrayoption|array",
+            "pageheader" => "stringoption:",
+            "pagefooter" => "stringoption:{PAGENO}/{nbpg}",
         ];
     }
 
@@ -105,6 +109,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             '--markdowntemplates' => $this->validatedOption('markdowntemplates'),
             '--css' => $this->validatedOption('css'),
             '--options' => $this->validatedOption('options'),
+            '--pageheader' => $this->validatedOption('pageheader'),
+            '--pagefooter' => $this->validatedOption('pagefooter'),
         ];
 
         $commandInput = new ArrayInput($arguments);

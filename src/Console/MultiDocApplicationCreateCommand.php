@@ -48,6 +48,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $this->addOption('markdowntemplates', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional markdown templates directories');
         $this->addOption('css', null, InputOption::VALUE_REQUIRED, 'Directory where the css file is located');
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
+        $this->addOption('pageheader', null, InputOption::VALUE_REQUIRED, 'The content of the page header (PDF only)');
+        $this->addOption('pagefooter', null, InputOption::VALUE_REQUIRED, 'The content of the page footer (PDF only)');
     }
 
     /**
@@ -67,6 +69,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "markdowntemplates" => "arrayoption|array",
             "css" => "stringoption:" . dirname(__FILE__) . "/../Assets/Html/styles.css|required",
             "options" => "arrayoption|array",
+            "pageheader" => "stringoption:",
+            "pagefooter" => "stringoption:{PAGENO}/{nbpg}",
         ];
     }
 
@@ -88,6 +92,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $container->setCustomHtmlDirectories($this->validatedOption('htmltemplates'));
         $container->setCustomMarkdownDirectories($this->validatedOption('markdowntemplates'));
         $container->setCssFilename($this->validatedOption('css'));
+        $container->setPageHeader($this->validatedOption('pageheader'));
+        $container->setPageFooter($this->validatedOption('pagefooter'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);

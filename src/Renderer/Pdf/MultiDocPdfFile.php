@@ -47,7 +47,8 @@ class MultiDocPdfFile extends Mpdf
         $defaultFontConfig = (new FontVariables())->getDefaults();
         $defaultFontData = $defaultFontConfig['fontdata'];
 
-        $this->setFooter('{PAGENO}/{nbpg}');
+        $this->SetHeader($this->container->pageHeader);
+        $this->SetFooter($this->container->pageFooter);
 
         parent::__construct(
             [
