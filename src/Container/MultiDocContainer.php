@@ -131,9 +131,9 @@ class MultiDocContainer
      */
     public function __get($name)
     {
-        $name = lcfirst($name);
+        $containerItemName = lcfirst($name);
 
-        return (isset($this->container[$name])) ? $this->container[$name] : null;
+        return (isset($this->container[$containerItemName])) ? $this->container[$containerItemName] : null;
     }
 
     /**
@@ -145,9 +145,9 @@ class MultiDocContainer
      */
     public function __set($name, $value)
     {
-        $name = lcfirst($name);
+        $containerItemName = lcfirst($name);
 
-        $this->container[$name] = $value;
+        $this->container[$containerItemName] = $value;
     }
 
     /**
