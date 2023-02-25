@@ -35,6 +35,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @property string $fontDefault
  * @property array $customRenderers
  * @property boolean $beautifyHtmlOutput
+ * @property boolean $minifyHtmlOutput
  * @property \horstoeko\multidocumentor\Events\MultiDocEventDispatcher $eventDispatcher
  * @property string $pageHeader
  * @property string $pageFooter
@@ -54,6 +55,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method string getFontDefault()
  * @method array getCustomRenderers()
  * @method booleab getBeautifyHtmlOutput()
+ * @method booleab getMinifyHtmlOutput()
  * @method \horstoeko\multidocumentor\Events\MultiDocEventDispatcher getEventDispatcher()
  * @method string getPageHeader()
  * @method string getPageFooter()
@@ -73,6 +75,7 @@ use horstoeko\multidocumentor\Events\MultiDocEventDispatcher;
  * @method void setFontDefault(string $fondDefault)
  * @method void setCustomRenderers(array $renderers)
  * @method void setBeautifyHtmlOutput(bool $beautifyHtmlOutput)
+ * @method void setMinifyHtmlOutput(bool $minifyHtmlOutput)
  * @method void setEventDispatcher(\horstoeko\multidocumentor\Events\MultiDocEventDispatcher $eventDispatcher)
  * @method void setPageHeader()
  * @method void setPageFooter()
@@ -118,6 +121,7 @@ class MultiDocContainer
         $this->customHtmlDirectories = [];
         $this->customMarkdownDirectories = [];
         $this->beautifyHtmlOutput = false;
+        $this->minifyHtmlOutput = true;
         $this->eventDispatcher = new MultiDocEventDispatcher;
         $this->pageHeader = "";
         $this->pageFooter = "{PAGENO}/{nbpg}";

@@ -50,6 +50,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
         $this->addOption('pageheader', null, InputOption::VALUE_REQUIRED, 'The content of the page header (PDF only)');
         $this->addOption('pagefooter', null, InputOption::VALUE_REQUIRED, 'The content of the page footer (PDF only)');
+        $this->addOption('beautifyhtml', null, InputOption::VALUE_NONE, 'Activate HTML beautifying (HTML only)');
+        $this->addOption('minifyhtml', null, InputOption::VALUE_NONE, 'Activate HTML minifying (HTML only)');
     }
 
     /**
@@ -71,6 +73,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "options" => "arrayoption|array",
             "pageheader" => "stringoption:",
             "pagefooter" => "stringoption:{PAGENO}/{nbpg}",
+            "beautifyhtml" => "default:false|boolean",
+            "minifyhtml" => "default:false|boolean",
         ];
     }
 
@@ -94,6 +98,8 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $container->setCssFilename($this->validatedOption('css'));
         $container->setPageHeader($this->validatedOption('pageheader'));
         $container->setPageFooter($this->validatedOption('pagefooter'));
+        $container->setBeautifyHtmlOutput($this->validatedOption('beautifyhtml'));
+        $container->setMinifyHtmlOutput($this->validatedOption('minifyhtml'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
             list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);

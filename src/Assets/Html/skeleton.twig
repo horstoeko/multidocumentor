@@ -10,8 +10,14 @@
             {% endfor %}
             {{inlinecss|raw}}
         </style>
+        <script>
+            {{inlinejshead|raw}}
+        </script>
     </head>
     <body>
         {{content|raw}}
+        <script>
+            {{inlinejsbody|raw}}
+        </script>
     </body>
 </html>

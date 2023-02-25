@@ -48,6 +48,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
         $this->addOption('options', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Additional options');
         $this->addOption('pageheader', null, InputOption::VALUE_REQUIRED, 'The content of the page header (PDF only)');
         $this->addOption('pagefooter', null, InputOption::VALUE_REQUIRED, 'The content of the page footer (PDF only)');
+        $this->addOption('beautifyhtml', null, InputOption::VALUE_NONE, 'Activate HTML beautifying (HTML only)');
+        $this->addOption('minifyhtml', null, InputOption::VALUE_NONE, 'Activate HTML minifying (HTML only)');
     }
 
     /**
@@ -69,6 +71,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             "options" => "arrayoption|array",
             "pageheader" => "stringoption:",
             "pagefooter" => "stringoption:{PAGENO}/{nbpg}",
+            "beautifyhtml" => "default:false|boolean",
+            "minifyhtml" => "default:false|boolean",
         ];
     }
 
@@ -111,6 +115,8 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             '--options' => $this->validatedOption('options'),
             '--pageheader' => $this->validatedOption('pageheader'),
             '--pagefooter' => $this->validatedOption('pagefooter'),
+            '--beautifyhtml' => $this->validatedOption('beautifyhtml'),
+            '--minifyhtml' => $this->validatedOption('minifyhtml'),
         ];
 
         $commandInput = new ArrayInput($arguments);

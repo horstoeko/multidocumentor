@@ -36,6 +36,8 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
             [
                 "inlinefonts" => $this->createInlineFonts(),
                 "inlinecss" => $this->createInlineCss(),
+                "inlinejshead" => $this->createInlineJsHead(),
+                "inlinejsbodys" => $this->createInlineJsBody(),
                 "content" => $this->markup,
             ]
         );
@@ -82,5 +84,25 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
     private function createInlineCss(): string
     {
         return file_get_contents($this->container->getCssFilename());
+    }
+
+    /**
+     * Create inline script part for the head-part of the HTML file
+     *
+     * @return string
+     */
+    private function createInlineJsHead(): string
+    {
+        return "";
+    }
+
+    /**
+     * Create inline script part for the body-part of the HTML file
+     *
+     * @return string
+     */
+    private function createInlineJsBody(): string
+    {
+        return "";
     }
 }
