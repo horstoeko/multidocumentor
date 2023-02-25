@@ -4,10 +4,10 @@
 {% set thistmplnameprefix2 = thisobjecttype ~ "_header_" %}
 {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
-# {{ name }}
-{{ "" }}
+# {{ name|removeinvisible }}
+
 _{{ summary|removeinvisible }}_
-{{ "" }}
+
 {{ description|removeinvisible }}
 {% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}

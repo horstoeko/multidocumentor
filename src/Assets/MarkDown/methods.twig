@@ -30,33 +30,40 @@
 {% set formattedMethodName = method.getName()|removeinvisible %}
 {% set formattedMethodVisibilty = method.getVisibility()|removeinvisible %}
 {% set formattedCode = formattedMethodName ~ "(" ~ argumentNames|join(", ")  ~ ")" %}
-{{ "" }}
 {% include thistmplnameprefix1 ~ "beforetitle.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "beforetitle.twig" ignore missing %}
-### {{ formattedMethodName }} ({{ formattedMethodVisibilty }})
-{{ "" }}
+
+### {{ formattedMethodName|removeinvisible }} ({{ formattedMethodVisibilty|removeinvisible }})
+
 ```php
-{{ formattedCode }}
+{{ formattedCode|removeinvisible }}
 ```
-{%- include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing -%}
-{%- include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing -%}
-{{ "" }}
+
+{% include thistmplnameprefix1 ~ "aftertitle.twig" ignore missing %}
+{% include thistmplnameprefix2 ~ "aftertitle.twig" ignore missing %}
 {% include thistmplnameprefix1 ~ "beforedescription.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "beforedescription.twig" ignore missing %}
-{% if summary != "" %}{{ summary }}{% endif %}
-{% if description != "" %}{{ description }}{% endif %}
+{%- if summary != "" %}
+    {{- summary|removeinvisible }}
+{% endif -%}
+{%- if description != "" %}
+    {{- description|removeinvisible }}
+{% endif -%}
 {% include thistmplnameprefix1 ~ "afterdescription.twig" ignore missing %}
 {% include thistmplnameprefix2 ~ "afterdescription.twig" ignore missing %}
-{{ "" }}
-{% if method.getArguments()|length > 0%}
-{{ "" }}
+{% if method.getArguments()|length > 0 %}
+
+
 #### Parameters
-{{ "" }}
+
 {% for argument in method.getArguments() %}
 {% set argumentParam = method.getDocBlock().getTagsByName('param')|default([])|filter(v => v.getVariableName() == argument.name) %}
 *{{ argument.getType() }} ${{ argument.getName() }}{% if argument.getDefault() %} = {{ argument.getDefault() }}{% endif %}*
-{{(argumentParam|first).getDescription()|parsedownnop|stripoutertag('p')}}
+
+{% if argumentParam|length > 0 %}
+    {{- (argumentParam|first).getDescription()|parsedownnop|stripoutertag('p')|removeinvisible }}
+    
+{% endif -%}
 {% endfor %}
 {% endif %}
 {% endfor %}
-{{ "\n" }}

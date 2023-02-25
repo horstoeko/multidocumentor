@@ -30,6 +30,8 @@ abstract class MultiDocApplicationAbstractCommand extends Command
     /**
      * The internal validation class
      *
+     * Controls the internal validation
+     *
      * @var \Rakit\Validation\Validator
      */
     protected $validator = null;
