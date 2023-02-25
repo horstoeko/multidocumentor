@@ -14,6 +14,7 @@ use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Renderer\MultiDocRendererClassList;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -35,6 +36,17 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
         $this->setName('multidoc:renderers');
         $this->setDescription('List all registed renderers');
         $this->setHelp('This shows a list all registed renderers');
+        $this->addOption('withclass', null, InputOption::VALUE_NONE, 'Show the classname of the renderer');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getValidationOptions(): array
+    {
+        return [
+            "withclass" => "default:false|boolean",
+        ];
     }
 
     /**
@@ -47,14 +59,27 @@ class MultiDocApplicationListRenderers extends MultiDocApplicationAbstractComman
         $renderersDefinitionList = new MultiDocRendererClassList($container);
         $renderers = $renderersDefinitionList->getAllRegisteredRenderers();
 
+        $tableHeader = ['Index', 'Name', 'Description'];
+
+        if ($this->validatedOption('withclass') === true) {
+            $tableHeader[] = 'Class';
+        }
+
         $table = new Table($output);
-        $table->setHeaders(['Index', 'Name', 'Description']);
+        $table->setHeaders($tableHeader);
 
         $tableItems = array_map(
-            function ($renderer) {
-                return ['', $renderer::getShortName(), $renderer::getDescription()];
+            function ($renderer, $rendererKey) {
+                $row = [$rendererKey, $renderer::getShortName(), $renderer::getDescription()];
+
+                if ($this->validatedOption('withclass') === true) {
+                    $row[] = $renderer;
+                }
+
+                return $row;
             },
-            $renderers
+            $renderers,
+            array_keys($renderers)
         );
 
         $table->setRows($tableItems);
