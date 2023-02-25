@@ -59,16 +59,6 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    abstract public function getDefaultTemplateDirectory(): string;
-
-    /**
-     * @inheritDoc
-     */
-    abstract public function getCustomTemplateDirectories(): array;
-
-    /**
-     * @inheritDoc
-     */
     public function beforeGetOutput(): void
     {
     }

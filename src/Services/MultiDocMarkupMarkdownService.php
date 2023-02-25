@@ -39,24 +39,8 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
         parent::__construct($container);
 
         $this->twigService = new MultiDocTwigService($this->container);
-        $this->twigService->addTemplateDirectories($this->getCustomTemplateDirectories());
-        $this->twigService->addTemplateDirectory($this->getDefaultTemplateDirectory());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDefaultTemplateDirectory(): string
-    {
-        return $this->container->getMarkdownDirectory();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCustomTemplateDirectories(): array
-    {
-        return $this->container->getCustomMarkdownDirectories();
+        $this->twigService->addTemplateDirectories($this->container->getCustomMarkdownDirectories());
+        $this->twigService->addTemplateDirectory($this->container->getMarkdownDirectory());
     }
 
     /**
