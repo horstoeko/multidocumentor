@@ -194,7 +194,7 @@ class MultiDocTools
     /**
      * Minify a HTML string
      *
-     * @param string $html
+     * @param  string $html
      * @return string
      */
     public static function minifyHtml(string $html): string

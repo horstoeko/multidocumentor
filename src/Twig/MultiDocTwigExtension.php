@@ -41,6 +41,18 @@ class MultiDocTwigExtension extends AbstractExtension
     }
 
     /**
+     * Returns a list of functions to add to the existing list.
+     *
+     * @return \Twig\TwigFunction[]
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig\TwigFunction('downloadurl', [$this, 'downloadUrl']),
+        ];
+    }
+
+    /**
      * Removes invisble Characters
      *
      * @param  string $string
@@ -61,8 +73,8 @@ class MultiDocTwigExtension extends AbstractExtension
     {
         $converter = new CommonMarkConverter(
             [
-            'html_input' => 'strip',
-            'allow_unsafe_links' => false,
+                'html_input' => 'strip',
+                'allow_unsafe_links' => false,
             ]
         );
 
@@ -114,5 +126,26 @@ class MultiDocTwigExtension extends AbstractExtension
         }
 
         return $htmlString;
+    }
+
+    /**
+     * Downloads content from URL and returns the output
+     *
+     * @param  string $url
+     * @return void
+     */
+    public function downloadUrl(string $url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_VERBOSE, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, false);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 }
