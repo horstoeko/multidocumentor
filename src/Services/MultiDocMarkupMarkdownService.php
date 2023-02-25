@@ -9,8 +9,9 @@
 
 namespace horstoeko\multidocumentor\Services;
 
-use horstoeko\multidocumentor\Services\MultiDocAbstractMarkupService;
+use horstoeko\multidocumentor\Container\MultiDocContainer;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
+use horstoeko\multidocumentor\Services\MultiDocAbstractMarkupService;
 
 /**
  * Service class which renders the markup in markdown format
@@ -23,6 +24,25 @@ use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
  */
 class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
 {
+    /**
+     * The HTML Engine
+     *
+     * @var \horstoeko\multidocumentor\Interfaces\MultiDocTwigServiceInterface
+     */
+    private $twigService;
+
+    /**
+     * Constructur
+     */
+    public function __construct(MultiDocContainer $container)
+    {
+        parent::__construct($container);
+
+        $this->twigService = new MultiDocTwigService($this->container);
+        $this->twigService->addTemplateDirectories($this->getCustomTemplateDirectories());
+        $this->twigService->addTemplateDirectory($this->getDefaultTemplateDirectory());
+    }
+
     /**
      * @inheritDoc
      */
@@ -37,6 +57,33 @@ class MultiDocMarkupMarkdownService extends MultiDocAbstractMarkupService
     public function getCustomTemplateDirectories(): array
     {
         return $this->container->getCustomMarkdownDirectories();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function render(string $name, array $data = array()): string
+    {
+        return $this->twigService->renderTemplate(
+            $name,
+            array_merge(
+                $data,
+                [
+                    "_config" => $this->container,
+                    "_container" => $this->container,
+                ]
+            )
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface
+    {
+        $this->addOutput($this->render($name, $data));
+
+        return $this;
     }
 
     /**

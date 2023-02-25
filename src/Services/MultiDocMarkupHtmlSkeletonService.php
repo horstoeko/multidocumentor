@@ -29,8 +29,10 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
      *
      * @return MultiDocMarkupServiceInterface
      */
-    public function beforeGetOutput(): MultiDocMarkupServiceInterface
+    public function beforeGetOutput(): void
     {
+        parent::beforeGetOutput();
+
         $this->markup = $this->render(
             "skeleton.twig",
             [
@@ -41,8 +43,6 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
                 "content" => $this->markup,
             ]
         );
-
-        return $this;
     }
 
     /**

@@ -10,9 +10,7 @@
 namespace horstoeko\multidocumentor\Services;
 
 use horstoeko\multidocumentor\Container\MultiDocContainer;
-use horstoeko\multidocumentor\Services\MultiDocTwigService;
 use horstoeko\multidocumentor\Interfaces\MultiDocMarkupServiceInterface;
-use horstoeko\multidocumentor\Tools\MultiDocTools;
 
 /**
  * Basic Service class which renders the markup
@@ -33,13 +31,6 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     protected $container;
 
     /**
-     * The HTML Engine
-     *
-     * @var \horstoeko\multidocumentor\Interfaces\MultiDocTwigServiceInterface
-     */
-    private $twigService;
-
-    /**
      * The internal markup container
      *
      * @var string
@@ -53,10 +44,6 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     {
         $this->container = $container;
         $this->markup = "";
-
-        $this->twigService = new MultiDocTwigService($this->container);
-        $this->twigService->addTemplateDirectories($this->getCustomTemplateDirectories());
-        $this->twigService->addTemplateDirectory($this->getDefaultTemplateDirectory());
     }
 
     /**
@@ -82,9 +69,8 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    public function beforeGetOutput(): MultiDocMarkupServiceInterface
+    public function beforeGetOutput(): void
     {
-        return $this;
     }
 
     /**
@@ -93,13 +79,6 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     public function getOutput(): string
     {
         $this->beforeGetOutput();
-
-        if ($this->container->getBeautifyHtmlOutput() === true) {
-            $this->markup = MultiDocTools::beautifyHtml($this->markup);
-        }
-        if ($this->container->getMinifyHtmlOutput() === true) {
-            $this->markup = MultiDocTools::minifyHtml($this->markup);
-        }
 
         return $this->markup;
     }
@@ -117,29 +96,12 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    public function render(string $name, array $data = array()): string
-    {
-        return $this->twigService->renderTemplate(
-            $name,
-            array_merge(
-                $data,
-                [
-                    "_config" => $this->container,
-                    "_container" => $this->container,
-                ]
-            )
-        );
-    }
+    abstract public function render(string $name, array $data = array()): string;
 
     /**
      * @inheritDoc
      */
-    public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface
-    {
-        $this->addOutput($this->render($name, $data));
-
-        return $this;
-    }
+    abstract public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc

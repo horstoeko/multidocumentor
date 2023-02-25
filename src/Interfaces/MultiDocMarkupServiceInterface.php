@@ -51,9 +51,9 @@ interface MultiDocMarkupServiceInterface
     /**
      * Trigger which called before the getMarkupOutput method is run
      *
-     * @return MultiDocMarkupServiceInterface
+     * @return void
      */
-    public function beforeGetOutput(): MultiDocMarkupServiceInterface;
+    public function beforeGetOutput(): void;
 
     /**
      * Return the created markup
