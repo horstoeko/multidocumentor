@@ -53,7 +53,7 @@
         "testsreal": "./vendor/bin/phpunit --configuration ./build/phpunit.xml",
         "phpcs": "./vendor/bin/phpcs --standard=./build/phpcsrules.xml --extensions=php --ignore=autoload.php ./src ./tests",
         "phpcs12": "./vendor/bin/phpcs --standard=./build/phpcsrules_psr12.xml --extensions=php --ignore=autoload.php ./src ./tests",
-        "phpcbf": "./vendor/bin/phpcbf -q ./src ./tests",
+        "phpcbf": "./vendor/bin/phpcbf ./src ./tests",
         "phpcbf1": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr1.xml -q ./src ./tests",
         "phpcbf2": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr2.xml -q ./src ./tests",
         "phpcbf12": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr12.xml -q ./src ./tests",

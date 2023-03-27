@@ -39,7 +39,7 @@ class MultiDocMarkupHtmlSkeletonService extends MultiDocMarkupHtmlService
                 "inlinefonts" => $this->createInlineFonts(),
                 "inlinecss" => $this->createInlineCss(),
                 "inlinejshead" => $this->createInlineJsHead(),
-                "inlinejsbodys" => $this->createInlineJsBody(),
+                "inlinejsbody" => $this->createInlineJsBody(),
                 "content" => $this->markup,
             ]
         );
