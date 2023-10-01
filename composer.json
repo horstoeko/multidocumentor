@@ -31,7 +31,7 @@
         "php": "^7.3|^7.4|^8.0|^8.1|^8.2|^8.3",
         "league/commonmark": "^1.6",
         "league/html-to-markdown": "^5.1",
-        "mpdf/mpdf": "^8.0",
+        "mpdf/mpdf": "^8",
         "phpdocumentor/reflection": "~4.0",
         "rakit/validation": "^1.4",
         "symfony/console": "^5|^6",
