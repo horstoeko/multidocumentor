@@ -68,9 +68,9 @@ class MultiDocRenderService implements MultiDocRenderServiceInterface
          */
         $project = $projectFactory->create('Project to document', $this->includedFiles);
 
-        $renderer = MultiDocRendererFactory::createRenderer($this->container);
-        $renderer->setReflectedFiles($project->getFiles());
-        $renderer->render();
+        $multiDocRenderer = MultiDocRendererFactory::createRenderer($this->container);
+        $multiDocRenderer->setReflectedFiles($project->getFiles());
+        $multiDocRenderer->render();
 
         return $this;
     }

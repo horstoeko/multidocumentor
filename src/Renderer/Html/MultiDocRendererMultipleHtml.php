@@ -66,14 +66,16 @@ class MultiDocRendererMultipleHtml extends MultiDocAbstractRenderer
      */
     public function render(): MultiDocRendererInterface
     {
-        foreach ($this->reflectedFiles as $file) {
-            foreach ($file->getClasses() as $class) {
+        foreach ($this->reflectedFiles as $reflectedFile) {
+            foreach ($reflectedFile->getClasses() as $class) {
                 $this->renderClass($class);
             }
-            foreach ($file->getInterfaces() as $interface) {
+            
+            foreach ($reflectedFile->getInterfaces() as $interface) {
                 $this->renderInterface($interface);
             }
-            foreach ($file->getTraits() as $trait) {
+            
+            foreach ($reflectedFile->getTraits() as $trait) {
                 $this->renderTrait($trait);
             }
         }

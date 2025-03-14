@@ -67,7 +67,7 @@ class MultiDocApplicationCreateMultipleCommand extends MultiDocApplicationAbstra
             "renderers" => "arrayoption|array",
             "htmltemplates" => "arrayoption|array",
             "markdowntemplates" => "arrayoption|array",
-            "css" => "stringoption:" . dirname(__FILE__) . "/../Assets/Html/styles.css|required",
+            "css" => "stringoption:" . __DIR__ . "/../Assets/Html/styles.css|required",
             "options" => "arrayoption|array",
             "pageheader" => "stringoption:",
             "pagefooter" => "stringoption:{PAGENO}/{nbpg}",

@@ -55,6 +55,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
         if ($this->container->getBeautifyHtmlOutput() === true) {
             $this->markup = MultiDocTools::beautifyHtml($this->markup);
         }
+        
         if ($this->container->getMinifyHtmlOutput() === true) {
             $this->markup = MultiDocTools::minifyHtml($this->markup);
         }
@@ -63,7 +64,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function render(string $name, array $data = array()): string
+    public function render(string $name, array $data = []): string
     {
         return $this->twigService->renderTemplate(
             $name,
@@ -80,7 +81,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
     /**
      * @inheritDoc
      */
-    public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface
+    public function renderAndAddToOutput(string $name, array $data = []): MultiDocMarkupServiceInterface
     {
         $this->addOutput($this->render($name, $data));
 
@@ -120,12 +121,21 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function writeSummary(\phpDocumentor\Reflection\Element $object, array $constants, array $properties, array $methods): MultiDocMarkupServiceInterface
     {
-        $allConstants = $allProperties = $allMethods = array(
+        $allConstants = [
             'public' => [],
             'protected' => [],
             'private' => []
-        );
-
+        ];
+        $allProperties = [
+            'public' => [],
+            'protected' => [],
+            'private' => []
+        ];
+        $allMethods = [
+            'public' => [],
+            'protected' => [],
+            'private' => []
+        ];
         foreach ($constants as $constant) {
             $allConstants['public'][] = $constant->getName();
         }
@@ -157,7 +167,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function writeConstants(\phpDocumentor\Reflection\Element $object, array $constants): MultiDocMarkupServiceInterface
     {
-        if (!empty($constants)) {
+        if ($constants !== []) {
             $this->renderAndAddToOutput(
                 'constants.twig',
                 [
@@ -178,7 +188,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function writeProperties(\phpDocumentor\Reflection\Element $object, array $properties): MultiDocMarkupServiceInterface
     {
-        if (!empty($properties)) {
+        if ($properties !== []) {
             $this->renderAndAddToOutput(
                 'properties.twig',
                 [
@@ -199,7 +209,7 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function writeMethods(\phpDocumentor\Reflection\Element $object, array $methods): MultiDocMarkupServiceInterface
     {
-        if (!empty($methods)) {
+        if ($methods !== []) {
             $this->renderAndAddToOutput(
                 'methods.twig',
                 [
@@ -220,9 +230,9 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function createFromClass(\phpDocumentor\Reflection\Php\Class_ $class): MultiDocMarkupServiceInterface
     {
-        $summary = $class->getDocBlock() !== null ? $class->getDocBlock()->getSummary() : '';
-        $description = $class->getDocBlock() !== null ? $class->getDocBlock()->getDescription() : '';
-        $tags = $class->getDocBlock() !== null ? $class->getDocBlock()->getTags() : [];
+        $summary = $class->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $class->getDocBlock()->getSummary() : '';
+        $description = $class->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $class->getDocBlock()->getDescription() : '';
+        $tags = $class->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $class->getDocBlock()->getTags() : [];
 
         $this->writeHeader($class, $class->getName(), $summary, $description, $tags);
         $this->writeSummary($class, $class->getConstants(), $class->getProperties(), $class->getMethods());
@@ -238,12 +248,12 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function createFromInterface(\phpDocumentor\Reflection\Php\Interface_ $interface): MultiDocMarkupServiceInterface
     {
-        $summary = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getSummary() : '';
-        $description = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getDescription() : '';
-        $tags = $interface->getDocBlock() !== null ? $interface->getDocBlock()->getTags() : [];
+        $summary = $interface->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $interface->getDocBlock()->getSummary() : '';
+        $description = $interface->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $interface->getDocBlock()->getDescription() : '';
+        $tags = $interface->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $interface->getDocBlock()->getTags() : [];
 
         $this->writeHeader($interface, $interface->getName(), $summary, $description, $tags);
-        $this->writeSummary($interface, $interface->getConstants(), array(), $interface->getMethods());
+        $this->writeSummary($interface, $interface->getConstants(), [], $interface->getMethods());
         $this->writeConstants($interface, $interface->getConstants());
         $this->writeMethods($interface, $interface->getMethods());
 
@@ -255,12 +265,12 @@ class MultiDocMarkupHtmlService extends MultiDocAbstractMarkupService
      */
     public function createFromTrait(\phpDocumentor\Reflection\Php\Trait_ $trait): MultiDocMarkupServiceInterface
     {
-        $summary = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getSummary() : '';
-        $description = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getDescription() : '';
-        $tags = $trait->getDocBlock() !== null ? $trait->getDocBlock()->getTags() : [];
+        $summary = $trait->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $trait->getDocBlock()->getSummary() : '';
+        $description = $trait->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $trait->getDocBlock()->getDescription() : '';
+        $tags = $trait->getDocBlock() instanceof \phpDocumentor\Reflection\DocBlock ? $trait->getDocBlock()->getTags() : [];
 
         $this->writeHeader($trait, $trait->getName(), $summary, $description, $tags);
-        $this->writeSummary($trait, array(), $trait->getProperties(), $trait->getMethods());
+        $this->writeSummary($trait, [], $trait->getProperties(), $trait->getMethods());
         $this->writeProperties($trait, $trait->getProperties());
         $this->writeMethods($trait, $trait->getMethods());
 

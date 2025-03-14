@@ -34,8 +34,7 @@ class MultiDocRendererFactory
     {
         $rendererDefinitions = new MultiDocRendererClassList($container);
         $rendererClass = $rendererDefinitions->findByName($container->getOutputFormat());
-        $rendererInstance = new $rendererClass($container);
 
-        return $rendererInstance;
+        return new $rendererClass($container);
     }
 }

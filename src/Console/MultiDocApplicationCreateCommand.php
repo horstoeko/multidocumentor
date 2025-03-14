@@ -69,7 +69,7 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
             "renderers" => "arrayoption|array",
             "htmltemplates" => "arrayoption|array",
             "markdowntemplates" => "arrayoption|array",
-            "css" => "stringoption:" . dirname(__FILE__) . "/../Assets/Html/styles.css|required",
+            "css" => "stringoption:" . __DIR__ . "/../Assets/Html/styles.css|required",
             "options" => "arrayoption|array",
             "pageheader" => "stringoption:",
             "pagefooter" => "stringoption:{PAGENO}/{nbpg}",
@@ -96,18 +96,18 @@ class MultiDocApplicationCreateCommand extends MultiDocApplicationAbstractComman
         $container->setCustomHtmlDirectories($this->validatedOption('htmltemplates'));
         $container->setCustomMarkdownDirectories($this->validatedOption('markdowntemplates'));
         $container->setCssFilename($this->validatedOption('css'));
-        $container->setPageHeader($this->validatedOption('pageheader'));
-        $container->setPageFooter($this->validatedOption('pagefooter'));
+        $container->setPageHeader();
+        $container->setPageFooter();
         $container->setBeautifyHtmlOutput($this->validatedOption('beautifyhtml'));
         $container->setMinifyHtmlOutput($this->validatedOption('minifyhtml'));
 
         foreach ($this->validatedOption("fontsettings") as $fontsetting) {
-            list($fontName, $fontType, $fontFile) = explode(",", $fontsetting);
+            [$fontName, $fontType, $fontFile] = explode(",", $fontsetting);
             $container->addFontsSettings($fontName, $fontType, $fontFile);
         }
 
         foreach ($this->validatedOption("options") as $option) {
-            list($optionName, $optionValue) = explode(",", $option);
+            [$optionName, $optionValue] = explode(",", $option);
             $container->$optionName = $optionValue;
         }
 

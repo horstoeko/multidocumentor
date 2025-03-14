@@ -63,7 +63,7 @@ interface MultiDocMarkupServiceInterface
      * @param  array  $data
      * @return string
      */
-    public function render(string $name, array $data = array()): string;
+    public function render(string $name, array $data = []): string;
 
     /**
      * Render a markup and add the rendered output to internal markup storage
@@ -72,7 +72,7 @@ interface MultiDocMarkupServiceInterface
      * @param  array  $data
      * @return MultiDocMarkupServiceInterface
      */
-    public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface;
+    public function renderAndAddToOutput(string $name, array $data = []): MultiDocMarkupServiceInterface;
 
     /**
      * Write an introduction

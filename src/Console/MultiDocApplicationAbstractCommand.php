@@ -34,33 +34,33 @@ abstract class MultiDocApplicationAbstractCommand extends Command
      *
      * @var \Rakit\Validation\Validator
      */
-    protected $validator = null;
+    protected $validator;
 
     /**
      * The internal validation class containing the validation resulst
      *
      * @var \Rakit\Validation\Validation
      */
-    protected $validation = null;
+    protected $validation;
 
     /**
      * The input interface
      *
      * @var \Symfony\Component\Console\Input\InputInterface
      */
-    protected $inputInterface = null;
+    protected $inputInterface;
 
     /**
      * The output interface
      *
      * @var \Symfony\Component\Console\Output\OutputInterface
      */
-    protected $outputInterface = null;
+    protected $outputInterface;
 
     /**
      * @inheritDoc
      */
-    public function __construct(string $name = null)
+    public function __construct(?string $name)
     {
         parent::__construct($name);
 

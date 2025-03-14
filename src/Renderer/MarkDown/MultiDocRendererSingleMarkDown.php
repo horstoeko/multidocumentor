@@ -66,16 +66,16 @@ class MultiDocRendererSingleMarkDown extends MultiDocAbstractRenderer
         $this->markupService->initialize();
         $this->markupService->writeIntroduction();
 
-        foreach ($this->reflectedFiles as $file) {
-            foreach ($file->getClasses() as $class) {
+        foreach ($this->reflectedFiles as $reflectedFile) {
+            foreach ($reflectedFile->getClasses() as $class) {
                 $this->markupService->createFromClass($class);
             }
 
-            foreach ($file->getInterfaces() as $interface) {
+            foreach ($reflectedFile->getInterfaces() as $interface) {
                 $this->markupService->createFromInterface($interface);
             }
 
-            foreach ($file->getTraits() as $trait) {
+            foreach ($reflectedFile->getTraits() as $trait) {
                 $this->markupService->createFromTrait($trait);
             }
         }

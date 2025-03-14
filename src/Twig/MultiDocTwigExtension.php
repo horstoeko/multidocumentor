@@ -78,9 +78,7 @@ class MultiDocTwigExtension extends AbstractExtension
             ]
         );
 
-        $htmlString = $converter->convertToHtml($markDownString ?? "");
-
-        return $htmlString;
+        return $converter->convertToHtml($markDownString ?? "");
     }
 
     /**
@@ -92,9 +90,8 @@ class MultiDocTwigExtension extends AbstractExtension
     public function parsedownNoParagrap($markDownString): string
     {
         $htmlString = $this->parsedown($markDownString ?? "");
-        $htmlString = preg_replace('!^<p>(.*?)</p>$!i', '$1', $htmlString);
 
-        return $htmlString;
+        return preg_replace('!^<p>(.*?)</p>$!i', '$1', $htmlString);
     }
 
     /**
@@ -106,23 +103,23 @@ class MultiDocTwigExtension extends AbstractExtension
      */
     public function stripoutertag($htmlString, $tagName): string
     {
-        if (trim($htmlString) == "") {
+        if (trim($htmlString) === "") {
             return $htmlString;
         }
 
         $doc = new DOMDocument();
         $doc->loadHTML($htmlString);
 
-        $elements = $doc->getElementsByTagName($tagName);
+        $domNodeList = $doc->getElementsByTagName($tagName);
 
-        if (count($elements) == 0) {
+        if (count($domNodeList) == 0) {
             return $htmlString;
         }
 
         $htmlString = "";
 
-        foreach ($elements[0]->childNodes as $child) {
-            $htmlString .= $elements[0]->ownerDocument->saveHTML($child);
+        foreach ($domNodeList[0]->childNodes as $child) {
+            $htmlString .= $domNodeList[0]->ownerDocument->saveHTML($child);
         }
 
         return $htmlString;

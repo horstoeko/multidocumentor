@@ -41,6 +41,6 @@ class MultiDocMessageTexts
      */
     public static function getText(string $code, array $parameters = []): string
     {
-        return vsprintf(isset(self::TEXTS[$code]) ? self::TEXTS[$code] : $code, $parameters);
+        return vsprintf(self::TEXTS[$code] ?? $code, $parameters);
     }
 }

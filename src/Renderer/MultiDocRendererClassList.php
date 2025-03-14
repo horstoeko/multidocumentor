@@ -67,9 +67,10 @@ class MultiDocRendererClassList
     public function findByIndex(int $index, bool $raiseExceptionIfNotFound = true): ?string
     {
         if (!isset($this->rendererClasses[$index])) {
-            if ($raiseExceptionIfNotFound === true) {
+            if ($raiseExceptionIfNotFound) {
                 throw new \Exception(sprintf('No renderer registered at index %s', $index));
             }
+            
             return null;
         }
 
@@ -95,9 +96,10 @@ class MultiDocRendererClassList
         $rendererClass = reset($rendererClasses);
 
         if ($rendererClass === false) {
-            if ($raiseExceptionIfNotFound === true) {
+            if ($raiseExceptionIfNotFound) {
                 throw new \Exception(sprintf('Cannot determine the renderer %s', $name));
             }
+            
             return null;
         }
 
@@ -194,7 +196,7 @@ class MultiDocRendererClassList
      */
     private function addRendererClass(string $className): MultiDocRendererClassList
     {
-        if (MultiDocTools::classImplementsInterface($className, MultiDocRendererInterface::class) !== true) {
+        if (!MultiDocTools::classImplementsInterface($className, MultiDocRendererInterface::class)) {
             return $this;
         }
 

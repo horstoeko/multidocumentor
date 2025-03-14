@@ -35,7 +35,7 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
      *
      * @var string
      */
-    protected $markup;
+    protected $markup = "";
 
     /**
      * Constructur
@@ -43,7 +43,6 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     public function __construct(MultiDocContainer $container)
     {
         $this->container = $container;
-        $this->markup = "";
     }
 
     /**
@@ -86,12 +85,12 @@ abstract class MultiDocAbstractMarkupService implements MultiDocMarkupServiceInt
     /**
      * @inheritDoc
      */
-    abstract public function render(string $name, array $data = array()): string;
+    abstract public function render(string $name, array $data = []): string;
 
     /**
      * @inheritDoc
      */
-    abstract public function renderAndAddToOutput(string $name, array $data = array()): MultiDocMarkupServiceInterface;
+    abstract public function renderAndAddToOutput(string $name, array $data = []): MultiDocMarkupServiceInterface;
 
     /**
      * @inheritDoc

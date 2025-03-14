@@ -110,7 +110,7 @@ class MultiDocContainer
         $this->excludeDirectories = [];
         $this->outputTo = "";
         $this->outputFormat = "";
-        $this->assetDirectory = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets");
+        $this->assetDirectory = realpath(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Assets");
         $this->htmlDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "Html");
         $this->cssFilename = $this->htmlDirectory . DIRECTORY_SEPARATOR . "styles.css";
         $this->markdownDirectory = realpath($this->assetDirectory . DIRECTORY_SEPARATOR . "MarkDown");
@@ -137,7 +137,7 @@ class MultiDocContainer
     {
         $containerItemName = lcfirst($name);
 
-        return (isset($this->container[$containerItemName])) ? $this->container[$containerItemName] : null;
+        return $this->container[$containerItemName] ?? null;
     }
 
     /**
@@ -166,20 +166,25 @@ class MultiDocContainer
         $containerItemName = lcFirst(substr($name, 3));
 
         if (strcasecmp(substr($name, 0, 3), "get") === 0) {
-            return isset($this->container[$containerItemName]) ? $this->container[$containerItemName] : null;
+            return $this->container[$containerItemName] ?? null;
         }
-        if (strcasecmp(substr($name, 0, 3), "set") === 0 && count($arguments) > 0) {
+        
+        if (strcasecmp(substr($name, 0, 3), "set") === 0 && $arguments !== []) {
             $this->container[$containerItemName] = $arguments[0];
-            return;
+            return null;
         }
+        
         if (strcasecmp($name, "addFontsSettings") === 0) {
             $this->container[$containerItemName][$arguments[0]][$arguments[1]] = $arguments[2];
-            return;
+            return null;
         }
-        if (strcasecmp(substr($name, 0, 3), "add") === 0 && count($arguments) > 0) {
+        
+        if (strcasecmp(substr($name, 0, 3), "add") === 0 && $arguments !== []) {
             $this->container[$containerItemName] = isset($this->container[$containerItemName]) && is_array($this->container[$containerItemName]) ? $this->container[$containerItemName] : [];
             $this->container[$containerItemName][] = $arguments;
-            return;
+            return null;
         }
+
+        return null;
     }
 }

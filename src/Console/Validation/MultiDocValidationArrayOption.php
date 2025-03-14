@@ -55,6 +55,6 @@ class MultiDocValidationArrayOption extends Rule implements ModifyValue
      */
     public function modifyValue($value)
     {
-        return !is_array($value) ? [] : $value;
+        return is_array($value) ? $value : [];
     }
 }

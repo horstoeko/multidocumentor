@@ -147,6 +147,7 @@ class MultiDocTools
             foreach ($ret as &$item) {
                 $item = self::objectToArray($item);
             }
+            
             return $ret;
         } else {
             return $obj;
@@ -199,7 +200,7 @@ class MultiDocTools
      */
     public static function minifyHtml(string $html): string
     {
-        $replace = array(
+        $replace = [
             //remove tabs before and after HTML tags
             '/\>[^\S ]+/s'   => '>',
             '/[^\S ]+\</s'   => '<',
@@ -224,7 +225,7 @@ class MultiDocTools
             '/\),[\r\n\t ]+/s'  => '),',
             //remove quotes from HTML attributes that does not contain spaces; keep quotes around URLs!
             '~([\r\n\t ])?([a-zA-Z0-9]+)="([a-zA-Z0-9_/\\-]+)"([\r\n\t ])?~s' => '$1$2=$3$4', //$1 and $4 insert first white-space character found before/after attribute
-        );
+        ];
 
         return preg_replace(array_keys($replace), array_values($replace), $html);
     }
