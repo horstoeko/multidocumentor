@@ -164,7 +164,7 @@ class MultiDocHtmlBeautifier
                 if (count($content) > 0) {
                     $space = true;
                 }
-                
+
                 continue; //don't want to insert unnecessary space
             }
 
@@ -179,10 +179,10 @@ class MultiDocHtmlBeautifier
                     $this->lineCharCount++;
                     $content[] = ' ';
                 }
-                
+
                 $space = false;
             }
-            
+
             $this->lineCharCount++;
             $content[] = $input_char; //letter at-a-time (or string) inserted to an array
         }
@@ -221,7 +221,7 @@ class MultiDocHtmlBeautifier
             $this->tags[$tag . 'count'] = 1;
             $this->tags[$tag . $this->tags[$tag . 'count']] = $this->indentLevel; //and record the present indent level
         }
-        
+
         $this->tags[$tag . $this->tags[$tag . 'count'] . 'parent'] = $this->tags['parent']; //set the parent (i.e. in the case of a div this.tags.div1parent)
         $this->tags['parent'] = $tag . $this->tags[$tag . 'count']; //and make this the current parent (i.e. in the case of a div 'div1')
     }
@@ -236,7 +236,7 @@ class MultiDocHtmlBeautifier
                 if ($tag . $this->tags[$tag . 'count'] === $temp_parent) { //if this is it use it
                     break;
                 }
-                
+
                 $temp_parent = $this->tags[$temp_parent . 'parent'] ?? ''; //otherwise keep on climbing up the DOM Tree
             }
             
@@ -274,7 +274,7 @@ class MultiDocHtmlBeautifier
                     $this->pos = $orig_pos;
                     $this->lineCharCount = $orig_line_char_count;
                 }
-                
+
                 return count($content) > 0 ? implode('', $content) : ['', 'TK_EOF'];
             }
 
@@ -304,7 +304,7 @@ class MultiDocHtmlBeautifier
                     $content[] = ' ';
                     $this->lineCharCount++;
                 }
-                
+
                 $space = false;
             }
 
@@ -331,13 +331,13 @@ class MultiDocHtmlBeautifier
         } else { //otherwise go with the tag ending
             $tag_index = strpos($tag_complete, '>');
         }
-        
+
         if ($tag_complete[0] === '<') {
             $tag_offset = 1;
         } else {
             $tag_offset = $tag_complete[2] === '#' ? 3 : 2;
         }
-        
+
         $tag_check = strtolower(substr($tag_complete, $tag_offset, max($tag_index - $tag_offset, 0)));
 
         if ($tag_complete[strlen($tag_complete) - 2] === '/'
@@ -347,19 +347,19 @@ class MultiDocHtmlBeautifier
             if (!$peek) {
                 $this->tagType = 'SINGLE';
             }
-        
+
         } elseif ($tag_check === 'script') {
             if (!$peek) {
                 $this->record_tag($tag_check);
                 $this->tagType = 'SCRIPT';
             }
-        
+
         } elseif ($tag_check === 'style') {
             if (!$peek) {
                     $this->record_tag($tag_check);
                     $this->tagType = 'STYLE';
             }
-        
+
         } elseif ($this->is_unformatted($tag_check)) {
             // do not reformat the "unformatted" tags
             $comment = $this->get_unformatted('</' . $tag_check . '>', $tag_complete);
@@ -376,7 +376,7 @@ class MultiDocHtmlBeautifier
             }
 
             $this->tagType = 'SINGLE';
-        
+
         } elseif ($tag_check && $tag_check[0] === '!') {
             //peek for <! comment
             // for comments content is already correct.
@@ -384,7 +384,7 @@ class MultiDocHtmlBeautifier
                     $this->tagType = 'SINGLE';
                     $this->traverse_whitespace();
             }
-        
+
         } elseif (!$peek) {
             if ($tag_check && $tag_check[0] === '/') { //this tag is a double tag so check for tag-ending
                     $this->retrieve_tag(substr($tag_check, 1)); //remove it and all ancestors
@@ -395,7 +395,7 @@ class MultiDocHtmlBeautifier
                 if (strtolower($tag_check) !== 'html') {
                     $this->indentContent = true;
                 }
-                
+
                 $this->tagType = 'START';
 
                 // Allow preserving of newlines after a start tag
@@ -408,7 +408,7 @@ class MultiDocHtmlBeautifier
                     $this->print_newline(true, $this->output);
                 }
             }
-        
+
         }
 
         if ($peek) {
@@ -559,9 +559,9 @@ class MultiDocHtmlBeautifier
 
             if (!is_string($token)) {
                 return $token;
-            } else {
-                return [$token, 'TK_CONTENT'];
             }
+
+            return [$token, 'TK_CONTENT'];
         }
 
         if ($this->currentMode === 'TAG') {
@@ -569,10 +569,10 @@ class MultiDocHtmlBeautifier
 
             if (!is_string($token)) {
                 return $token;
-            } else {
-                $tag_name_type = 'TK_TAG_' . $this->tagType;
-                return [$token, $tag_name_type];
             }
+
+            $tag_name_type = 'TK_TAG_' . $this->tagType;
+            return [$token, $tag_name_type];
         }
 
         return null;
@@ -605,16 +605,12 @@ class MultiDocHtmlBeautifier
         // test next_tag to see if it is just html tag (no external content)
         $matches = [];
         preg_match('/^\s*<\s*\/?([a-z]*)\s*[^>]*>\s*$/', ($next_tag ?: ""), $matches);
-        $tag = $matches ?: null;
+        $tag = $matches !== [] ? $matches : null;
 
         // if next_tag comes back but is not an isolated tag, then
         // let's treat the 'a' tag as having content
         // and respect the unformatted option
-        if ($tag === null || $tag === [] || in_array($tag, $this->options['unformatted'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return $tag === null || $tag === [] || in_array($tag, $this->options['unformatted']);
     }
 
     private function print_newline($force, &$arr)
@@ -731,7 +727,7 @@ class MultiDocHtmlBeautifier
                 // Don't add a newline before elements that should remain unformatted.
                 $matches = [];
                 preg_match('/^\s*<([a-z]+)/i', $this->tokenText, $matches);
-                $tag_check = $matches ?: null;
+                $tag_check = $matches !== [] ? $matches : null;
 
                 if ($tag_check === null || $tag_check === [] || !in_array($tag_check[1], $this->options['unformatted'])) {
                     $this->print_newline(false, $this->output);

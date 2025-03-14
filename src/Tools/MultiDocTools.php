@@ -147,11 +147,11 @@ class MultiDocTools
             foreach ($ret as &$item) {
                 $item = self::objectToArray($item);
             }
-            
+
             return $ret;
-        } else {
-            return $obj;
         }
+
+        return $obj;
     }
 
     /**
